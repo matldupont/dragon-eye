@@ -4,5 +4,5 @@ const currentPath = Astro.url.pathname;
 const isActive = currentPath === href;
 ---
 
-<a href={href} class=`hover:bg-blue-300 py-1 px-2 rounded-md transition-colors ${isActive ? 'bg-blue-300' : ''}`>{text}</a>
+<a href={href} class=`hover:bg-blue-300 py-1 px-2 rounded-md transition-colors ${isActive ? 'bg-blue-300' : ''}`>{text}{currentPath}{isActive}</a>
 
