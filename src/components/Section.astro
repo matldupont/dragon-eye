@@ -1,0 +1,9 @@
+---
+import Title from './Title.astro';
+const { title } = Astro.props;
+---
+
+<section id="hero" class="flex w-full flex-col gap-y-4 pt-6 md:pt-8 lg:pt-12">
+  <Title title={title} />
+  <slot />
+</section>

@@ -1,0 +1,17 @@
+---
+import { Image } from 'astro:assets';
+const { image, title, text } = Astro.props;
+---
+
+<div class="flex gap-x-8 shadow-gray-500 shadow-md bg-white rounded-xs p-8">
+  <div class="flex flex-col gap-y-4">
+    <div class="h-48 w-48 bg-white rounded-xs shadow-gray-500 shadow-md p-4">
+      <Image src={image} alt="The Ottawa School File" class="w-full h-full " />
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-y-4">
+    <div class="font-bold text-2xl font-mono uppercase">{title}</div>
+    <p>{text}</p>
+  </div>
+</div>
