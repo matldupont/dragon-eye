@@ -1,9 +1,25 @@
 ---
-import FileDetails from '../../components/FileDetails.astro';
-import Layout from '../../layouts/Layout.astro';
-import lochness from '../../assets/LochNess.jpg';
+import FileDetails from "../../components/FileDetails.astro";
+import Layout from "../../layouts/Layout.astro";
+import lochness from "../../assets/LochNess.jpg";
+import Link from "../../components/Nav/Link.astro";
 ---
 
 <Layout>
-  <FileDetails image={lochness} title="The Nessy File" text="There is a swamp monster that lives in Loch Ness. We don't know how or why it got there" />
+  <div class="flex flex-col gap-4 mt-8">
+    <a href="/files" class="text-blue-500 hover:text-blue-600"
+      >← Back to Files</a
+    >
+    <FileDetails
+      image={lochness}
+      imageAlt="Loch Ness Monster mugshot"
+      title="The Nessy File"
+      description="The cryptid of the Scottish lake. Known for their sharp teeth and snake-like appearance. It does not like to be disturbed."
+      caseNumber="753221"
+      alias="Loch Ness Monster, Nessie"
+      address="Loch Ness, Scotland"
+      knownAssociates="Ogopogo"
+      name="Nessy"
+    />
+  </div>
 </Layout>

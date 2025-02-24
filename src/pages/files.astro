@@ -1,17 +1,30 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import alert from '../assets/Alert.png';
-import lochness from '../assets/LochNess.jpg';
-import FileSummary from '../components/FileSummary.astro';
-import Section from '../components/Section.astro';
+import Layout from "../layouts/Layout.astro";
+import alert from "../assets/Alert.png";
+import lochness from "../assets/LochNess.jpg";
+import FileSummary from "../components/FileSummary.astro";
+import Section from "../components/Section.astro";
 ---
 
 <Layout>
   <Section title="Files">
-      <p>This is a collection of files about specific cryptids, and other interesting information.</p>
-      <div class="flex flex-col gap-y-4">
-        <FileSummary image={alert} title="The Ottawa School File" description="In Ottawa, there's a little school that's rumored to be haunted. Many people have seen strange things there. But what!?" link="/files/ottawa-school-file" />
-        <FileSummary image={lochness} title="The Nessy File" description="There is a swamp monster that lives in Loch Ness. We don't know how or why it got there" link="/files/nessy-file" />
-      </div>
+    <p>
+      This is a collection of files about specific cryptids, and other
+      interesting information.
+    </p>
+    <div class="flex flex-col gap-y-4">
+      <FileSummary
+        image={alert}
+        title="The Ottawa School File"
+        description="In Ottawa, there's a little school that's rumored to be haunted. Many people have seen strange things there. But what!?"
+        link="/files/ottawa-school-file"
+      />
+      <FileSummary
+        image={lochness}
+        title="The Nessy File"
+        description="There is a swamp monster that lives in Loch Ness. We don't know how or why it got there."
+        link="/files/nessy-file"
+      />
+    </div>
   </Section>
 </Layout>
