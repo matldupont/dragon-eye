@@ -1,0 +1,24 @@
+---
+import FileDetails from "../../components/FileDetails.astro";
+import Layout from "../../layouts/Layout.astro";
+import bigfoot from "../../assets/Bigfoot.jpg";
+---
+
+<Layout>
+  <div class="flex flex-col gap-4 mt-8">
+    <a href="/files" class="text-blue-500 hover:text-blue-600"
+      >← Back to Files</a
+    >
+    <FileDetails
+      image={bigfoot}
+      imageAlt="Bigfoot mugshot"
+      title="The Bigfoot File"
+      description="Know for his big feet, excellent strength and incredible hiding skills. He is a master of the woods. He spends the day eating and hiding from humans. He is just very shy."
+      caseNumber="483165"
+      alias="Sasquatch"
+      address="Pacific Northwest, USA"
+      knownAssociates="Yeti, Jacko, Skunk Ape"
+      name="Bigfoot"
+    />
+  </div>
+</Layout>

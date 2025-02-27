@@ -2,6 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import alert from "../assets/Alert.png";
 import lochness from "../assets/LochNess.jpg";
+import bigfoot from "../assets/Bigfoot.jpg";
+import ghost from "../assets/Ghost.jpg";
 import FileSummary from "../components/FileSummary.astro";
 import Section from "../components/Section.astro";
 ---
@@ -24,6 +26,18 @@ import Section from "../components/Section.astro";
         title="The Nessy File"
         description="There is a swamp monster that lives in Loch Ness. We don't know how or why it got there."
         link="/files/nessy-file"
+      />
+      <FileSummary
+        image={bigfoot}
+        title="The Bigfoot File"
+        description="The big, furry ruler of the woods. We don't know how or why it got there."
+        link="/files/bigfoot-file"
+      />
+      <FileSummary
+        image={ghost}
+        title="The Ghost File"
+        description="Ghosts. Very common in basements. But why?!"
+        link="/files/ghost-file"
       />
     </div>
   </Section>
