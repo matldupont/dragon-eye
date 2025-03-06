@@ -1,13 +1,21 @@
 ---
-import hero from '../assets/hero.jpeg';
-import Section from './Section.astro';
-import Title from './Title.astro';
+import hero from "../assets/hero.jpeg";
+import Section from "./Section.astro";
+import Title from "./Title.astro";
 ---
 
 <Section title="Welcome to Dragon Eye">
+  <a
+    href="/about"
+    class="text-blue-500 hover:text-blue-600 transition-colors hover:underline"
+  >
+    Learn more about us →
+  </a>
   <div class="rounded-4xl overflow-hidden w-full pt-4 md:pt-6 lg:pt-8">
-    <img class="w-full aspect-auto object-cover" src={hero.src} alt="4 girls catching monsters" />
+    <img
+      class="w-full aspect-auto object-cover"
+      src={hero.src}
+      alt="4 girls catching monsters"
+    />
   </div>
 </Section>
-
-

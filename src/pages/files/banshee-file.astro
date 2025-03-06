@@ -1,0 +1,24 @@
+---
+import FileDetails from "../../components/FileDetails.astro";
+import Layout from "../../layouts/Layout.astro";
+import banshee from "../../assets/banshee.jpg";
+---
+
+<Layout>
+  <div class="flex flex-col gap-4 mt-8">
+    <a href="/files" class="text-blue-500 hover:text-blue-600"
+      >← Back to Files</a
+    >
+    <FileDetails
+      image={banshee}
+      imageAlt="Banshee mugshot"
+      title="The Banshee File"
+      description="The banshee, or 'bean sídhe' in Irish, is a female spirit in Irish folklore whose mournful wail is an omen of death. Often appearing as a pale woman with long, flowing white or silver hair and red eyes from endless weeping, she's typically dressed in a grey cloak over a white dress. Banshees are known to follow specific Irish families, particularly those with 'O' or 'Mc' in their names. Their cry, described as a combination of a wail and a keening song, is said to be heard at night when a family member is about to die. Some accounts describe them washing the blood-stained clothes of those who are about to die in streams. While terrifying, the banshee is not malevolent - she merely warns of inevitable fate. Modern sightings continue to be reported across Ireland and in areas with strong Irish heritage."
+      caseNumber="413286"
+      alias="Bean Sídhe, Bean Chaointe, Badhbh, The Washer at the Ford"
+      address="Ireland"
+      knownAssociates="The Dullahan, Fairy Folk, Ancient Irish Families"
+      name="Banshee"
+    />
+  </div>
+</Layout>
