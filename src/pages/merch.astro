@@ -1,0 +1,78 @@
+---
+import Section from '../components/Section.astro';
+import Layout from '../layouts/Layout.astro';
+import Product from '../components/Product.astro';
+---
+
+<Layout>
+  <Section title="Dragon Eye Merch">
+    <div class="flex flex-col gap-6">
+      <p class="text-lg">Show your Dragon Eye pride with our exclusive merchandise! Perfect for club members and supporters.</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- T-Shirt -->
+        <Product 
+          emoji="👕" 
+          title="Dragon Eye T-Shirt" 
+          description="Show your Dragon Eye pride with our official club t-shirt." 
+          price="20.00" 
+        />
+
+        <!-- Hat -->
+        <Product 
+          emoji="🧢" 
+          title="Dragon Eye Cap" 
+          description="Stay cool while on the hunt for clues with our stylish cap." 
+          price="15.00" 
+        />
+
+        <!-- Notebook -->
+        <Product 
+          emoji="📓" 
+          title="Detective Notebook" 
+          description="Record all your clues and findings in this official Dragon Eye notebook." 
+          price="10.00" 
+        />
+
+        <!-- Magnifying Glass -->
+        <Product 
+          emoji="🔍" 
+          title="Junior Detective Kit" 
+          description="Everything you need to start your detective journey, including a magnifying glass." 
+          price="25.00" 
+        />
+
+        <!-- Badge -->
+        <Product 
+          emoji="🔰" 
+          title="Dragon Eye Badge" 
+          description="Official member badge - show that you're part of the Dragon Eye detective club." 
+          price="8.00" 
+        />
+
+        <!-- Sticker Pack -->
+        <Product 
+          emoji="🏷️" 
+          title="Sticker Pack" 
+          description="Decorate your notebooks and gear with these cool Dragon Eye stickers." 
+          price="5.00" 
+        />
+
+        <!-- Sweatpants -->
+        <Product 
+          emoji="👖" 
+          title="Dragon Eye Sweatpants" 
+          description="Stay comfortable during stakeouts and detective work with our cozy sweatpants." 
+          price="30.00" 
+        />
+      </div>
+
+      <div class="mt-8 bg-white/80 p-6 rounded-xs shadow-md">
+        <h3 class="text-xl font-bold text-blue-900 mb-4">Ordering Information</h3>
+        <p>All merchandise is available for purchase during our Monday and Wednesday meetings at Dragon Eye HQ.</p>
+        <p class="mt-2">For special orders or inquiries, please speak with a club leader.</p>
+        <p class="mt-4 font-bold">Members receive a 10% discount on all merchandise!</p>
+      </div>
+    </div>
+  </Section>
+</Layout>
