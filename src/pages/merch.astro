@@ -2,6 +2,8 @@
 import Section from '../components/Section.astro';
 import Layout from '../layouts/Layout.astro';
 import Product from '../components/Product.astro';
+import tshirt1 from '../assets/tshirt1.jpg';
+import tshirt2 from '../assets/tshirt2.jpg';
 ---
 
 <Layout>
@@ -10,12 +12,15 @@ import Product from '../components/Product.astro';
       <p class="text-lg">Show your Dragon Eye pride with our exclusive merchandise! Perfect for club members and supporters.</p>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- T-Shirt -->
+        <!-- T-Shirt with two options -->
         <Product 
-          emoji="👕" 
           title="Dragon Eye T-Shirt" 
-          description="Show your Dragon Eye pride with our official club t-shirt." 
-          price="20.00" 
+          description="Show your Dragon Eye pride with our official club t-shirt. Two styles available." 
+          price="20.00"
+          imageOptions={[
+            { src: tshirt1, alt: "Dragon Eye T-Shirt Option 1" },
+            { src: tshirt2, alt: "Dragon Eye T-Shirt Option 2" }
+          ]}
         />
 
         <!-- Hat -->

@@ -1,10 +1,41 @@
 ---
-const { emoji, title, description, price } = Astro.props;
+import { Image } from 'astro:assets';
+
+interface ImageOption {
+  src: any;
+  alt: string;
+}
+
+const { emoji, title, description, price, imageOptions } = Astro.props;
+const hasImageOptions = imageOptions && imageOptions.length > 0;
 ---
 
 <div class="bg-white/80 p-6 rounded-xs shadow-md flex flex-col">
-  <div class="bg-white h-48 rounded-xs drop-shadow-md mb-4 flex items-center justify-center">
-    <span class="text-9xl">{emoji}</span>
+  <div class="bg-white h-48 rounded-xs drop-shadow-md mb-4 flex items-center justify-center relative">
+    {hasImageOptions ? (
+      <>
+        {imageOptions.map((image: ImageOption, index: number) => (
+          <div id={`image-option-${index}`} class={`h-full w-full flex items-center justify-center ${index === 0 ? '' : 'hidden'}`}>
+            <Image src={image.src} alt={image.alt} class="h-full object-contain p-2" />
+          </div>
+        ))}
+        {imageOptions.length > 1 && (
+          <div class="absolute bottom-2 right-2 flex space-x-2">
+            {imageOptions.map((_: ImageOption, index: number) => (
+              <button 
+                id={`option-btn-${index}`} 
+                class={`option-btn py-1 px-2 rounded-xs text-xs text-white ${index === 0 ? 'bg-blue-900' : 'bg-gray-400'}`}
+                data-index={index}
+              >
+                Option {index + 1}
+              </button>
+            ))}
+          </div>
+        )}
+      </>
+    ) : (
+      <span class="text-9xl">{emoji}</span>
+    )}
   </div>
   <h3 class="text-xl font-bold text-blue-900 mb-2">{title}</h3>
   <p class="mb-2">{description}</p>
@@ -13,3 +44,28 @@ const { emoji, title, description, price } = Astro.props;
     Add to Cart
   </button>
 </div>
+
+{hasImageOptions && imageOptions.length > 1 && (
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const optionButtons = document.querySelectorAll('.option-btn');
+      
+      optionButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const selectedIndex = Number(button.getAttribute('data-index'));
+          const imageContainers = document.querySelectorAll('[id^="image-option-"]');
+          
+          // Hide all images and reset all buttons
+          imageContainers.forEach((container, i) => {
+            container.classList.toggle('hidden', i !== selectedIndex);
+          });
+          
+          optionButtons.forEach((btn, i) => {
+            btn.classList.toggle('bg-blue-900', i === selectedIndex);
+            btn.classList.toggle('bg-gray-400', i !== selectedIndex);
+          });
+        });
+      });
+    });
+  </script>
+)}
