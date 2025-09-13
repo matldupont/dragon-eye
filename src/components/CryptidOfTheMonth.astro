@@ -1,7 +1,7 @@
 ---
 import Section from "./Section.astro";
 import { Image } from "astro:assets";
-import mothman from "../assets/mothman.jpg";
+import chupacabra from "../assets/chupacabra.jpg";
 ---
 
 <Section title="Cryptid of the Month">
@@ -9,16 +9,16 @@ import mothman from "../assets/mothman.jpg";
     <div class="flex flex-col md:flex-row gap-6">
       <div class="w-full md:w-1/3 bg-white rounded-xs drop-shadow-md p-4">
         <Image 
-          src={mothman} 
-          alt="Mothman" 
+          src={chupacabra} 
+          alt="Chupacabra" 
           width={400} 
           height={300} 
           class="w-full h-full object-cover"
         />
       </div>
       <div class="w-full md:w-2/3">
-        <h3 class="text-2xl font-bold text-blue-900 mb-2 font-mono uppercase">Mothman</h3>
-        <p class="mb-4">First spotted in Point Pleasant, West Virginia in 1966, Mothman is described as a large, winged humanoid with glowing red eyes. Standing 7 feet tall with a wingspan of 10-15 feet, this mysterious creature has been linked to disasters and strange phenomena.</p>
+        <h3 class="text-2xl font-bold text-blue-900 mb-2 font-mono uppercase">Chupacabra</h3>
+        <p class="mb-4">First reported in Puerto Rico in 1995, the Chupacabra (Spanish for 'goat-sucker') is known for attacking and drinking the blood of livestock. Described as a reptilian creature with leathery skin, spikes down its back, and glowing red eyes, sightings have spread throughout Latin America and the southern United States.</p>
         <div class="mt-4">
           <a href="/files" class="text-blue-900 font-mono hover:underline">View all cryptid files →</a>
         </div>
