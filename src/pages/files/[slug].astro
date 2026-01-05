@@ -15,31 +15,14 @@ export async function getStaticPaths() {
 
 const { params } = Astro;
 
-const file = cryptidFiles.find((f) => f.slug === params.slug);
+const cryptid = cryptidFiles.find((f) => f.slug === params.slug);
 
-if (!file) {
+if (!cryptid) {
   return Astro.redirect("/files", 404);
 }
 
-const { title, name, image, imageAlt, description, caseNumber, alias, address, knownAssociates } = file;
-
 ---
 <Layout>
-    <div class="flex flex-col gap-4 mt-8">
-      <a href="/files" class="text-blue-500 hover:text-blue-600"
-        >← Back to Files</a
-      >
-      <FileDetails
-        image={image}
-        imageAlt={imageAlt}
-        title={title}
-        description={description}
-        caseNumber={caseNumber}
-        alias={alias}
-        address={address}
-        knownAssociates={knownAssociates}
-        name={name}
-      />
-    </div>
-  </Layout>
+  <FileDetails cryptid={cryptid} />
+</Layout>
   

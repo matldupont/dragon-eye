@@ -18,6 +18,11 @@ export interface CryptidFile {
   alias?: string;
   address?: string;
   knownAssociates?: string;
+  codename: string;
+  region: string;
+  type: string;
+  dangerLevel: 'Low' | 'Medium' | 'High' | 'Unknown';
+  firstSighting: string;
 }
 
 export const cryptidFiles: CryptidFile[] = [
@@ -32,6 +37,11 @@ export const cryptidFiles: CryptidFile[] = [
     alias: "Sasquatch",
     address: "Pacific Northwest, USA",
     knownAssociates: "Yeti, Jacko, Skunk Ape",
+    codename: "BIGFOOT-483165",
+    region: "Pacific Northwest, USA",
+    type: "Humanoid",
+    dangerLevel: "Low",
+    firstSighting: "1920s",
   },
   {
     slug: "ghost-file",
@@ -44,6 +54,11 @@ export const cryptidFiles: CryptidFile[] = [
     alias: "Spirit, Specter, Phantom, Soul, Ghoul, Poltergeist",
     address: "Everywhere",
     knownAssociates: "Grim Reaper, other dearly departed",
+    codename: "GHOST-932574",
+    region: "Worldwide",
+    type: "Spirit",
+    dangerLevel: "Low",
+    firstSighting: "Ancient times",
   },
   {
     slug: "banshee-file",
@@ -56,6 +71,11 @@ export const cryptidFiles: CryptidFile[] = [
     alias: "Bean Sídhe, Bean Chaointe, Badhbh, The Washer at the Ford",
     address: "Ireland",
     knownAssociates: "The Dullahan, Fairy Folk, Ancient Irish Families",
+    codename: "BANSHEE-413286",
+    region: "Ireland",
+    type: "Spirit",
+    dangerLevel: "Medium",
+    firstSighting: "8th century",
   },
   {
     slug: "nessy-file",
@@ -68,6 +88,11 @@ export const cryptidFiles: CryptidFile[] = [
     alias: "Loch Ness Monster, Nessie",
     address: "Loch Ness, Scotland",
     knownAssociates: "Ogopogo",
+    codename: "NESSY-753221",
+    region: "Scotland",
+    type: "Aquatic",
+    dangerLevel: "Medium",
+    firstSighting: "565 AD",
   },
   {
     slug: "mothman",
@@ -80,6 +105,11 @@ export const cryptidFiles: CryptidFile[] = [
     alias: "Winged Cryptid, Harbinger of Doom",
     address: "Point Pleasant, West Virginia",
     knownAssociates: "Silver Bridge Collapse, Eyewitnesses",
+    codename: "MOTHMAN-112233",
+    region: "West Virginia, USA",
+    type: "Winged Humanoid",
+    dangerLevel: "High",
+    firstSighting: "November 15, 1966",
   },
   {
     slug: "ottawa-school-file",
@@ -92,6 +122,11 @@ export const cryptidFiles: CryptidFile[] = [
     alias: "None",
     address: "Ottawa, Ontario",
     knownAssociates: "None",
+    codename: "OTTAWA-532976",
+    region: "Ottawa, Ontario",
+    type: "Unknown",
+    dangerLevel: "Unknown",
+    firstSighting: "Unknown",
   },
   {
     slug: "chupacabra-file",
@@ -104,6 +139,11 @@ export const cryptidFiles: CryptidFile[] = [
     alias: "Goat Sucker, Blood Drainer",
     address: "Puerto Rico, Mexico, Southern United States",
     knownAssociates: "Livestock Attacks, Farmers, Rural Communities",
+    codename: "CHUPACABRA-951995",
+    region: "Latin America, Southern USA",
+    type: "Reptilian",
+    dangerLevel: "High",
+    firstSighting: "March 1995",
   },
 ];
 

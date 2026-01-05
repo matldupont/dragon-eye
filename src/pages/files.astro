@@ -1,65 +1,169 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import alert from "../assets/Alert.png";
-import lochness from "../assets/LochNess.jpg";
-import bigfoot from "../assets/Bigfoot.jpg";
-import ghost from "../assets/Ghost.jpg";
-import banshee from "../assets/banshee.jpg";
-import mothman from "../assets/mothman.jpg";
-import chupacabra from "../assets/chupacabra.jpg";
-import FileSummary from "../components/FileSummary.astro";
-import Section from "../components/Section.astro";
+import { cryptidFiles } from "../data/cryptidFiles";
+import CryptidCard from "../components/CryptidCard.astro";
+import { Search, Filter } from "@lucide/astro";
+
+// Get unique regions for filter
+const regions = ['all', ...Array.from(new Set(cryptidFiles.map(c => c.region)))];
+const dangerLevels = ['all', 'Low', 'Medium', 'High', 'Unknown'];
 ---
 
 <Layout>
-  <Section title="Files">
-    <p>
-      This is a collection of files about specific cryptids, and other
-      interesting information.
-    </p>
-    <div class="flex flex-col gap-y-4">
-      <FileSummary
-        image={alert}
-        title="The Ottawa School File"
-        description="In Ottawa, there's a little school that's rumored to be haunted. Many people have seen strange things there. But what!?"
-        link="/files/ottawa-school-file"
-      />
-      <FileSummary
-        image={lochness}
-        title="The Nessy File"
-        description="There is a swamp monster that lives in Loch Ness. We don't know how or why it got there."
-        link="/files/nessy-file"
-      />
-      <FileSummary
-        image={bigfoot}
-        title="The Bigfoot File"
-        description="The big, furry ruler of the woods. We don't know how or why it got there."
-        link="/files/bigfoot-file"
-      />
-      <FileSummary
-        image={ghost}
-        title="The Ghost File"
-        description="Ghosts. Very common in basements. But why?!"
-        link="/files/ghost-file"
-      />
-      <FileSummary
-        image={banshee}
-        title="The Banshee File"
-        description="A wailing spirit from Irish folklore that heralds death with its piercing scream. Known to appear near homes at night."
-        link="/files/banshee-file"
-      />
-      <FileSummary
-        image={mothman}
-        title="The Mothman File"
-        description="A winged cryptid first spotted in Point Pleasant, West Virginia, often associated with disasters and strange phenomena."
-        link="/files/mothman"
-      />
-      <FileSummary
-        image={chupacabra}
-        title="The Chupacabra File"
-        description="A reptilian creature first reported in Puerto Rico in 1995, known for attacking livestock and drinking their blood."
-        link="/files/chupacabra-file"
-      />
+  <div class="min-h-screen bg-[#0f0f0f] py-12">
+    <div class="container mx-auto px-4">
+      {/* Header */}
+      <div class="mb-12 text-center">
+        <div class="inline-block px-4 py-2 bg-lime-400/10 border border-lime-400 rounded-sm mb-4">
+          <span class="text-lime-400 font-['Courier_New']">CLASSIFIED DATABASE</span>
+        </div>
+        <h1 class="mb-4">Cryptid Files</h1>
+        <p class="text-purple-200 max-w-2xl mx-auto">
+          Browse our complete archive of cryptid investigations. Use the search and filters below to find specific cases.
+        </p>
+      </div>
+
+      {/* Search and Filters */}
+      <div class="max-w-5xl mx-auto mb-12 space-y-4">
+        {/* Search Bar */}
+        <div class="relative">
+          <Search class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-lime-400" />
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search by name, codename, or region..."
+            class="w-full pl-12 pr-4 py-4 bg-purple-950/50 border-2 border-purple-800 text-white placeholder-purple-400 focus:outline-none focus:border-lime-400 transition-colors font-['Courier_New']"
+          />
+        </div>
+
+        {/* Filters */}
+        <div class="flex flex-wrap gap-4 items-center p-4 bg-purple-950/30 border border-purple-800">
+          <div class="flex items-center gap-2">
+            <Filter class="w-5 h-5 text-lime-400" />
+            <span class="text-lime-400 font-['Courier_New']">FILTERS:</span>
+          </div>
+
+          <div class="flex flex-wrap gap-4 flex-1">
+            <div class="flex items-center gap-2">
+              <label class="text-purple-300 font-['Courier_New']">Region:</label>
+              <select
+                id="filter-region"
+                class="px-3 py-2 bg-black border border-purple-700 text-white focus:outline-none focus:border-lime-400 font-['Courier_New']"
+              >
+                {regions.map(region => (
+                  <option value={region}>
+                    {region === 'all' ? 'All Regions' : region}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <label class="text-purple-300 font-['Courier_New']">Danger:</label>
+              <select
+                id="filter-danger"
+                class="px-3 py-2 bg-black border border-purple-700 text-white focus:outline-none focus:border-lime-400 font-['Courier_New']"
+              >
+                {dangerLevels.map(level => (
+                  <option value={level}>
+                    {level === 'all' ? 'All Levels' : level}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div id="results-count" class="text-purple-300 font-['Courier_New']">
+            {cryptidFiles.length} FILE{cryptidFiles.length !== 1 ? 'S' : ''} FOUND
+          </div>
+        </div>
+      </div>
+
+      {/* Results Grid */}
+      <div id="results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {cryptidFiles.map(cryptid => (
+          <div 
+            class="cryptid-card-wrapper" 
+            data-name={cryptid.name.toLowerCase()}
+            data-codename={cryptid.codename.toLowerCase()}
+            data-region={cryptid.region.toLowerCase()}
+            data-danger={cryptid.dangerLevel}
+          >
+            <CryptidCard cryptid={cryptid} />
+          </div>
+        ))}
+      </div>
+
+      <div id="no-results" class="text-center py-16 hidden">
+        <div class="text-purple-400 font-['Courier_New'] mb-4">
+          NO FILES MATCH YOUR SEARCH
+        </div>
+        <p class="text-purple-300">
+          Try adjusting your filters or search terms
+        </p>
+      </div>
     </div>
-  </Section>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+    const filterRegion = document.getElementById('filter-region') as HTMLSelectElement | null;
+    const filterDanger = document.getElementById('filter-danger') as HTMLSelectElement | null;
+    const resultsGrid = document.getElementById('results-grid') as HTMLElement | null;
+    const resultsCount = document.getElementById('results-count') as HTMLElement | null;
+    const noResults = document.getElementById('no-results') as HTMLElement | null;
+    const cardWrappers = document.querySelectorAll('.cryptid-card-wrapper') as NodeListOf<HTMLElement>;
+
+    if (!searchInput || !filterRegion || !filterDanger || !resultsGrid || !resultsCount || !noResults) {
+      console.error('Required elements not found');
+    } else {
+      function filterCryptids() {
+        if (!searchInput || !filterRegion || !filterDanger || !resultsGrid || !resultsCount || !noResults) return;
+        
+        const searchTerm = searchInput.value.toLowerCase();
+        const selectedRegion = filterRegion.value;
+        const selectedDanger = filterDanger.value;
+
+        let visibleCount = 0;
+
+        cardWrappers.forEach(wrapper => {
+          const name = wrapper.dataset.name || '';
+          const codename = wrapper.dataset.codename || '';
+          const region = wrapper.dataset.region || '';
+          const danger = wrapper.dataset.danger || '';
+
+          const matchesSearch = !searchTerm || 
+            name.includes(searchTerm) || 
+            codename.includes(searchTerm) || 
+            region.includes(searchTerm);
+          
+          const matchesRegion = selectedRegion === 'all' || region === selectedRegion.toLowerCase();
+          const matchesDanger = selectedDanger === 'all' || danger === selectedDanger;
+
+          if (matchesSearch && matchesRegion && matchesDanger) {
+            wrapper.style.display = '';
+            visibleCount++;
+          } else {
+            wrapper.style.display = 'none';
+          }
+        });
+
+        // Update results count
+        resultsCount.textContent = `${visibleCount} FILE${visibleCount !== 1 ? 'S' : ''} FOUND`;
+
+        // Show/hide no results message
+        if (visibleCount === 0) {
+          noResults.classList.remove('hidden');
+          resultsGrid.classList.add('hidden');
+        } else {
+          noResults.classList.add('hidden');
+          resultsGrid.classList.remove('hidden');
+        }
+      }
+
+      searchInput.addEventListener('input', filterCryptids);
+      filterRegion.addEventListener('change', filterCryptids);
+      filterDanger.addEventListener('change', filterCryptids);
+    }
+  </script>
 </Layout>

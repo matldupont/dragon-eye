@@ -3,10 +3,154 @@ import Welcome from '../components/Welcome.astro';
 import CryptidOfTheMonth from '../components/CryptidOfTheMonth.astro';
 import CryptidComingSoon from '../components/CryptidComingSoon.astro';
 import Layout from '../layouts/Layout.astro';
+import { Fingerprint, Search, FileText } from "@lucide/astro";
+import Link from "../components/Nav/Link.astro";
+// import ImageWithFallback from "../components/ImageWithFallback.astro";
+// import featuredCryptid from "../data/featuredCryptid";
+import DangerBadge from "../components/DangerBadge.astro";
+import {cryptidFiles} from "../data/cryptidFiles";
+import { Image } from 'astro:assets';
+import CryptidCard from '../components/CryptidCard.astro';
+
+const featuredCryptid = cryptidFiles[0];
 ---
 
 <Layout>
-	<Welcome />
-	<CryptidOfTheMonth />
-	<CryptidComingSoon />
+	<div class="min-h-screen bg-[#0f0f0f]">
+		{/* Hero Section */}
+		<section class="relative py-20 border-b border-purple-900/50 overflow-hidden">
+		  <div class="absolute inset-0 bg-gradient-to-b from-purple-950/20 to-transparent"></div>
+		  <div class="container mx-auto px-4 relative z-10">
+			<div class="max-w-4xl mx-auto text-center">
+			  <div class="inline-flex items-center gap-2 px-4 py-2 bg-lime-400/10 border border-lime-400 rounded-sm mb-6">
+				<Fingerprint class="w-5 h-5 text-lime-400" />
+				<span class="text-lime-400 font-['Courier_New']">TOP SECRET CLEARANCE REQUIRED</span>
+			  </div>
+			  
+			  <h1 class="mb-6">
+				Dragon Eye: Cryptid Investigation Files
+			  </h1>
+			  
+			  <p class="text-purple-200 mb-8 max-w-2xl mx-auto">
+				Welcome to the Dragon Eye Agency! We're a team of kid-friendly cryptid investigators uncovering mysteries across the world. 
+				Browse our files, learn about legendary creatures, and join our mission to discover the unknown!
+			  </p>
+			  
+			  <div class="flex flex-wrap items-center justify-center gap-4">
+				<Link 
+				  to="/files"
+				  class="px-8 py-4 bg-lime-400 text-black hover:bg-yellow-400 transition-colors font-['Courier_New'] font-medium"
+				>
+				  <span class="flex items-center gap-2">
+					<Search class="w-5 h-5" />
+					EXPLORE THE FILES
+				  </span>
+				</Link>
+				<a 
+				  href="#featured"
+				  class="px-8 py-4 border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black transition-all font-['Courier_New'] font-medium"
+				>
+				  <span class="flex items-center gap-2">
+					<FileText class="w-5 h-5" />
+					CRYPTID OF THE MONTH
+				  </span>
+				</a>
+			  </div>
+			</div>
+		  </div>
+		</section>
+  
+		{/* Featured Cryptid of the Month */}
+		<section id="featured" class="py-16 border-b border-purple-900/50">
+		  <div class="container mx-auto px-4">
+			<div class="flex items-center gap-3 mb-8">
+			  <div class="h-px flex-1 bg-lime-400"></div>
+			  <h2 class="text-lime-400 font-['Courier_New'] tracking-wider">
+				★ FEATURED FILE: CRYPTID OF THE MONTH ★
+			  </h2>
+			  <div class="h-px flex-1 bg-lime-400"></div>
+			</div>
+  
+			<div class="max-w-5xl mx-auto bg-purple-950/50 border-4 border-yellow-400 shadow-2xl shadow-yellow-400/20">
+			  <div class="grid md:grid-cols-2 gap-0">
+				{/* Image Side */}
+				<div class="relative aspect-square bg-black overflow-hidden">
+				  <Image 
+					src={featuredCryptid.image} 
+					alt={featuredCryptid.name}
+					class="w-full h-full object-cover"
+				  />
+				  <div class="absolute top-4 left-4 right-4">
+					<div class="bg-black/80 border-2 border-yellow-400 p-3 font-['Courier_New']">
+					  <div class="text-yellow-400 mb-1">CASE FILE:</div>
+					  <div class="text-lime-400">{featuredCryptid.codename}</div>
+					</div>
+				  </div>
+				</div>
+  
+				{/* Info Side */}
+				<div class="p-8 border-l-4 border-yellow-400">
+				  <h3 class="mb-4">{featuredCryptid.name}</h3>
+				  
+				  <div class="space-y-3 mb-6">
+					<div class="flex flex-wrap gap-2">
+					  <span class="px-3 py-1 bg-lime-500/20 text-lime-400 border border-lime-400 rounded-sm font-['Courier_New']">
+						{featuredCryptid.region}
+					  </span>
+					  <span class="px-3 py-1 bg-purple-500/20 text-purple-300 border border-purple-400 rounded-sm font-['Courier_New']">
+						{featuredCryptid.type}
+					  </span>
+					</div>
+  
+					<DangerBadge level={featuredCryptid.dangerLevel} />
+				  </div>
+  
+				  <p class="text-purple-200 mb-6">
+					{featuredCryptid.description}
+				  </p>
+  
+				  <div class="space-y-2 text-purple-300 mb-6">
+					<div class="flex gap-2">
+					  <span class="text-lime-400 font-['Courier_New'] min-w-[120px]">FIRST SEEN:</span>
+					  <span>{featuredCryptid.firstSighting}</span>
+					</div>
+					<div class="flex gap-2">
+					  <span class="text-lime-400 font-['Courier_New'] min-w-[120px]">LOCATION:</span>
+					  <span>{featuredCryptid.address}</span>
+					</div>
+				  </div>
+  
+				  <Link 
+					to={`/files/${featuredCryptid.slug}`}
+					class="inline-block w-full px-6 py-3 bg-yellow-400 text-black hover:bg-lime-400 transition-colors font-['Courier_New'] font-medium text-center"
+				  >
+					VIEW FULL FILE →
+				  </Link>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</section>
+  
+		{/* Latest Files Section */}
+		<section class="py-16">
+		  <div class="container mx-auto px-4">
+			<div class="flex items-center justify-between mb-8">
+			  <h2 class="text-lime-400">Latest Files</h2>
+			  <Link 
+				to="/files"
+				class="px-4 py-2 border border-lime-400 text-lime-400 hover:bg-lime-400 hover:text-black transition-all font-['Courier_New']"
+			  >
+				VIEW ALL FILES →
+			  </Link>
+			</div>
+  
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			  {cryptidFiles.map(cryptid => (
+				<CryptidCard cryptid={cryptid} />
+			  ))}
+			</div>
+		  </div>
+		</section>
+	  </div>
 </Layout>

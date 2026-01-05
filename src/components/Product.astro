@@ -8,14 +8,17 @@ interface ImageOption {
 
 const { emoji, title, description, price, imageOptions } = Astro.props;
 const hasImageOptions = imageOptions && imageOptions.length > 0;
+
+// Generate a unique ID for this product instance
+const productId = `product-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
-<div class="bg-white/80 p-6 rounded-xs shadow-md flex flex-col">
-  <div class="bg-white h-48 rounded-xs drop-shadow-md mb-4 flex items-center justify-center relative">
+<div class="bg-purple-950/30 border-2 border-purple-800 p-6 flex flex-col h-full hover:border-yellow-400 transition-all" data-product-id={productId}>
+  <div class="bg-black/50 border border-purple-700 h-48 rounded-sm mb-4 flex items-center justify-center relative overflow-hidden">
     {hasImageOptions ? (
       <>
         {imageOptions.map((image: ImageOption, index: number) => (
-          <div id={`image-option-${index}`} class={`h-full w-full flex items-center justify-center ${index === 0 ? '' : 'hidden'}`}>
+          <div data-image-option={index} class={`h-full w-full flex items-center justify-center ${index === 0 ? '' : 'hidden'}`}>
             <Image src={image.src} alt={image.alt} class="h-full object-contain p-2" />
           </div>
         ))}
@@ -23,11 +26,11 @@ const hasImageOptions = imageOptions && imageOptions.length > 0;
           <div class="absolute bottom-2 right-2 flex space-x-2">
             {imageOptions.map((_: ImageOption, index: number) => (
               <button 
-                id={`option-btn-${index}`} 
-                class={`option-btn py-1 px-2 rounded-xs text-xs text-white ${index === 0 ? 'bg-blue-900' : 'bg-gray-400'}`}
+                class={`product-option-btn py-1 px-2 rounded-sm text-xs text-white font-['Courier_New'] ${index === 0 ? 'bg-yellow-400 text-black' : 'bg-purple-800 text-purple-200'}`}
                 data-index={index}
+                data-product-id={productId}
               >
-                Option {index + 1}
+                {index + 1}
               </button>
             ))}
           </div>
@@ -37,35 +40,43 @@ const hasImageOptions = imageOptions && imageOptions.length > 0;
       <span class="text-9xl">{emoji}</span>
     )}
   </div>
-  <h3 class="text-xl font-bold text-blue-900 mb-2">{title}</h3>
-  <p class="mb-2">{description}</p>
-  <p class="font-bold text-lg mb-4">${price}</p>
-  <button class="mt-auto bg-blue-900 text-white py-2 px-4 rounded-xs hover:bg-blue-800 transition-colors">
-    Add to Cart
+  <h3 class="text-xl font-medium text-white mb-2">{title}</h3>
+  <p class="mb-3 text-purple-200 text-sm leading-relaxed">{description}</p>
+  <p class="font-bold text-lg mb-4 text-yellow-400 font-['Courier_New']">${price}</p>
+  <button class="mt-auto w-full bg-yellow-400 text-black py-3 px-4 rounded-sm hover:bg-lime-400 transition-colors font-['Courier_New'] font-medium">
+    ADD TO CART
   </button>
 </div>
 
 {hasImageOptions && imageOptions.length > 1 && (
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const optionButtons = document.querySelectorAll('.option-btn');
+  <script define:vars={{ productId }}>
+    (function() {
+      const productContainer = document.querySelector(`[data-product-id="${productId}"]`);
+      if (!productContainer) return;
+
+      const optionButtons = productContainer.querySelectorAll('.product-option-btn');
       
       optionButtons.forEach(button => {
         button.addEventListener('click', () => {
           const selectedIndex = Number(button.getAttribute('data-index'));
-          const imageContainers = document.querySelectorAll('[id^="image-option-"]');
+          const imageContainers = productContainer.querySelectorAll('[data-image-option]');
           
-          // Hide all images and reset all buttons
+          // Hide all images and reset all buttons within this product only
           imageContainers.forEach((container, i) => {
             container.classList.toggle('hidden', i !== selectedIndex);
           });
           
           optionButtons.forEach((btn, i) => {
-            btn.classList.toggle('bg-blue-900', i === selectedIndex);
-            btn.classList.toggle('bg-gray-400', i !== selectedIndex);
+            if (i === selectedIndex) {
+              btn.classList.remove('bg-purple-800', 'text-purple-200');
+              btn.classList.add('bg-yellow-400', 'text-black');
+            } else {
+              btn.classList.remove('bg-yellow-400', 'text-black');
+              btn.classList.add('bg-purple-800', 'text-purple-200');
+            }
           });
         });
       });
-    });
+    })();
   </script>
 )}

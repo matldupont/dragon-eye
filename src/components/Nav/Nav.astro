@@ -1,12 +1,36 @@
 ---
 import Link from "./Link.astro";
+import { Eye } from "@lucide/astro";
 ---
 
-<nav class="flex items-center py-4 font-mono text-sm">
-  <ul class="flex gap-4">
-    <li><Link href="/" text="Home" /></li>
-    <li><Link href="/about" text="About" /></li>
-    <li><Link href="/files" text="Files" /></li>
-    <li><Link href="/merch" text="Merch" /></li>
-  </ul>
+<nav class="border-b border-purple-900/50 bg-[#0a0a0a] sticky top-0 z-50">
+  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+    <Link to="/" class="flex items-center gap-2 group">
+      <Eye class="w-8 h-8 text-lime-400 group-hover:text-yellow-400 transition-colors" />
+      <span class="font-['Courier_New'] tracking-wider">
+        DRAGON EYE
+      </span>
+    </Link>
+    
+    <div class="flex items-center gap-6">
+      <Link 
+        to="/files" 
+        class="hover:text-lime-400 transition-colors"
+      >
+        Files
+      </Link>
+      <Link 
+        to="/merch" 
+        class="hover:text-lime-400 transition-colors"
+      >
+        Merch
+      </Link>
+      <Link 
+        to="/contact" 
+        class="hover:text-lime-400 transition-colors"
+      >
+        Contact
+      </Link>
+    </div>
+  </div>
 </nav>

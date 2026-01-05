@@ -1,8 +1,17 @@
 ---
-const { href, text } = Astro.props;
+interface Props {
+  to?: string;
+  href?: string;
+  class?: string;
+}
+
+const { to, href, class: className } = Astro.props;
+const linkHref = to || href || '#';
 const currentPath = Astro.url.pathname;
-const isActive = currentPath === href || currentPath === `${href}/`
+const isActive = currentPath === linkHref || currentPath === `${linkHref}/`;
 ---
 
-<a href={href} class=`hover:bg-blue-300 py-1 px-2 rounded-md transition-colors ${isActive ? 'bg-blue-300' : ''}`>{text}</a>
+<a href={linkHref} class={className}>
+  <slot />
+</a>
 

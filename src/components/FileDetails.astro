@@ -1,75 +1,188 @@
 ---
 import { Image } from "astro:assets";
-const {
-  image,
-  imageAlt,
-  title,
-  description,
-  caseNumber,
-  alias,
-  address,
-  name,
-  knownAssociates,
-} = Astro.props;
+import { ArrowLeft, MapPin, Calendar, TriangleAlert } from "@lucide/astro";
+import type { CryptidFile } from "../data/cryptidFiles";
+import { cryptidFiles } from "../data/cryptidFiles";
+import DangerBadge from "./DangerBadge.astro";
+import StatusBadge from "./StatusBadge.astro";
+import CryptidCard from "./CryptidCard.astro";
+import Link from "./Nav/Link.astro";
+
+interface Props {
+  cryptid: CryptidFile & {
+    status?: 'Sighted' | 'Under Investigation' | 'Confirmed' | 'Myth';
+    caseNotes?: string[];
+    location?: string;
+  };
+}
+
+const { cryptid } = Astro.props;
+
+// Handle aliases - convert string to array if needed
+const aliases = cryptid.alias ? cryptid.alias.split(',').map(a => a.trim()) : [];
+
+// Get related files (same region or type, excluding current)
+const relatedFiles = cryptidFiles
+  .filter(c => c.slug !== cryptid.slug && (c.region === cryptid.region || c.type === cryptid.type))
+  .slice(0, 3);
 ---
 
-<div
-  class="flex flex-col gap-y-4 drop-shadow-lg bg-white rounded-xs p-8 text-gray-700"
->
-  <div class="flex flex-col md:flex-row gap-x-8">
-    <div class="flex justify-center items-center gap-y-4">
-      <div
-        class="h-56 w-56 md:h-48 md:w-48 bg-white rounded-xs drop-shadow-md p-4"
-      >
-        <Image width={200} height={200} inferSize={true} src={image} alt={imageAlt} class="w-full h-full" />
-      </div>
-    </div>
-
-    <div class="flex flex-col gap-y-4 flex-1 mt-8">
-      <h1 class="self-center font-bold text-2xl font-mono uppercase">
-        {title}
-      </h1>
-      <dl
-        class="grid grid-cols-[1fr_2fr] gap-x-2 gap-y-4 items-center justify-end flex-1"
-      >
-        <dt class="flex font-bold text-lg justify-end text-right">Name:</dt>
-        <dd class="border-b px-4 border-gray-500 font-mono text-gray-600">
-          {name}
-        </dd>
-
-        <dt class="flex font-bold text-lg justify-end text-right">
-          Case Number:
-        </dt>
-        <dd class="border-b px-4 border-gray-500 font-mono text-gray-600">
-          {caseNumber}
-        </dd>
-
-        <dt class="flex font-bold text-lg justify-end">Alias:</dt>
-        <dd class="border-b px-4 border-gray-500 font-mono text-gray-600">
-          {alias}
-        </dd>
-
-        <dt class="flex font-bold text-lg justify-end">Address:</dt>
-        <dd class="border-b px-4 border-gray-500 font-mono text-gray-600">
-          {address}
-        </dd>
-      </dl>
-    </div>
-  </div>
-  <dl class="flex gap-x-4 mt-8">
-    <dt class="flex font-bold text-lg">Known Associates:</dt>
-    <dd class="flex-1 border-b px-4 border-gray-500 font-mono text-gray-600">
-      {knownAssociates}
-    </dd>
-  </dl>
-  <div class="flex-1 border-b py-2 border-gray-500 font-mono text-gray-600">
-  </div>
-  <dl class="mt-4">
-    <dt class="flex font-bold text-lg">Description:</dt>
-    <dd
-      class="flex-1 underline underline-offset-6 text-base/8 font-mono text-gray-600 float-left clear-left"
+<div class="min-h-screen bg-[#0f0f0f] py-8">
+  <div class="container mx-auto px-4">
+    {/* Back Button */}
+    <Link
+      to="/files"
+      class="flex items-center gap-2 px-4 py-2 border border-lime-400 text-lime-400 hover:bg-lime-400 hover:text-black transition-all font-['Courier_New'] mb-8 inline-block w-fit"
     >
-      {description}
-    </dd>
-  </dl>
+      <ArrowLeft class="w-4 h-4" />
+      BACK TO FILES
+    </Link>
+
+    {/* Main File Content */}
+    <div class="max-w-6xl mx-auto">
+      {/* Header with Codename and Status */}
+      <div class="bg-purple-950/50 border-2 border-yellow-400 p-6 mb-6">
+        <div class="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <div class="text-yellow-400 font-['Courier_New'] mb-2">
+              CASE FILE: {cryptid.codename}
+            </div>
+            <h1 class="mb-2">{cryptid.name}</h1>
+            {aliases.length > 0 && (
+              <div class="text-purple-300">
+                <span class="text-lime-400 font-['Courier_New']">ALIASES:</span>{' '}
+                {aliases.join(', ')}
+              </div>
+            )}
+          </div>
+          <div class="flex flex-wrap gap-2">
+            {cryptid.status && <StatusBadge status={cryptid.status} />}
+            <DangerBadge level={cryptid.dangerLevel} />
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content Grid */}
+      <div class="grid lg:grid-cols-2 gap-6 mb-8">
+        {/* Mugshot/Image */}
+        <div class="bg-purple-950/30 border-2 border-purple-800 p-4">
+          <div class="bg-black/50 border border-purple-700 mb-4">
+            <div class="aspect-square relative overflow-hidden">
+              <Image 
+                src={cryptid.image} 
+                alt={cryptid.imageAlt}
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+          <div class="text-center font-['Courier_New'] text-lime-400">
+            PHOTOGRAPHIC EVIDENCE
+          </div>
+        </div>
+
+        {/* Dossier Facts */}
+        <div class="space-y-4">
+          <div class="bg-purple-950/30 border-2 border-purple-800 p-6">
+            <h3 class="text-lime-400 font-['Courier_New'] mb-4 border-b border-purple-700 pb-2">
+              DOSSIER INFORMATION
+            </h3>
+            
+            <div class="space-y-4">
+              <div>
+                <div class="flex items-center gap-2 text-lime-400 font-['Courier_New'] mb-1">
+                  <Calendar class="w-4 h-4" />
+                  FIRST SIGHTING
+                </div>
+                <div class="text-purple-100 pl-6">{cryptid.firstSighting}</div>
+              </div>
+
+              <div>
+                <div class="flex items-center gap-2 text-lime-400 font-['Courier_New'] mb-1">
+                  <MapPin class="w-4 h-4" />
+                  LOCATION
+                </div>
+                <div class="text-purple-100 pl-6">{cryptid.location || cryptid.address}</div>
+              </div>
+
+              <div>
+                <div class="text-lime-400 font-['Courier_New'] mb-1">TYPE</div>
+                <div class="text-purple-100 pl-6">{cryptid.type}</div>
+              </div>
+
+              <div>
+                <div class="text-lime-400 font-['Courier_New'] mb-1">REGION</div>
+                <div class="text-purple-100 pl-6">{cryptid.region}</div>
+              </div>
+
+              {cryptid.status && (
+                <div>
+                  <div class="text-lime-400 font-['Courier_New'] mb-1">STATUS</div>
+                  <div class="pl-6">
+                    <StatusBadge status={cryptid.status} />
+                  </div>
+                </div>
+              )}
+
+              {cryptid.knownAssociates && (
+                <div>
+                  <div class="text-lime-400 font-['Courier_New'] mb-1">KNOWN ASSOCIATES</div>
+                  <div class="text-purple-100 pl-6">{cryptid.knownAssociates}</div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Description */}
+          <div class="bg-purple-950/30 border-2 border-purple-800 p-6">
+            <h3 class="text-lime-400 font-['Courier_New'] mb-3 border-b border-purple-700 pb-2">
+              DESCRIPTION
+            </h3>
+            <p class="text-purple-100 leading-relaxed">
+              {cryptid.description}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Case Notes Section */}
+      {cryptid.caseNotes && cryptid.caseNotes.length > 0 && (
+        <div class="bg-yellow-400/10 border-2 border-yellow-400 p-6 mb-8">
+          <div class="flex items-center gap-2 mb-4">
+            <TriangleAlert class="w-6 h-6 text-yellow-400" />
+            <h3 class="text-yellow-400 font-['Courier_New']">
+              INVESTIGATOR CASE NOTES
+            </h3>
+          </div>
+          <div class="space-y-3">
+            {cryptid.caseNotes.map((note, index) => (
+              <div 
+                class="bg-black/30 border-l-4 border-yellow-400 p-4 text-purple-100"
+              >
+                <div class="flex gap-3">
+                  <span class="text-yellow-400 font-['Courier_New'] flex-shrink-0">
+                    [{index + 1}]
+                  </span>
+                  <span>{note}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Related Files */}
+      {relatedFiles.length > 0 && (
+        <div>
+          <h2 class="text-lime-400 mb-6 pb-2 border-b border-purple-700">
+            Related Files
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {relatedFiles.map(related => (
+              <CryptidCard cryptid={related} variant="compact" />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
 </div>

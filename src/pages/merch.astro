@@ -1,83 +1,215 @@
 ---
-import Section from '../components/Section.astro';
 import Layout from '../layouts/Layout.astro';
 import Product from '../components/Product.astro';
-import tshirt1 from '../assets/tshirt1.jpg';
-import tshirt2 from '../assets/tshirt2.jpg';
+import { Package } from '@lucide/astro';
+
+
+import shirt1 from '../assets/dragon-eye.shirt1.png';
+import shirt2 from '../assets/dragon-eye.shirt2.png';
+import cap from '../assets/dragon-eye.cap.png';
+import kit from '../assets/dragon-eye.kit.png';
+import badge from '../assets/dragon-eye.badge.png';
+import sticker1 from '../assets/dragon-eye.big-foot-stickers.png';
+import sticker3 from '../assets/dragon-eye.loch-ness-stickers.png';
+import sticker2 from '../assets/dragon-eye.ghost-stickers.png';
+import sweatpants from '../assets/dragon-eye.pants.png';
+
+
+// Product data with categories
+const products = [
+  {
+    id: 'tshirt',
+    title: 'Dragon Eye T-Shirt',
+    description: 'Show your Dragon Eye pride with our official club t-shirt. Two styles available.',
+    price: '20.00',
+    category: 'Dragon Eye Agency',
+    imageOptions: [
+      { src: shirt1, alt: 'Dragon Eye T-Shirt Option 1' },
+      { src: shirt2, alt: 'Dragon Eye T-Shirt Option 2' }
+    ]
+  },
+  {
+    id: 'cap',
+    emoji: '🧢',
+    title: 'Dragon Eye Cap',
+    description: 'Stay cool while on the hunt for clues with our stylish cap.',
+    price: '15.00',
+    category: 'Dragon Eye Agency',
+    imageOptions: [
+      { src: cap, alt: 'Dragon Eye Cap' }
+    ]
+  },  
+  {
+    id: 'detective-kit',
+    emoji: '🔍',
+    title: 'Junior Detective Kit',
+    description: 'Everything you need to start your detective journey, including a magnifying glass.',
+    price: '25.00',
+    category: 'Cryptid Collection',
+    imageOptions: [
+      { src: kit, alt: 'Junior Detective Kit' }
+    ]
+  },
+  {
+    id: 'badge',
+    emoji: '🔰',
+    title: 'Dragon Eye Badge',
+    description: 'Official member badge - show that you\'re part of the Dragon Eye detective club.',
+    price: '8.00',
+    category: 'Dragon Eye Agency',
+    imageOptions: [
+      { src: badge, alt: 'Dragon Eye Badge' }
+    ]
+  },
+  {
+    id: 'sticker-pack',
+    emoji: '🏷️',
+    title: 'Sticker Pack',
+    description: 'Decorate your notebooks and gear with these cool Dragon Eye stickers.',
+    price: '5.00',
+    category: 'Cryptid Collection',
+    imageOptions: [
+      { src: sticker1, alt: 'Big Foot Sticker' },
+      { src: sticker2, alt: 'Ghost Sticker' },
+      { src: sticker3, alt: 'Loch Ness Sticker' }
+    ]
+  },
+  {
+    id: 'sweatpants',
+    emoji: '👖',
+    title: 'Dragon Eye Sweatpants',
+    description: 'Stay comfortable during stakeouts and detective work with our cozy sweatpants.',
+    price: '30.00',
+    category: 'Dragon Eye Agency',
+    imageOptions: [
+      { src: sweatpants, alt: 'Dragon Eye Sweatpants' }
+    ]
+  }
+];
 ---
 
 <Layout>
-  <Section title="Dragon Eye Merch">
-    <div class="flex flex-col gap-6">
-      <p class="text-lg">Show your Dragon Eye pride with our exclusive merchandise! Perfect for club members and supporters.</p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- T-Shirt with two options -->
-        <Product 
-          title="Dragon Eye T-Shirt" 
-          description="Show your Dragon Eye pride with our official club t-shirt. Two styles available." 
-          price="20.00"
-          imageOptions={[
-            { src: tshirt1, alt: "Dragon Eye T-Shirt Option 1" },
-            { src: tshirt2, alt: "Dragon Eye T-Shirt Option 2" }
-          ]}
-        />
-
-        <!-- Hat -->
-        <Product 
-          emoji="🧢" 
-          title="Dragon Eye Cap" 
-          description="Stay cool while on the hunt for clues with our stylish cap." 
-          price="15.00" 
-        />
-
-        <!-- Notebook -->
-        <Product 
-          emoji="📓" 
-          title="Detective Notebook" 
-          description="Record all your clues and findings in this official Dragon Eye notebook." 
-          price="10.00" 
-        />
-
-        <!-- Magnifying Glass -->
-        <Product 
-          emoji="🔍" 
-          title="Junior Detective Kit" 
-          description="Everything you need to start your detective journey, including a magnifying glass." 
-          price="25.00" 
-        />
-
-        <!-- Badge -->
-        <Product 
-          emoji="🔰" 
-          title="Dragon Eye Badge" 
-          description="Official member badge - show that you're part of the Dragon Eye detective club." 
-          price="8.00" 
-        />
-
-        <!-- Sticker Pack -->
-        <Product 
-          emoji="🏷️" 
-          title="Sticker Pack" 
-          description="Decorate your notebooks and gear with these cool Dragon Eye stickers." 
-          price="5.00" 
-        />
-
-        <!-- Sweatpants -->
-        <Product 
-          emoji="👖" 
-          title="Dragon Eye Sweatpants" 
-          description="Stay comfortable during stakeouts and detective work with our cozy sweatpants." 
-          price="30.00" 
-        />
+  <div class="min-h-screen bg-[#0f0f0f] py-12">
+    <div class="container mx-auto px-4">
+      {/* Header */}
+      <div class="mb-12 text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-yellow-400/10 border border-yellow-400 rounded-sm mb-4">
+          <Package class="w-5 h-5 text-yellow-400" />
+          <span class="text-yellow-400 font-['Courier_New']">AGENCY EVIDENCE LOCKER</span>
+        </div>
+        <h1 class="mb-4">Agency Evidence Locker</h1>
+        <p class="text-purple-200 max-w-2xl mx-auto">
+          Get official Dragon Eye gear and cryptid collectibles! All proceeds support our ongoing investigations. 
+          Items coming soon!
+        </p>
       </div>
 
-      <div class="mt-8 bg-white/80 p-6 rounded-xs shadow-md">
-        <h3 class="text-xl font-bold text-blue-900 mb-4">Ordering Information</h3>
-        <p>All merchandise is available for purchase during our Monday and Wednesday meetings at Dragon Eye HQ.</p>
-        <p class="mt-2">For special orders or inquiries, please speak with a club leader.</p>
-        <p class="mt-4 font-bold">Members receive a 10% discount on all merchandise!</p>
+      {/* Category Tabs */}
+      <div class="max-w-3xl mx-auto mb-12">
+        <div class="flex flex-wrap gap-3 justify-center">
+          <button
+            id="tab-all"
+            data-tab="all"
+            class="px-6 py-3 font-['Courier_New'] transition-all bg-yellow-400 text-black"
+          >
+            ALL ITEMS
+          </button>
+          <button
+            id="tab-agency"
+            data-tab="agency"
+            class="px-6 py-3 font-['Courier_New'] transition-all border border-yellow-400 text-yellow-400 hover:bg-yellow-400/10"
+          >
+            DRAGON EYE AGENCY
+          </button>
+          <button
+            id="tab-cryptid"
+            data-tab="cryptid"
+            class="px-6 py-3 font-['Courier_New'] transition-all border border-yellow-400 text-yellow-400 hover:bg-yellow-400/10"
+          >
+            CRYPTID COLLECTION
+          </button>
+        </div>
+      </div>
+
+      {/* Products Grid */}
+      <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        {products.map(product => (
+          <div
+            class="product-wrapper"
+            data-category={product.category === 'Dragon Eye Agency' ? 'agency' : 'cryptid'}
+            data-product-id={product.id}
+          >
+            {product.imageOptions ? (
+              <Product
+                title={product.title}
+                description={product.description}
+                price={product.price}
+                imageOptions={product.imageOptions}
+              />
+            ) : (
+              <Product
+                emoji={product.emoji}
+                title={product.title}
+                description={product.description}
+                price={product.price}
+              />
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Info Box */}
+      <div class="max-w-3xl mx-auto bg-purple-950/30 border border-purple-800 p-6 text-center">
+        <div class="text-lime-400 font-['Courier_New'] mb-2">
+          COMING SOON!
+        </div>
+        <p class="text-purple-200">
+          Our merchandise shop is currently under construction. Check back soon to grab your favorite cryptid gear!
+          Follow us on social media for launch updates.
+        </p>
       </div>
     </div>
-  </Section>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('[data-tab]');
+    const productWrappers = document.querySelectorAll('.product-wrapper');
+
+    function filterProducts(activeTab: string) {
+      productWrappers.forEach(wrapper => {
+        const category = wrapper.getAttribute('data-category');
+        
+        if (activeTab === 'all') {
+          (wrapper as HTMLElement).style.display = '';
+        } else if (activeTab === 'agency' && category === 'agency') {
+          (wrapper as HTMLElement).style.display = '';
+        } else if (activeTab === 'cryptid' && category === 'cryptid') {
+          (wrapper as HTMLElement).style.display = '';
+        } else {
+          (wrapper as HTMLElement).style.display = 'none';
+        }
+      });
+
+      // Update tab styles
+      tabs.forEach(tab => {
+        const tabValue = tab.getAttribute('data-tab');
+        if (tabValue === activeTab) {
+          tab.classList.remove('border', 'text-yellow-400', 'hover:bg-yellow-400/10');
+          tab.classList.add('bg-yellow-400', 'text-black');
+        } else {
+          tab.classList.remove('bg-yellow-400', 'text-black');
+          tab.classList.add('border', 'border-yellow-400', 'text-yellow-400', 'hover:bg-yellow-400/10');
+        }
+      });
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tabValue = tab.getAttribute('data-tab');
+        if (tabValue) {
+          filterProducts(tabValue);
+        }
+      });
+    });
+  </script>
 </Layout>
