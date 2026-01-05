@@ -1,36 +1,13 @@
 ---
-import type { SanityDocument } from "@sanity/client";
-import type { Image } from '@sanity/types';
-import { loadQuery } from "../../../lib/load-query"
-
 import FileDetails from "../../components/FileDetails.astro";
 import Layout from "../../layouts/Layout.astro";
-import { urlForImage } from "../../../lib/url-for-image";
-
-interface CryptidFile extends SanityDocument {
-  title: string;
-  name: string;
-  image: Image;
-  imageAlt: string;
-  description: string;
-  caseNumber: string;
-  alias?: string[];
-  address?: string;
-  knownAssociates?: string[];
-  slug: {
-    current: string;
-  };
-}
+import { cryptidFiles } from "../../data/cryptidFiles";
 
 export async function getStaticPaths() {
-  const { data: posts } = await loadQuery<CryptidFile[]>({
-    query: `*[_type == "cryptidFile"]`,
-  });
-
-  return posts.map((post: CryptidFile) => {
+  return cryptidFiles.map((file) => {
     return {
       params: {
-slug: post.slug.current,
+        slug: file.slug,
       },
     };
   });
@@ -38,14 +15,13 @@ slug: post.slug.current,
 
 const { params } = Astro;
 
-const { data } = await loadQuery<CryptidFile>({
-  query: `*[_type == "cryptidFile" && slug.current == $slug][0]`,
-  params,
-});
+const file = cryptidFiles.find((f) => f.slug === params.slug);
 
-const { title, name, image, imageAlt, description, caseNumber, alias, address, knownAssociates } = data;
+if (!file) {
+  return Astro.redirect("/files", 404);
+}
 
-const imageURL = urlForImage(image).url();
+const { title, name, image, imageAlt, description, caseNumber, alias, address, knownAssociates } = file;
 
 ---
 <Layout>
@@ -54,7 +30,7 @@ const imageURL = urlForImage(image).url();
         >← Back to Files</a
       >
       <FileDetails
-        image={imageURL}
+        image={image}
         imageAlt={imageAlt}
         title={title}
         description={description}
