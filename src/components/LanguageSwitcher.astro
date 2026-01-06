@@ -1,0 +1,45 @@
+---
+import { getAlternatePaths } from '../i18n/routing';
+import type { Locale } from '../i18n/translations';
+
+// Get locale from URL pathname - more reliable than getLocaleFromAstro
+let currentLocale: 'en' | 'fr' = 'en';
+const currentPath = typeof Astro !== 'undefined' ? Astro.url.pathname : '/';
+try {
+  // @ts-ignore
+  if (typeof Astro !== 'undefined' && Astro.url) {
+    const pathname = Astro.url.pathname;
+    currentLocale = pathname.startsWith('/fr/') || pathname === '/fr' || pathname === '/fr/' ? 'fr' : 'en';
+  }
+} catch {
+  currentLocale = 'en';
+}
+const alternatePaths = getAlternatePaths(currentPath);
+
+const languages: { code: Locale; name: string }[] = [
+  { code: 'en', name: 'English' },
+  { code: 'fr', name: 'Français' },
+];
+---
+
+<div class="flex items-center gap-2">
+  {languages.map((lang) => {
+    const isActive = currentLocale === lang.code;
+    const path = lang.code === 'en' ? alternatePaths.en : alternatePaths.fr;
+    
+    return (
+      <a
+        href={path}
+        class={`px-3 py-1 text-sm font-['Courier_New'] transition-colors ${
+          isActive
+            ? 'bg-lime-400 text-black'
+            : 'text-purple-300 hover:text-lime-400 border border-purple-700 hover:border-lime-400 hover:shadow-[0_0_20px_rgba(163,230,53,0.4)]'
+        }`}
+        aria-label={`Switch to ${lang.name}`}
+      >
+        {lang.code.toUpperCase()}
+      </a>
+    );
+  })}
+</div>
+

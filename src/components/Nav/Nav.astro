@@ -1,12 +1,27 @@
 ---
 import Link from "./Link.astro";
+import LanguageSwitcher from "../LanguageSwitcher.astro";
 import { Eye } from "@lucide/astro";
+import { getTranslations } from "../../i18n/utils";
+
+// Get locale from URL pathname - more reliable than getLocaleFromAstro in some cases
+let locale: 'en' | 'fr' = 'en';
+try {
+  // @ts-ignore
+  if (typeof Astro !== 'undefined' && Astro.url) {
+    const pathname = Astro.url.pathname;
+    locale = pathname.startsWith('/fr/') || pathname === '/fr' || pathname === '/fr/' ? 'fr' : 'en';
+  }
+} catch {
+  locale = 'en';
+}
+const t = getTranslations(locale);
 ---
 
 <nav class="border-b border-purple-900/50 bg-[#0a0a0a] sticky top-0 z-50">
   <div class="container mx-auto px-4 py-4 flex items-center justify-between">
     <Link to="/" class="flex items-center gap-2 group">
-      <Eye class="w-8 h-8 text-lime-400 group-hover:text-yellow-400 transition-colors" />
+      <Eye class="w-8 h-8 text-lime-400 group-hover:text-yellow-400 group-hover:drop-shadow-[0_0_15px_rgba(250,204,21,0.5)] transition-all" />
       <span class="font-['Courier_New'] tracking-wider">
         DRAGON EYE
       </span>
@@ -15,22 +30,23 @@ import { Eye } from "@lucide/astro";
     <div class="flex items-center gap-6">
       <Link 
         to="/files" 
-        class="hover:text-lime-400 transition-colors"
+        class="hover:text-lime-400 hover:drop-shadow-[0_0_15px_rgba(163,230,53,0.5)] transition-all"
       >
-        Files
+        {t.nav.files}
       </Link>
       <Link 
         to="/merch" 
-        class="hover:text-lime-400 transition-colors"
+        class="hover:text-lime-400 hover:drop-shadow-[0_0_15px_rgba(163,230,53,0.5)] transition-all"
       >
-        Merch
+        {t.nav.merch}
       </Link>
       <Link 
-        to="/contact" 
-        class="hover:text-lime-400 transition-colors"
+        to="/about" 
+        class="hover:text-lime-400 hover:drop-shadow-[0_0_15px_rgba(163,230,53,0.5)] transition-all"
       >
-        Contact
+        {t.about.title}
       </Link>
+      <LanguageSwitcher />
     </div>
   </div>
 </nav>

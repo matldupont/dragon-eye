@@ -2,23 +2,37 @@
 import FileDetails from "../../components/FileDetails.astro";
 import Layout from "../../layouts/Layout.astro";
 import { cryptidFiles } from "../../data/cryptidFiles";
+import { addLocaleToPath } from "../../i18n/routing";
+import { getLocaleFromAstro } from "../../i18n/routing";
 
 export async function getStaticPaths() {
-  return cryptidFiles.map((file) => {
-    return {
-      params: {
-        slug: file.slug,
-      },
-    };
-  });
+  const locales = ['en', 'fr'];
+  const paths = [];
+  
+  for (const locale of locales) {
+    for (const file of cryptidFiles) {
+      paths.push({
+        params: {
+          slug: file.slug,
+        },
+        props: {
+          locale,
+        },
+      });
+    }
+  }
+  
+  return paths;
 }
 
 const { params } = Astro;
+const locale = getLocaleFromAstro();
 
 const cryptid = cryptidFiles.find((f) => f.slug === params.slug);
 
 if (!cryptid) {
-  return Astro.redirect("/files", 404);
+  const filesPath = locale === 'fr' ? '/fr/files' : '/files';
+  return Astro.redirect(filesPath, 404);
 }
 
 ---

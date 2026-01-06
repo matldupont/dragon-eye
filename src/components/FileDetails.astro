@@ -3,10 +3,12 @@ import { Image } from "astro:assets";
 import { ArrowLeft, MapPin, Calendar, TriangleAlert } from "@lucide/astro";
 import type { CryptidFile } from "../data/cryptidFiles";
 import { cryptidFiles } from "../data/cryptidFiles";
+import { getTranslatedCryptidFile } from "../data/cryptidFilesTranslations";
 import DangerBadge from "./DangerBadge.astro";
 import StatusBadge from "./StatusBadge.astro";
 import CryptidCard from "./CryptidCard.astro";
 import Link from "./Nav/Link.astro";
+import { getTranslations, getLocaleFromAstro } from '../i18n/utils';
 
 interface Props {
   cryptid: CryptidFile & {
@@ -16,15 +18,42 @@ interface Props {
   };
 }
 
-const { cryptid } = Astro.props;
+// Type guard to check if cryptid has extended properties
+type ExtendedCryptid = CryptidFile & {
+  status?: 'Sighted' | 'Under Investigation' | 'Confirmed' | 'Myth';
+  caseNotes?: string[];
+  location?: string;
+};
+
+const { cryptid: originalCryptid } = Astro.props as { cryptid: ExtendedCryptid };
+// Get locale from URL pathname - more reliable than getLocaleFromAstro in some cases
+let locale: 'en' | 'fr' = 'en';
+try {
+  // @ts-ignore
+  if (typeof Astro !== 'undefined' && Astro.url) {
+    const pathname = Astro.url.pathname;
+    locale = pathname.startsWith('/fr/') || pathname === '/fr' || pathname === '/fr/' ? 'fr' : 'en';
+  }
+} catch {
+  locale = 'en';
+}
+const t = getTranslations(locale);
+// Get translated version of the cryptid
+const cryptid = getTranslatedCryptidFile(originalCryptid, locale) as ExtendedCryptid;
+// Preserve extended properties
+if ('status' in originalCryptid) cryptid.status = originalCryptid.status;
+if ('caseNotes' in originalCryptid) cryptid.caseNotes = originalCryptid.caseNotes;
+if ('location' in originalCryptid) cryptid.location = originalCryptid.location;
 
 // Handle aliases - convert string to array if needed
 const aliases = cryptid.alias ? cryptid.alias.split(',').map(a => a.trim()) : [];
 
 // Get related files (same region or type, excluding current)
+// Note: We compare using original data, but display translated versions
 const relatedFiles = cryptidFiles
-  .filter(c => c.slug !== cryptid.slug && (c.region === cryptid.region || c.type === cryptid.type))
-  .slice(0, 3);
+  .filter(c => c.slug !== originalCryptid.slug && (c.region === originalCryptid.region || c.type === originalCryptid.type))
+  .slice(0, 3)
+  .map(c => getTranslatedCryptidFile(c, locale));
 ---
 
 <div class="min-h-screen bg-[#0f0f0f] py-8">
@@ -32,10 +61,10 @@ const relatedFiles = cryptidFiles
     {/* Back Button */}
     <Link
       to="/files"
-      class="flex items-center gap-2 px-4 py-2 border border-lime-400 text-lime-400 hover:bg-lime-400 hover:text-black transition-all font-['Courier_New'] mb-8 inline-block w-fit"
+      class="flex items-center gap-2 px-4 py-2 border border-lime-400 text-lime-400 hover:bg-lime-400 hover:text-black hover:shadow-[0_0_20px_rgba(163,230,53,0.4)] transition-all font-['Courier_New'] mb-8 inline-block w-fit"
     >
-      <ArrowLeft class="w-4 h-4" />
-      BACK TO FILES
+
+      {t.fileDetails.backToFiles}
     </Link>
 
     {/* Main File Content */}
@@ -45,12 +74,12 @@ const relatedFiles = cryptidFiles
         <div class="flex flex-wrap items-start justify-between gap-4">
           <div>
             <div class="text-yellow-400 font-['Courier_New'] mb-2">
-              CASE FILE: {cryptid.codename}
+              {t.fileDetails.caseNumber} {cryptid.codename}
             </div>
             <h1 class="mb-2">{cryptid.name}</h1>
             {aliases.length > 0 && (
               <div class="text-purple-300">
-                <span class="text-lime-400 font-['Courier_New']">ALIASES:</span>{' '}
+                <span class="text-lime-400 font-['Courier_New']">{t.fileDetails.alias}</span>{' '}
                 {aliases.join(', ')}
               </div>
             )}
@@ -76,7 +105,7 @@ const relatedFiles = cryptidFiles
             </div>
           </div>
           <div class="text-center font-['Courier_New'] text-lime-400">
-            PHOTOGRAPHIC EVIDENCE
+            {t.fileDetails.photographicEvidence}
           </div>
         </div>
 
@@ -84,14 +113,14 @@ const relatedFiles = cryptidFiles
         <div class="space-y-4">
           <div class="bg-purple-950/30 border-2 border-purple-800 p-6">
             <h3 class="text-lime-400 font-['Courier_New'] mb-4 border-b border-purple-700 pb-2">
-              DOSSIER INFORMATION
+              {t.fileDetails.dossierInformation}
             </h3>
             
             <div class="space-y-4">
               <div>
                 <div class="flex items-center gap-2 text-lime-400 font-['Courier_New'] mb-1">
                   <Calendar class="w-4 h-4" />
-                  FIRST SIGHTING
+                  {t.fileDetails.firstSighting}
                 </div>
                 <div class="text-purple-100 pl-6">{cryptid.firstSighting}</div>
               </div>
@@ -99,24 +128,24 @@ const relatedFiles = cryptidFiles
               <div>
                 <div class="flex items-center gap-2 text-lime-400 font-['Courier_New'] mb-1">
                   <MapPin class="w-4 h-4" />
-                  LOCATION
+                  {t.fileDetails.location}
                 </div>
                 <div class="text-purple-100 pl-6">{cryptid.location || cryptid.address}</div>
               </div>
 
               <div>
-                <div class="text-lime-400 font-['Courier_New'] mb-1">TYPE</div>
+                <div class="text-lime-400 font-['Courier_New'] mb-1">{t.fileDetails.type}</div>
                 <div class="text-purple-100 pl-6">{cryptid.type}</div>
               </div>
 
               <div>
-                <div class="text-lime-400 font-['Courier_New'] mb-1">REGION</div>
+                <div class="text-lime-400 font-['Courier_New'] mb-1">{t.fileDetails.region}</div>
                 <div class="text-purple-100 pl-6">{cryptid.region}</div>
               </div>
 
               {cryptid.status && (
                 <div>
-                  <div class="text-lime-400 font-['Courier_New'] mb-1">STATUS</div>
+                  <div class="text-lime-400 font-['Courier_New'] mb-1">{t.fileDetails.status}</div>
                   <div class="pl-6">
                     <StatusBadge status={cryptid.status} />
                   </div>
@@ -125,7 +154,7 @@ const relatedFiles = cryptidFiles
 
               {cryptid.knownAssociates && (
                 <div>
-                  <div class="text-lime-400 font-['Courier_New'] mb-1">KNOWN ASSOCIATES</div>
+                  <div class="text-lime-400 font-['Courier_New'] mb-1">{t.fileDetails.knownAssociates}</div>
                   <div class="text-purple-100 pl-6">{cryptid.knownAssociates}</div>
                 </div>
               )}
@@ -135,7 +164,7 @@ const relatedFiles = cryptidFiles
           {/* Description */}
           <div class="bg-purple-950/30 border-2 border-purple-800 p-6">
             <h3 class="text-lime-400 font-['Courier_New'] mb-3 border-b border-purple-700 pb-2">
-              DESCRIPTION
+              {t.fileDetails.description}
             </h3>
             <p class="text-purple-100 leading-relaxed">
               {cryptid.description}
@@ -150,11 +179,11 @@ const relatedFiles = cryptidFiles
           <div class="flex items-center gap-2 mb-4">
             <TriangleAlert class="w-6 h-6 text-yellow-400" />
             <h3 class="text-yellow-400 font-['Courier_New']">
-              INVESTIGATOR CASE NOTES
+              {t.fileDetails.investigatorCaseNotes}
             </h3>
           </div>
           <div class="space-y-3">
-            {cryptid.caseNotes.map((note, index) => (
+            {cryptid.caseNotes?.map((note: string, index: number) => (
               <div 
                 class="bg-black/30 border-l-4 border-yellow-400 p-4 text-purple-100"
               >
@@ -174,7 +203,7 @@ const relatedFiles = cryptidFiles
       {relatedFiles.length > 0 && (
         <div>
           <h2 class="text-lime-400 mb-6 pb-2 border-b border-purple-700">
-            Related Files
+            {t.fileDetails.relatedFiles}
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             {relatedFiles.map(related => (

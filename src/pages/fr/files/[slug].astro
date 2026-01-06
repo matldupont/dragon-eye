@@ -1,0 +1,29 @@
+---
+import FileDetails from "../../../components/FileDetails.astro";
+import Layout from "../../../layouts/Layout.astro";
+import { cryptidFiles } from "../../../data/cryptidFiles";
+import { addLocaleToPath } from "../../../i18n/routing";
+
+export async function getStaticPaths() {
+  return cryptidFiles.map((file) => {
+    return {
+      params: {
+        slug: file.slug,
+      },
+    };
+  });
+}
+
+const { params } = Astro;
+
+const cryptid = cryptidFiles.find((f) => f.slug === params.slug);
+
+if (!cryptid) {
+  return Astro.redirect("/fr/files", 404);
+}
+
+---
+<Layout>
+  <FileDetails cryptid={cryptid} />
+</Layout>
+

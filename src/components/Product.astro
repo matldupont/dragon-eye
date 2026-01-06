@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { getTranslations, getLocaleFromAstro } from '../i18n/utils';
 
 interface ImageOption {
   src: any;
@@ -7,23 +8,40 @@ interface ImageOption {
 }
 
 const { emoji, title, description, price, imageOptions } = Astro.props;
+// Get locale from URL pathname - more reliable than getLocaleFromAstro in some cases
+let locale: 'en' | 'fr' = 'en';
+try {
+  // @ts-ignore
+  if (typeof Astro !== 'undefined' && Astro.url) {
+    const pathname = Astro.url.pathname;
+    locale = pathname.startsWith('/fr/') || pathname === '/fr' || pathname === '/fr/' ? 'fr' : 'en';
+  }
+} catch {
+  locale = 'en';
+}
+const t = getTranslations(locale);
 const hasImageOptions = imageOptions && imageOptions.length > 0;
 
 // Generate a unique ID for this product instance
 const productId = `product-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
-<div class="bg-purple-950/30 border-2 border-purple-800 p-6 flex flex-col h-full hover:border-yellow-400 transition-all" data-product-id={productId}>
+<div class="bg-purple-950/30 border-2 border-purple-800 p-6 flex flex-col h-full hover:border-yellow-400 hover:shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-all" data-product-id={productId}>
   <div class="bg-black/50 border border-purple-700 h-48 rounded-sm mb-4 flex items-center justify-center relative overflow-hidden">
     {hasImageOptions ? (
       <>
         {imageOptions.map((image: ImageOption, index: number) => (
-          <div data-image-option={index} class={`h-full w-full flex items-center justify-center ${index === 0 ? '' : 'hidden'}`}>
-            <Image src={image.src} alt={image.alt} class="h-full object-contain p-2" />
+          <div 
+            data-image-option={index} 
+            class={`h-full w-full flex items-center justify-center cursor-pointer ${index === 0 ? '' : 'hidden'}`}
+            data-modal-image-index={index}
+            data-clickable-image={productId}
+          >
+            <Image src={image.src} alt={image.alt} class="h-full object-contain p-2 pointer-events-none" />
           </div>
         ))}
         {imageOptions.length > 1 && (
-          <div class="absolute bottom-2 right-2 flex space-x-2">
+          <div class="absolute bottom-2 right-2 flex space-x-2 z-10">
             {imageOptions.map((_: ImageOption, index: number) => (
               <button 
                 class={`product-option-btn py-1 px-2 rounded-sm text-xs text-white font-['Courier_New'] ${index === 0 ? 'bg-yellow-400 text-black' : 'bg-purple-800 text-purple-200'}`}
@@ -43,30 +61,103 @@ const productId = `product-${Math.random().toString(36).substr(2, 9)}`;
   <h3 class="text-xl font-medium text-white mb-2">{title}</h3>
   <p class="mb-3 text-purple-200 text-sm leading-relaxed">{description}</p>
   <p class="font-bold text-lg mb-4 text-yellow-400 font-['Courier_New']">${price}</p>
-  <button class="mt-auto w-full bg-yellow-400 text-black py-3 px-4 rounded-sm hover:bg-lime-400 transition-colors font-['Courier_New'] font-medium">
-    ADD TO CART
+  <button class="mt-auto w-full bg-yellow-400 text-black py-3 px-4 rounded-sm hover:bg-lime-400 hover:shadow-[0_0_20px_rgba(163,230,53,0.4)] transition-all font-['Courier_New'] font-medium">
+    {t.product.addToCart}
   </button>
 </div>
 
-{hasImageOptions && imageOptions.length > 1 && (
-  <script define:vars={{ productId }}>
-    (function() {
-      const productContainer = document.querySelector(`[data-product-id="${productId}"]`);
-      if (!productContainer) return;
+{/* Image Modal */}
+{hasImageOptions && (
+  <div 
+    id={`modal-${productId}`}
+    class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4"
+    data-product-modal={productId}
+  >
+    <div class="relative max-w-4xl max-h-[90vh] w-full h-full flex items-center justify-center">
+      <button 
+        class="absolute top-4 right-4 text-white hover:text-yellow-400 transition-colors z-10 bg-black/50 rounded-full p-2"
+        data-modal-close={productId}
+        aria-label={t.product.closeModal}
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      {imageOptions.map((image: ImageOption, index: number) => (
+        <div 
+          data-modal-image={index}
+          class={`h-full w-full flex items-center justify-center ${index === 0 ? '' : 'hidden'}`}
+        >
+          <Image src={image.src} alt={image.alt} class="max-w-full max-h-full object-contain" />
+        </div>
+      ))}
+      {imageOptions.length > 1 && (
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          {imageOptions.map((_: ImageOption, index: number) => (
+            <button 
+              class={`modal-option-btn py-2 px-3 rounded-sm text-sm text-white font-['Courier_New'] ${index === 0 ? 'bg-yellow-400 text-black' : 'bg-purple-800 text-purple-200'}`}
+              data-modal-index={index}
+              data-modal-product-id={productId}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+)}
 
-      const optionButtons = productContainer.querySelectorAll('.product-option-btn');
-      
-      optionButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          const selectedIndex = Number(button.getAttribute('data-index'));
-          const imageContainers = productContainer.querySelectorAll('[data-image-option]');
-          
-          // Hide all images and reset all buttons within this product only
-          imageContainers.forEach((container, i) => {
-            container.classList.toggle('hidden', i !== selectedIndex);
-          });
-          
-          optionButtons.forEach((btn, i) => {
+{hasImageOptions && (
+  <script define:vars={{ productId, imageOptions: imageOptions.length }}>
+    (function() {
+      // Wait for DOM to be ready
+      function initModal() {
+        const productContainer = document.querySelector(`[data-product-id="${productId}"]`);
+        if (!productContainer) {
+          setTimeout(initModal, 100);
+          return;
+        }
+
+        const modal = document.querySelector(`[data-product-modal="${productId}"]`);
+        if (!modal) {
+          setTimeout(initModal, 100);
+          return;
+        }
+
+        const modalCloseBtn = document.querySelector(`[data-modal-close="${productId}"]`);
+        const imageContainers = productContainer.querySelectorAll('[data-image-option]');
+        const modalImageContainers = modal.querySelectorAll('[data-modal-image]');
+        const optionButtons = productContainer.querySelectorAll('.product-option-btn');
+        const modalOptionButtons = modal.querySelectorAll('.modal-option-btn');
+
+        // Function to switch images in product card
+        function switchProductImage(selectedIndex) {
+        imageContainers.forEach((container, i) => {
+          container.classList.toggle('hidden', i !== selectedIndex);
+        });
+        
+        optionButtons.forEach((btn, i) => {
+          if (i === selectedIndex) {
+            btn.classList.remove('bg-purple-800', 'text-purple-200');
+            btn.classList.add('bg-yellow-400', 'text-black');
+          } else {
+            btn.classList.remove('bg-yellow-400', 'text-black');
+            btn.classList.add('bg-purple-800', 'text-purple-200');
+          }
+        });
+        }
+
+        // Function to switch images in modal
+        function switchModalImage(selectedIndex) {
+        if (!modalImageContainers) return;
+        
+        modalImageContainers.forEach((container, i) => {
+          container.classList.toggle('hidden', i !== selectedIndex);
+        });
+        
+        if (modalOptionButtons) {
+          modalOptionButtons.forEach((btn, i) => {
             if (i === selectedIndex) {
               btn.classList.remove('bg-purple-800', 'text-purple-200');
               btn.classList.add('bg-yellow-400', 'text-black');
@@ -75,8 +166,162 @@ const productId = `product-${Math.random().toString(36).substr(2, 9)}`;
               btn.classList.add('bg-purple-800', 'text-purple-200');
             }
           });
+        }
+        }
+
+        // Open modal with current image
+        function openModal() {
+          if (!modal) return;
+        
+        // Find currently visible image index
+        let currentIndex = 0;
+        imageContainers.forEach((container, i) => {
+          if (!container.classList.contains('hidden')) {
+            currentIndex = i;
+          }
         });
-      });
+        
+        // Set modal to show same image
+        switchModalImage(currentIndex);
+        
+        // Show modal
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closeModal() {
+        if (!modal) return;
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+        }
+
+        // Make images clickable
+        imageContainers.forEach(container => {
+          container.addEventListener('click', (e) => {
+            // Don't open modal if clicking on option buttons
+            const clickedButton = e.target.closest('.product-option-btn');
+            if (clickedButton) {
+              return;
+            }
+            e.stopPropagation();
+            e.preventDefault();
+            openModal();
+          });
+          
+          // Also add pointer cursor style
+          container.style.cursor = 'pointer';
+        });
+
+        // Product card option buttons
+        optionButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const selectedIndex = Number(button.getAttribute('data-index'));
+          switchProductImage(selectedIndex);
+        });
+        });
+
+        // Modal option buttons
+        if (modalOptionButtons) {
+        modalOptionButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const selectedIndex = Number(button.getAttribute('data-modal-index'));
+            switchModalImage(selectedIndex);
+            // Also update product card to match
+            switchProductImage(selectedIndex);
+          });
+        });
+        }
+
+        // Close modal button
+        if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', closeModal);
+        }
+
+        // Close modal on background click
+        if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            closeModal();
+          }
+        });
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+            closeModal();
+          }
+        });
+      }
+
+      // Initialize when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initModal);
+      } else {
+        initModal();
+      }
     })();
+  </script>
+)}
+
+{/* Global click handler for image modals - only add once */}
+{hasImageOptions && (
+  <script is:inline>
+    if (!window.__dragonEyeModalHandlerAdded) {
+      window.__dragonEyeModalHandlerAdded = true;
+      document.addEventListener('click', function(e) {
+        const clickableImage = e.target.closest('[data-clickable-image]');
+        if (clickableImage && !e.target.closest('.product-option-btn')) {
+          const productId = clickableImage.getAttribute('data-clickable-image');
+          if (productId) {
+            const modal = document.querySelector(`[data-product-modal="${productId}"]`);
+            if (modal) {
+              e.preventDefault();
+              e.stopPropagation();
+              
+              // Find currently visible image
+              const productContainer = document.querySelector(`[data-product-id="${productId}"]`);
+              if (productContainer) {
+                const imageContainers = productContainer.querySelectorAll('[data-image-option]');
+                let currentIndex = 0;
+                imageContainers.forEach((container, i) => {
+                  if (!container.classList.contains('hidden')) {
+                    currentIndex = i;
+                  }
+                });
+                
+                // Show modal with correct image
+                const modalImageContainers = modal.querySelectorAll('[data-modal-image]');
+                const modalOptionButtons = modal.querySelectorAll('.modal-option-btn');
+                
+                modalImageContainers.forEach((container, i) => {
+                  container.classList.toggle('hidden', i !== currentIndex);
+                });
+                
+                // Update modal buttons
+                if (modalOptionButtons) {
+                  modalOptionButtons.forEach((btn, i) => {
+                    if (i === currentIndex) {
+                      btn.classList.remove('bg-purple-800', 'text-purple-200');
+                      btn.classList.add('bg-yellow-400', 'text-black');
+                    } else {
+                      btn.classList.remove('bg-yellow-400', 'text-black');
+                      btn.classList.add('bg-purple-800', 'text-purple-200');
+                    }
+                  });
+                }
+                
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+              }
+            }
+          }
+        }
+      });
+    }
   </script>
 )}

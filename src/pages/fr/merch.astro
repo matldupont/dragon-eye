@@ -1,25 +1,23 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Product from '../components/Product.astro';
+import Layout from '../../layouts/Layout.astro';
+import Product from '../../components/Product.astro';
 import { Package } from '@lucide/astro';
-import { getTranslations, getLocaleFromAstro } from '../i18n/utils';
+import { getTranslations } from '../../i18n/utils';
 
-import shirt1 from '../assets/dragon-eye.shirt1.png';
-import shirt2 from '../assets/dragon-eye.shirt2.png';
-import cap from '../assets/dragon-eye.cap.png';
-import kit from '../assets/dragon-eye.kit.png';
-import badge from '../assets/dragon-eye.badge.png';
-import sticker1 from '../assets/dragon-eye.big-foot-stickers.png';
-import sticker3 from '../assets/dragon-eye.loch-ness-stickers.png';
-import sticker2 from '../assets/dragon-eye.ghost-stickers.png';
-import sweatpants from '../assets/dragon-eye.pants.png';
-import plushieBigFoot from '../assets/big-foot.plushie.png';
-import plushieDragon from '../assets/dragon.plushie.png';
-import plushieLochNess from '../assets/loch-ness.plushie.png';
+import shirt1 from '../../assets/dragon-eye.shirt1.png';
+import shirt2 from '../../assets/dragon-eye.shirt2.png';
+import cap from '../../assets/dragon-eye.cap.png';
+import kit from '../../assets/dragon-eye.kit.png';
+import badge from '../../assets/dragon-eye.badge.png';
+import sticker1 from '../../assets/dragon-eye.big-foot-stickers.png';
+import sticker3 from '../../assets/dragon-eye.loch-ness-stickers.png';
+import sticker2 from '../../assets/dragon-eye.ghost-stickers.png';
+import sweatpants from '../../assets/dragon-eye.pants.png';
+import plushieBigFoot from '../../assets/big-foot.plushie.png';
+import plushieDragon from '../../assets/dragon.plushie.png';
+import plushieLochNess from '../../assets/loch-ness.plushie.png';
 
-const locale = getLocaleFromAstro();
-const t = getTranslations(locale);
-
+const t = getTranslations('fr');
 
 // Product data with categories - using translations
 const products = [
@@ -230,3 +228,4 @@ const products = [
     });
   </script>
 </Layout>
+

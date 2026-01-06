@@ -1,13 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { cryptidFiles } from "../data/cryptidFiles";
-import { getTranslatedCryptidFile } from "../data/cryptidFilesTranslations";
-import CryptidCard from "../components/CryptidCard.astro";
+import Layout from "../../layouts/Layout.astro";
+import { cryptidFiles } from "../../data/cryptidFiles";
+import { getTranslatedCryptidFile } from "../../data/cryptidFilesTranslations";
+import CryptidCard from "../../components/CryptidCard.astro";
 import { Search, Filter } from "@lucide/astro";
-import { getTranslations, getLocaleFromAstro } from '../i18n/utils';
+import { getTranslations } from '../../i18n/utils';
 
-const locale = getLocaleFromAstro();
-const t = getTranslations(locale);
+const t = getTranslations('fr');
 
 // Get unique regions for filter
 const regions = ['all', ...Array.from(new Set(cryptidFiles.map(c => c.region)))];
@@ -87,7 +86,7 @@ const dangerLevels = ['all', 'Low', 'Medium', 'High', 'Unknown'];
       {/* Results Grid */}
       <div id="results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {cryptidFiles.map(cryptid => {
-          const translatedCryptid = getTranslatedCryptidFile(cryptid, locale);
+          const translatedCryptid = getTranslatedCryptidFile(cryptid, 'fr');
           return (
             <div 
               class="cryptid-card-wrapper" 
@@ -157,7 +156,7 @@ const dangerLevels = ['all', 'Low', 'Medium', 'High', 'Unknown'];
         });
 
         // Update results count
-        const filesFoundText = resultsCount.getAttribute('data-files-found-text') || 'FILES FOUND';
+        const filesFoundText = resultsCount.getAttribute('data-files-found-text') || 'DOSSIERS TROUVÉS';
         resultsCount.textContent = `${visibleCount} ${filesFoundText}`;
 
         // Show/hide no results message
@@ -176,3 +175,4 @@ const dangerLevels = ['all', 'Low', 'Medium', 'High', 'Unknown'];
     }
   </script>
 </Layout>
+

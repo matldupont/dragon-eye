@@ -1,22 +1,20 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import CryptidOfTheMonth from '../components/CryptidOfTheMonth.astro';
-import CryptidComingSoon from '../components/CryptidComingSoon.astro';
-import Layout from '../layouts/Layout.astro';
+// French version of index page - components handle translations automatically
+import Welcome from '../../components/Welcome.astro';
+import CryptidOfTheMonth from '../../components/CryptidOfTheMonth.astro';
+import CryptidComingSoon from '../../components/CryptidComingSoon.astro';
+import Layout from '../../layouts/Layout.astro';
 import { Fingerprint, Search, FileText } from "@lucide/astro";
-import Link from "../components/Nav/Link.astro";
-// import ImageWithFallback from "../components/ImageWithFallback.astro";
-// import featuredCryptid from "../data/featuredCryptid";
-import DangerBadge from "../components/DangerBadge.astro";
-import {cryptidFiles} from "../data/cryptidFiles";
-import { getTranslatedCryptidFile } from "../data/cryptidFilesTranslations";
+import Link from "../../components/Nav/Link.astro";
+import DangerBadge from "../../components/DangerBadge.astro";
+import {cryptidFiles} from "../../data/cryptidFiles";
+import { getTranslatedCryptidFile } from "../../data/cryptidFilesTranslations";
 import { Image } from 'astro:assets';
-import CryptidCard from '../components/CryptidCard.astro';
-import { getTranslations, getLocaleFromAstro } from '../i18n/utils';
+import CryptidCard from '../../components/CryptidCard.astro';
+import { getTranslations } from '../../i18n/utils';
 
-const locale = getLocaleFromAstro();
-const t = getTranslations(locale);
-const featuredCryptid = getTranslatedCryptidFile(cryptidFiles[0], locale);
+const t = getTranslations('fr');
+const featuredCryptid = getTranslatedCryptidFile(cryptidFiles[0], 'fr');
 ---
 
 <Layout>
@@ -150,10 +148,11 @@ const featuredCryptid = getTranslatedCryptidFile(cryptidFiles[0], locale);
   
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 			  {cryptidFiles.map(cryptid => (
-				<CryptidCard cryptid={getTranslatedCryptidFile(cryptid, locale)} />
+				<CryptidCard cryptid={getTranslatedCryptidFile(cryptid, 'fr')} />
 			  ))}
 			</div>
 		  </div>
 		</section>
 	  </div>
 </Layout>
+

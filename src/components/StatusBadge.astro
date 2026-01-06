@@ -1,9 +1,13 @@
 ---
+import { getTranslations, getLocaleFromAstro } from '../i18n/utils';
+
 interface Props {
   status: 'Sighted' | 'Under Investigation' | 'Confirmed' | 'Myth';
 }
 
 const { status } = Astro.props;
+const locale = getLocaleFromAstro();
+const t = getTranslations(locale);
 
 const colors = {
   'Sighted': 'bg-lime-500/20 text-lime-400 border-lime-400',
@@ -11,8 +15,16 @@ const colors = {
   'Confirmed': 'bg-red-500/20 text-red-400 border-red-400',
   'Myth': 'bg-gray-500/20 text-gray-400 border-gray-400'
 };
+
+const statusMap: Record<string, keyof typeof t.statusLabels> = {
+  'Sighted': 'sighted',
+  'Under Investigation': 'underInvestigation',
+  'Confirmed': 'confirmed',
+  'Myth': 'myth',
+};
+const statusText = t.statusLabels[statusMap[status]] || status;
 ---
 
 <span class={`inline-flex items-center px-2 py-1 border rounded-sm font-['Courier_New'] ${colors[status]}`}>
-  {status.toUpperCase()}
+  {statusText.toUpperCase()}
 </span>

@@ -1,9 +1,13 @@
 ---
+import { getTranslations, getLocaleFromAstro } from '../i18n/utils';
+
 interface Props {
   level: 'Low' | 'Medium' | 'High' | 'Unknown';
 }
 
 const { level } = Astro.props;
+const locale = getLocaleFromAstro();
+const t = getTranslations(locale);
 
 const colors = {
   Low: 'bg-lime-500/20 text-lime-400 border-lime-400',
@@ -11,8 +15,11 @@ const colors = {
   High: 'bg-red-500/20 text-red-400 border-red-400',
   Unknown: 'bg-purple-500/20 text-purple-300 border-purple-400'
 };
+
+const levelKey = level.toLowerCase() as 'low' | 'medium' | 'high' | 'unknown';
+const levelText = t.dangerLevels[levelKey] || level;
 ---
 
 <span class={`inline-flex items-center px-3 py-1 border rounded-sm font-['Courier_New'] ${colors[level]}`}>
-  DANGER: {level.toUpperCase()}
+  {t.dangerLevels.label} {levelText.toUpperCase()}
 </span>
