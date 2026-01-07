@@ -103,9 +103,19 @@ The workflow also runs automatically:
 - Check your API key permissions/limits
 - Review the workflow logs for specific error messages
 
-### PR Not Created
-- Check that the workflow has `contents: write` and `pull-requests: write` permissions
-- Verify the workflow completed successfully (green checkmark)
+### PR Not Created / "GitHub Actions is not permitted to create pull requests"
+This error usually means the repository settings need to be updated:
+
+1. Go to **Settings** → **Actions** → **General**
+2. Scroll down to **Workflow permissions**
+3. Select **"Read and write permissions"**
+4. Check **"Allow GitHub Actions to create and approve pull requests"**
+5. Click **Save**
+
+Alternatively, if you're using a branch protection rule:
+- Go to **Settings** → **Branches**
+- Edit your branch protection rule
+- Under **"Restrict who can push to matching branches"**, make sure GitHub Actions is allowed
 
 ### Image Not Generated
 - Make sure `STABILITY_API_KEY` or `OPENAI_API_KEY` is set

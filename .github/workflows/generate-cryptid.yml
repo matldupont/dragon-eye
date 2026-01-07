@@ -23,12 +23,12 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      issues: write
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
       - name: Setup pnpm
@@ -43,6 +43,11 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Generate new cryptid
         env:
@@ -71,6 +76,8 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          committer: GitHub Actions <noreply@github.com>
+          author: GitHub Actions <noreply@github.com>
           commit-message: "feat: Add new cryptid of the month"
           title: "🔮 New Cryptid of the Month - ${{ steps.date.outputs.date }}"
           body: |
