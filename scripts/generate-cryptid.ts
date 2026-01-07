@@ -404,6 +404,14 @@ async function generateCryptidWithAI(name?: string): Promise<CryptidData | null>
     
     if (imageFilename) {
       console.log(`✅ Image generated successfully: ${imageFilename}`);
+      // Ensure the image filename matches the cryptid slug
+      const expectedFilename = `${slug}.png`;
+      if (imageFilename !== expectedFilename) {
+        console.warn(`⚠️  Image filename mismatch: got ${imageFilename}, expected ${expectedFilename}`);
+        // Use the slug-based filename to ensure consistency
+        const correctedFilename = `${slug}.png`;
+        console.log(`   Using corrected filename: ${correctedFilename}`);
+      }
     } else {
       console.warn('⚠️  No image was generated. You may need to add an image manually.');
     }
@@ -423,7 +431,7 @@ async function generateCryptidWithAI(name?: string): Promise<CryptidData | null>
       type: aiData.type,
       dangerLevel: aiData.dangerLevel,
       firstSighting: aiData.firstSighting,
-      imageFilename: imageFilename || undefined,
+      imageFilename: imageFilename ? `${slug}.png` : undefined,
     };
   } catch (error) {
     console.error('❌ Error generating with AI:', error);

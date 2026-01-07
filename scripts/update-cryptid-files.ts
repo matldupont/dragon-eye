@@ -63,7 +63,20 @@ function updateCryptidFiles(cryptid: CryptidData) {
   // Find the import section and add image import
   // Use generated image if available, otherwise use Alert.png as placeholder
   const imageVarName = cryptid.slug.replace(/-/g, '');
-  const imageFile = cryptid.imageFilename || 'Alert.png';
+  // Check if image file exists, otherwise use Alert.png
+  let imageFile = 'Alert.png';
+  if (cryptid.imageFilename) {
+    // Verify the image file actually exists
+    const imagePath = join(rootDir, 'src/assets', cryptid.imageFilename);
+    if (existsSync(imagePath)) {
+      imageFile = cryptid.imageFilename;
+      console.log(`✅ Using generated image: ${imageFile}`);
+    } else {
+      console.warn(`⚠️  Image file not found: ${imagePath}, using Alert.png as placeholder`);
+    }
+  } else {
+    console.log('ℹ️  No imageFilename in cryptid data, using Alert.png as placeholder');
+  }
   const imageImport = `import ${imageVarName} from "../assets/${imageFile}";`;
   
   // Check if imports section exists and add our import

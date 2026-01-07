@@ -6,8 +6,7 @@ import lochness from "../assets/LochNess.jpg";
 import mothman from "../assets/mothman.jpg";
 import alert from "../assets/Alert.png";
 import chupacabra from "../assets/chupacabra.jpg";
-import krakenfile from "../assets/Alert.png";
-import wendigofile from "../assets/Alert.png";
+import krakenfile from "../assets/kraken-file.png";
 import melonheadsfile from "../assets/melon-heads-file.png";
 import unicornfile from "../assets/unicorn-file.png";
 
