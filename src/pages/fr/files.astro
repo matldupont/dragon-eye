@@ -41,18 +41,18 @@ const dangerLevels = ['all', 'Low', 'Medium', 'High', 'Unknown'];
         </div>
 
         {/* Filters */}
-        <div class="flex flex-wrap gap-4 items-center p-4 bg-purple-950/30 border border-purple-800">
+        <div class="flex flex-col md:flex-row gap-4 items-start md:items-center p-4 bg-purple-950/30 border border-purple-800">
           <div class="flex items-center gap-2">
             <Filter class="w-5 h-5 text-lime-400" />
             <span class="text-lime-400 font-['Courier_New']">{t.files.filters}</span>
           </div>
 
-          <div class="flex flex-wrap gap-4 flex-1">
-            <div class="flex items-center gap-2">
-              <label class="text-purple-300 font-['Courier_New']">{t.files.region}</label>
+          <div class="flex flex-col md:flex-row gap-4 flex-1 min-w-0 w-full md:w-auto">
+            <div class="flex items-center gap-2 w-full min-w-0">
+              <label class="text-purple-300 font-['Courier_New'] whitespace-nowrap flex-shrink-0">{t.files.region}</label>
               <select
                 id="filter-region"
-                class="px-3 py-2 bg-black border border-purple-700 text-white focus:outline-none focus:border-lime-400 font-['Courier_New']"
+                class="px-3 py-2 bg-black border border-purple-700 text-white focus:outline-none focus:border-lime-400 font-['Courier_New'] flex-1 min-w-0 max-w-full"
               >
                 {regions.map(region => (
                   <option value={region}>
@@ -62,11 +62,11 @@ const dangerLevels = ['all', 'Low', 'Medium', 'High', 'Unknown'];
               </select>
             </div>
 
-            <div class="flex items-center gap-2">
-              <label class="text-purple-300 font-['Courier_New']">{t.files.danger}</label>
+            <div class="flex items-center gap-2 w-full min-w-0">
+              <label class="text-purple-300 font-['Courier_New'] whitespace-nowrap flex-shrink-0">{t.files.danger}</label>
               <select
                 id="filter-danger"
-                class="px-3 py-2 bg-black border border-purple-700 text-white focus:outline-none focus:border-lime-400 font-['Courier_New']"
+                class="px-3 py-2 bg-black border border-purple-700 text-white focus:outline-none focus:border-lime-400 font-['Courier_New'] flex-1 min-w-0 max-w-full"
               >
                 {dangerLevels.map(level => (
                   <option value={level}>
@@ -77,7 +77,7 @@ const dangerLevels = ['all', 'Low', 'Medium', 'High', 'Unknown'];
             </div>
           </div>
 
-          <div id="results-count" class="text-purple-300 font-['Courier_New']" data-files-found-text={t.files.filesFound}>
+          <div id="results-count" class="text-purple-300 font-['Courier_New'] whitespace-nowrap" data-files-found-text={t.files.filesFound}>
             {cryptidFiles.length} {t.files.filesFound}
           </div>
         </div>
