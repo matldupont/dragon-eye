@@ -6,7 +6,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate-cryptid": "tsx scripts/generate-cryptid.ts",
+    "update-cryptid": "tsx scripts/update-cryptid-files.ts",
+    "create-cryptid": "tsx scripts/create-new-cryptid.ts"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
@@ -32,6 +35,8 @@
     "postcss": "^8.5.3",
     "prettier": "^3.5.2",
     "prettier-plugin-astro": "^0.14.1",
-    "tailwindcss": "^4.0.8"
+    "tailwindcss": "^4.0.8",
+    "tsx": "^4.19.2",
+    "dotenv": "^16.4.5"
   }
 }

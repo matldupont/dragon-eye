@@ -6,6 +6,10 @@ import lochness from "../assets/LochNess.jpg";
 import mothman from "../assets/mothman.jpg";
 import alert from "../assets/Alert.png";
 import chupacabra from "../assets/chupacabra.jpg";
+import krakenfile from "../assets/Alert.png";
+import wendigofile from "../assets/Alert.png";
+import melonheadsfile from "../assets/melon-heads-file.png";
+import unicornfile from "../assets/unicorn-file.png";
 
 export interface CryptidFile {
   slug: string;
@@ -144,6 +148,41 @@ export const cryptidFiles: CryptidFile[] = [
     type: "Reptilian",
     dangerLevel: "High",
     firstSighting: "March 1995",
+  },
+  {
+    slug: "melon-heads-file",
+    title: "The Melon Heads File",
+    name: "Melon Heads",
+    image: melonheadsfile,
+    imageAlt: "Melon Heads mugshot",
+    description: "The Melon Heads are small, humanoid creatures with grotesquely enlarged, bulbous heads resembling melons, said to roam dense woods seeking human contact. Legend claims a mad doctor in the forest experimented on children from a mental hospital, causing their heads to swell unnaturally through horrific procedures. One night, the children revolted, burned down the doctor's house, and now wander as feral beings with sharp teeth and pale skin.",
+    caseNumber: "742200",
+    alias: "Melonheads",
+    address: "Kirtland, Ohio, USA",
+    
+    codename: "MELONHEA-742200",
+    region: "Kirtland, Ohio, USA",
+    type: "Mutated Humanoid",
+    dangerLevel: "Medium",
+    firstSighting: "1960s",
+  },
+
+  {
+    slug: "unicorn-file",
+    title: "The Unicorn File",
+    name: "Unicorn",
+    image: unicornfile,
+    imageAlt: "Unicorn mugshot",
+    description: "A legendary equine creature characterized by a single spiraling horn projecting from its forehead, though historical accounts and skeletal evidence suggest the animal may have possessed two backward-pointing horns similar to a giraffe. Unicorn sightings span multiple continents and centuries, with descriptions varying from purely mythical to potentially based on real but misidentified animals.",
+    caseNumber: "417084",
+    alias: "African Unicorn, Arabian Unicorn, Tahish, Elasmotherium (prehistoric relative)",
+    address: "Indus Valley (ancient seals), Mecca region (16th century sighting), Bambos Berg region Africa (early 1800s)",
+    knownAssociates: "Okapi (confirmed real species, formerly classified as cryptid), Komodo Dragon (formerly cryptid, now confirmed species)",
+    codename: "UNICORN-417084",
+    region: "Global (Primary regions: India, Arabia, Africa, Medieval Europe)",
+    type: "Large Equine/Ungulate",
+    dangerLevel: "Unknown",
+    firstSighting: "1804 (European documentation by John Barrow); Ancient Greek and Medieval texts reference earlier sightings",
   },
 ];
 

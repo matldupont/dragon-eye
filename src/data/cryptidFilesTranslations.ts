@@ -102,7 +102,32 @@ export const cryptidTranslations: Record<Locale, CryptidTranslations> = {
       region: "Amérique Latine, Sud des États-Unis",
       type: "Reptilien",
       firstSighting: "Mars 1995",
+    },  
+    "melon-heads-file": {
+      title: "Le Dossier Melon Heads",
+      name: "Melon Heads",
+      imageAlt: "Photo signalétique de Melon Heads",
+      description: "The Melon Heads are small, humanoid creatures with grotesquely enlarged, bulbous heads resembling melons, said to roam dense woods seeking human contact. Legend claims a mad doctor in the forest experimented on children from a mental hospital, causing their heads to swell unnaturally through horrific procedures. One night, the children revolted, burned down the doctor's house, and now wander as feral beings with sharp teeth and pale skin. [TRANSLATION NEEDED]",
+      alias: "Melonheads [TRANSLATION NEEDED]",
+      address: "Kirtland, Ohio, USA [TRANSLATION NEEDED]",
+      
+      region: "Kirtland, Ohio, USA [TRANSLATION NEEDED]",
+      type: "Mutated Humanoid [TRANSLATION NEEDED]",
+      firstSighting: "1960s [TRANSLATION NEEDED]",
     },
+    "unicorn-file": {
+      title: "Le Dossier Unicorn",
+      name: "Unicorn",
+      imageAlt: "Photo signalétique de Unicorn",
+      description: "A legendary equine creature characterized by a single spiraling horn projecting from its forehead, though historical accounts and skeletal evidence suggest the animal may have possessed two backward-pointing horns similar to a giraffe. Unicorn sightings span multiple continents and centuries, with descriptions varying from purely mythical to potentially based on real but misidentified animals. [TRANSLATION NEEDED]",
+      alias: "African Unicorn, Arabian Unicorn, Tahish, Elasmotherium (prehistoric relative) [TRANSLATION NEEDED]",
+      address: "Indus Valley (ancient seals), Mecca region (16th century sighting), Bambos Berg region Africa (early 1800s) [TRANSLATION NEEDED]",
+      knownAssociates: "Okapi (confirmed real species, formerly classified as cryptid), Komodo Dragon (formerly cryptid, now confirmed species) [TRANSLATION NEEDED]",
+      region: "Global (Primary regions: India, Arabia, Africa, Medieval Europe) [TRANSLATION NEEDED]",
+      type: "Large Equine/Ungulate [TRANSLATION NEEDED]",
+      firstSighting: "1804 (European documentation by John Barrow); Ancient Greek and Medieval texts reference earlier sightings [TRANSLATION NEEDED]",
+    },
+
   },
 };
 

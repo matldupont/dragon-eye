@@ -10,13 +10,15 @@ import Link from "../components/Nav/Link.astro";
 import DangerBadge from "../components/DangerBadge.astro";
 import {cryptidFiles} from "../data/cryptidFiles";
 import { getTranslatedCryptidFile } from "../data/cryptidFilesTranslations";
+import { cryptidOfTheMonthSlug } from "../data/cryptidOfTheMonth";
 import { Image } from 'astro:assets';
 import CryptidCard from '../components/CryptidCard.astro';
 import { getTranslations, getLocaleFromAstro } from '../i18n/utils';
 
 const locale = getLocaleFromAstro();
 const t = getTranslations(locale);
-const featuredCryptid = getTranslatedCryptidFile(cryptidFiles[0], locale);
+const featuredCryptidData = cryptidFiles.find(c => c.slug === cryptidOfTheMonthSlug) || cryptidFiles[0];
+const featuredCryptid = getTranslatedCryptidFile(featuredCryptidData, locale);
 ---
 
 <Layout>
