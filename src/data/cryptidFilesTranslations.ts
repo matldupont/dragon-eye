@@ -151,6 +151,18 @@ export const cryptidTranslations: Record<Locale, CryptidTranslations> = {
       type: "Shapeshifting witch [TRANSLATION NEEDED]",
       firstSighting: "Pre-colonial Navajo oral traditions; modern publicity from 1996 Utah family encounters at Skinwalker Ranch.[1][2] [TRANSLATION NEEDED]",
     },
+    "lavalisk-file": {
+      title: "Le Dossier Lavalisk",
+      name: "Lavalisk",
+      imageAlt: "Photo signalétique de Lavalisk",
+      description: "The Lavalisk is a serpentine reptile with molten orange scales that glow faintly in darkness, capable of exhaling superheated steam from gill-like vents along its neck. Sightings describe it slithering through geothermal vents and abandoned mines, leaving trails of scorched earth and sulfurous fumes. Locals believe it feeds on mineral deposits, growing larger with each volcanic eruption. [TRANSLATION NEEDED]",
+      alias: "Steam Serpent, Geyser Wyrm [TRANSLATION NEEDED]",
+      address: "Yellowstone National Park, Wyoming, USA [TRANSLATION NEEDED]",
+      
+      region: "Yellowstone National Park, Wyoming, USA [TRANSLATION NEEDED]",
+      type: "Thermic Reptilian [TRANSLATION NEEDED]",
+      firstSighting: "July 14, 1934 [TRANSLATION NEEDED]",
+    },
 
   },
 };
