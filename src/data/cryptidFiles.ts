@@ -11,6 +11,7 @@ import melonheadsfile from "../assets/melon-heads-file.png";
 import unicornfile from "../assets/unicorn-file.png";
 import skinwalkerfile from "../assets/skinwalker-file.png";
 import lavaliskfile from "../assets/lavalisk-file.png";
+import pukwudgiefile from "../assets/pukwudgie-file.png";
 
 export interface CryptidFile {
   slug: string;
@@ -238,6 +239,24 @@ export const cryptidFiles: CryptidFile[] = [
     type: "Thermic Reptilian",
     dangerLevel: "Medium",
     firstSighting: "July 14, 1934",
+  },
+
+  {
+    slug: "pukwudgie-file",
+    title: "The Pukwudgie File",
+    name: "Pukwudgie",
+    image: pukwudgiefile,
+    imageAlt: "Pukwudgie mugshot",
+    description: "The Pukwudgie is a diminutive humanoid cryptid, standing 2-3 feet tall, with gray skin, large ears and noses, and porcupine-like quills running down its back.[1][3][4] Originating from Native American folklore, particularly the Wampanoag and Algonquian tribes, it is known as a trickster spirit of the forest that can shapeshift, turn invisible, and wield magic to disorient or harm those who disrespect it.[1][2][4] Once harmonious with humans, it turned hostile due to betrayal or jealousy, now luring victims into danger or attacking with arrows and spears.[1][3][4]",
+    caseNumber: "899093",
+    alias: "Puk-Wudjie, Bokwjimen, Puck-wudj-ininee, Bagwajinini, Bogwejimenak",
+    address: "Northeastern United States, Great Lakes region, Massachusetts, Indiana, Delaware, southeastern Canada[1][2][4]",
+    knownAssociates: "Enemies of Maushop the giant and Granny Squannit[3][4]",
+    codename: "PUKWUDGI-899093",
+    region: "Northeastern United States, Great Lakes region, Massachusetts, Indiana, Delaware, southeastern Canada[1][2][4]",
+    type: "Humanoid trickster spirit",
+    dangerLevel: "Medium",
+    firstSighting: "Approximately 9,000 years ago in Wampanoag oral traditions[1]",
   },
 ];
 
