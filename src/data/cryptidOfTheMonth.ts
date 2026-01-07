@@ -3,4 +3,4 @@
  * This file is updated by the automation script when a new cryptid is generated
  */
 
-export const cryptidOfTheMonthSlug = "skinwalker-file";
+export const cryptidOfTheMonthSlug = "lavalisk-file";

@@ -10,6 +10,7 @@ import krakenfile from "../assets/kraken-file.png";
 import melonheadsfile from "../assets/melon-heads-file.png";
 import unicornfile from "../assets/unicorn-file.png";
 import skinwalkerfile from "../assets/skinwalker-file.png";
+import lavaliskfile from "../assets/lavalisk-file.png";
 
 export interface CryptidFile {
   slug: string;
@@ -219,6 +220,24 @@ export const cryptidFiles: CryptidFile[] = [
     type: "Shapeshifting witch",
     dangerLevel: "High",
     firstSighting: "Pre-colonial Navajo oral traditions; modern publicity from 1996 Utah family encounters at Skinwalker Ranch.[1][2]",
+  },
+
+  {
+    slug: "lavalisk-file",
+    title: "The Lavalisk File",
+    name: "Lavalisk",
+    image: lavaliskfile,
+    imageAlt: "Lavalisk mugshot",
+    description: "The Lavalisk is a serpentine reptile with molten orange scales that glow faintly in darkness, capable of exhaling superheated steam from gill-like vents along its neck. Sightings describe it slithering through geothermal vents and abandoned mines, leaving trails of scorched earth and sulfurous fumes. Locals believe it feeds on mineral deposits, growing larger with each volcanic eruption.",
+    caseNumber: "863474",
+    alias: "Steam Serpent, Geyser Wyrm",
+    address: "Yellowstone National Park, Wyoming, USA",
+    
+    codename: "LAVALISK-863474",
+    region: "Yellowstone National Park, Wyoming, USA",
+    type: "Thermic Reptilian",
+    dangerLevel: "Medium",
+    firstSighting: "July 14, 1934",
   },
 ];
 
