@@ -184,5 +184,23 @@ export const cryptidFiles: CryptidFile[] = [
     dangerLevel: "Unknown",
     firstSighting: "1804 (European documentation by John Barrow); Ancient Greek and Medieval texts reference earlier sightings",
   },
+
+  {
+    slug: "kraken-file",
+    title: "The Kraken File",
+    name: "Kraken",
+    image: krakenfile,
+    imageAlt: "Kraken mugshot",
+    description: "The Kraken is a colossal cephalopod-like sea monster with tentacles capable of ensnaring and sinking entire ships, often described as island-sized with eyes as large as dinner plates.[1][3][5] It lurks in the deep ocean, creating massive whirlpools by diving and luring prey with fish-attracting scents or excrement.[2][6] Sailors report it dragging vessels and crews to watery depths, embodying the terror of the unknown seas.[4]",
+    caseNumber: "513700",
+    alias: "Hafgufa",
+    address: "Deep waters of the North Atlantic Ocean",
+    knownAssociates: "None; solitary creature",
+    codename: "KRAKEN-513700",
+    region: "Norwegian Sea, coasts of Norway, Greenland, and Iceland",
+    type: "Sea Monster",
+    dangerLevel: "High",
+    firstSighting: "1180, mentioned by King Sverre of Norway",
+  },
 ];
 
