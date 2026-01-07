@@ -139,6 +139,18 @@ export const cryptidTranslations: Record<Locale, CryptidTranslations> = {
       type: "Sea Monster [TRANSLATION NEEDED]",
       firstSighting: "1180, mentioned by King Sverre of Norway [TRANSLATION NEEDED]",
     },
+    "skinwalker-file": {
+      title: "Le Dossier Skinwalker",
+      name: "Skinwalker",
+      imageAlt: "Photo signalétique de Skinwalker",
+      description: "Skinwalkers are malevolent shapeshifters from Navajo legend, known as yee naaldlooshii, who gain their powers by corrupting sacred medicine practices or committing grave taboos, allowing them to transform into animals like coyotes, wolves, or bears.[1][2] They possess humans by eye contact, control nocturnal creatures, and summon spirits of the dead, embodying pure evil that Navajo people avoid naming to prevent summoning them.[1][3] Nearly impossible to kill except with weapons dipped in white ash, they lurk in the American Southwest, blending animalistic traits even in human form.[1][2] [TRANSLATION NEEDED]",
+      alias: "Yee naaldlooshii [TRANSLATION NEEDED]",
+      address: "Skinwalker Ranch, northeast Utah[2][3] [TRANSLATION NEEDED]",
+      knownAssociates: "Ute tribe (cursed by Navajo skinwalkers); associated with Pueblo, Apache, Hopi legends[1][2] [TRANSLATION NEEDED]",
+      region: "Four Corners region: Navajo Reservation areas in northeast Arizona, northwest New Mexico, southeast Utah, southwest Colorado; notably Skinwalker Ranch, Utah.[2][3] [TRANSLATION NEEDED]",
+      type: "Shapeshifting witch [TRANSLATION NEEDED]",
+      firstSighting: "Pre-colonial Navajo oral traditions; modern publicity from 1996 Utah family encounters at Skinwalker Ranch.[1][2] [TRANSLATION NEEDED]",
+    },
 
   },
 };
