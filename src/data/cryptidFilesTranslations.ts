@@ -175,6 +175,18 @@ export const cryptidTranslations: Record<Locale, CryptidTranslations> = {
       type: "Humanoid trickster spirit [TRANSLATION NEEDED]",
       firstSighting: "Approximately 9,000 years ago in Wampanoag oral traditions[1] [TRANSLATION NEEDED]",
     },
+    "babayaga-file": {
+      title: "Le Dossier Babayaga",
+      name: "Babayaga",
+      imageAlt: "Photo signalétique de Babayaga",
+      description: "Babayaga is a fearsome witch from Slavic folklore, known for residing in a hut that stands on chicken legs deep in the forest, surrounded by a fence of human bones.[1][2][3] She travels by flying in a giant mortar propelled by a pestle, sometimes sweeping her tracks with a broom, and is both a cannibalistic devourer of children and an enigmatic helper to worthy heroes.[1][3][4] Her dual nature makes her a harbinger of transformation, rewarding the clever while punishing trespassers who fail her impossible tasks.[1][5] [TRANSLATION NEEDED]",
+      alias: "Baba Yaga, Iagaia Baba [TRANSLATION NEEDED]",
+      address: "Eastern European forests, particularly Russia and Slavic regions [TRANSLATION NEEDED]",
+      
+      region: "Eastern European forests, particularly Russia and Slavic regions [TRANSLATION NEEDED]",
+      type: "Witch [TRANSLATION NEEDED]",
+      firstSighting: "Mid-18th century (legends dating back to medieval period) [TRANSLATION NEEDED]",
+    },
 
   },
 };
