@@ -187,6 +187,18 @@ export const cryptidTranslations: Record<Locale, CryptidTranslations> = {
       type: "Witch [TRANSLATION NEEDED]",
       firstSighting: "Mid-18th century (legends dating back to medieval period) [TRANSLATION NEEDED]",
     },
+    "yeti-file": {
+      title: "Le Dossier Yeti",
+      name: "Yeti",
+      imageAlt: "Photo signalétique de Yeti",
+      description: "The Yeti is a large, bipedal ape-like creature covered in shaggy fur, typically described as standing 6 to 10 feet tall with immense strength and adaptability to extreme Himalayan cold.[1][5] Known locally as Meh-Teh by the Sherpa people, it is elusive, stealthy, and capable of navigating treacherous snowy terrain while evading detection.[1][4] Folklore portrays it as potentially aggressive, with reports of attacks on humans and livestock, though concrete evidence remains elusive.[2] [TRANSLATION NEEDED]",
+      alias: "Abominable Snowman, Meh-Teh, Nyalmo, Chuti, Rang Shim Bombo [TRANSLATION NEEDED]",
+      address: "Himalaya region of Nepal and Tibet [TRANSLATION NEEDED]",
+      
+      region: "Himalaya region of Nepal and Tibet [TRANSLATION NEEDED]",
+      type: "Hominid [TRANSLATION NEEDED]",
+      firstSighting: "1921 (Lt. Col. Charles Howard-Bury expedition) [TRANSLATION NEEDED]",
+    },
 
   },
 };
