@@ -199,6 +199,18 @@ export const cryptidTranslations: Record<Locale, CryptidTranslations> = {
       type: "Hominid [TRANSLATION NEEDED]",
       firstSighting: "1921 (Lt. Col. Charles Howard-Bury expedition) [TRANSLATION NEEDED]",
     },
+    "flatwoods-monster-file": {
+      title: "Le Dossier Flatwoods Monster",
+      name: "Flatwoods Monster",
+      imageAlt: "Photo signalétique de Flatwoods Monster",
+      description: "An alleged extraterrestrial or cryptid sighted in Flatwoods, West Virginia. Described as a tall humanoid figure with a spade-shaped head, glowing eyes, and a dark body. Associated with a UFO sighting and strange odors. [TRANSLATION NEEDED]",
+      alias: "Braxton County Monster, Phantom of Flatwoods [TRANSLATION NEEDED]",
+      address: "West Virginia, USA [TRANSLATION NEEDED]",
+      knownAssociates: "UFO Witnesses, Local Residents [TRANSLATION NEEDED]",
+      region: "West Virginia, USA [TRANSLATION NEEDED]",
+      type: "Alien Humanoid [TRANSLATION NEEDED]",
+      firstSighting: "September 12, 1952 [TRANSLATION NEEDED]",
+    },
 
   },
 };
