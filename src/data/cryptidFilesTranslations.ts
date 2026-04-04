@@ -211,6 +211,18 @@ export const cryptidTranslations: Record<Locale, CryptidTranslations> = {
       type: "Alien Humanoid [TRANSLATION NEEDED]",
       firstSighting: "September 12, 1952 [TRANSLATION NEEDED]",
     },
+    "jersey-devil-file": {
+      title: "Le Dossier Jersey Devil",
+      name: "Jersey Devil",
+      imageAlt: "Photo signalétique de Jersey Devil",
+      description: "A legendary creature said to inhabit the Pine Barrens of New Jersey. Described as having the head of a horse, wings of a bat, hooves, and a forked tail. Known for its blood-curdling scream and association with the Leeds family. [TRANSLATION NEEDED]",
+      alias: "Leeds Devil, Pine Barrens Devil [TRANSLATION NEEDED]",
+      address: "New Jersey, USA [TRANSLATION NEEDED]",
+      knownAssociates: "The Leeds Family, Pine Barrens Locals [TRANSLATION NEEDED]",
+      region: "New Jersey, USA [TRANSLATION NEEDED]",
+      type: "Winged Creature [TRANSLATION NEEDED]",
+      firstSighting: "1735 [TRANSLATION NEEDED]",
+    },
 
   },
 };
