@@ -13,8 +13,6 @@ import skinwalkerfile from "../assets/skinwalker-file.png";
 import lavaliskfile from "../assets/lavalisk-file.png";
 import pukwudgiefile from "../assets/pukwudgie-file.png";
 import babayagafile from "../assets/babayaga-file.png";
-import yetifile from "../assets/Alert.png";
-import flatwoodsmonsterfile from "../assets/Alert.png";
 
 export interface CryptidFile {
   slug: string;
@@ -278,42 +276,6 @@ export const cryptidFiles: CryptidFile[] = [
     type: "Witch",
     dangerLevel: "High",
     firstSighting: "Mid-18th century (legends dating back to medieval period)",
-  },
-
-  {
-    slug: "yeti-file",
-    title: "The Yeti File",
-    name: "Yeti",
-    image: yetifile,
-    imageAlt: "Yeti mugshot",
-    description: "The Yeti is a large, bipedal ape-like creature covered in shaggy fur, typically described as standing 6 to 10 feet tall with immense strength and adaptability to extreme Himalayan cold.[1][5] Known locally as Meh-Teh by the Sherpa people, it is elusive, stealthy, and capable of navigating treacherous snowy terrain while evading detection.[1][4] Folklore portrays it as potentially aggressive, with reports of attacks on humans and livestock, though concrete evidence remains elusive.[2]",
-    caseNumber: "763785",
-    alias: "Abominable Snowman, Meh-Teh, Nyalmo, Chuti, Rang Shim Bombo",
-    address: "Himalaya region of Nepal and Tibet",
-    
-    codename: "YETI-763785",
-    region: "Himalaya region of Nepal and Tibet",
-    type: "Hominid",
-    dangerLevel: "Medium",
-    firstSighting: "1921 (Lt. Col. Charles Howard-Bury expedition)",
-  },
-
-  {
-    slug: "flatwoods-monster-file",
-    title: "The Flatwoods Monster File",
-    name: "Flatwoods Monster",
-    image: flatwoodsmonsterfile,
-    imageAlt: "Flatwoods Monster mugshot",
-    description: "An alleged extraterrestrial or cryptid sighted in Flatwoods, West Virginia. Described as a tall humanoid figure with a spade-shaped head, glowing eyes, and a dark body. Associated with a UFO sighting and strange odors.",
-    caseNumber: "756336",
-    alias: "Braxton County Monster, Phantom of Flatwoods",
-    address: "West Virginia, USA",
-    knownAssociates: "UFO Witnesses, Local Residents",
-    codename: "FLATWOOD-756336",
-    region: "West Virginia, USA",
-    type: "Alien Humanoid",
-    dangerLevel: "Medium",
-    firstSighting: "September 12, 1952",
-  },
+  }
 ];
 
