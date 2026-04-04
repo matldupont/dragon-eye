@@ -13,6 +13,7 @@ import skinwalkerfile from "../assets/skinwalker-file.png";
 import lavaliskfile from "../assets/lavalisk-file.png";
 import pukwudgiefile from "../assets/pukwudgie-file.png";
 import babayagafile from "../assets/babayaga-file.png";
+import jerseydevilfile from "../assets/Alert.png";
 
 export interface CryptidFile {
   slug: string;
@@ -277,5 +278,23 @@ export const cryptidFiles: CryptidFile[] = [
     dangerLevel: "High",
     firstSighting: "Mid-18th century (legends dating back to medieval period)",
   }
+
+  {
+    slug: "jersey-devil-file",
+    title: "The Jersey Devil File",
+    name: "Jersey Devil",
+    image: jerseydevilfile,
+    imageAlt: "Jersey Devil mugshot",
+    description: "A legendary creature said to inhabit the Pine Barrens of New Jersey. Described as having the head of a horse, wings of a bat, hooves, and a forked tail. Known for its blood-curdling scream and association with the Leeds family.",
+    caseNumber: "569919",
+    alias: "Leeds Devil, Pine Barrens Devil",
+    address: "New Jersey, USA",
+    knownAssociates: "The Leeds Family, Pine Barrens Locals",
+    codename: "JERSEYDE-569919",
+    region: "New Jersey, USA",
+    type: "Winged Creature",
+    dangerLevel: "Medium",
+    firstSighting: "1735",
+  },
 ];
 
