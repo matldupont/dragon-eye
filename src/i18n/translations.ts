@@ -6,6 +6,19 @@ export interface Translations {
     merch: string;
     contact: string;
   };
+  classifiedBar: {
+    marquee1: string;
+    marquee2: string;
+    marquee3: string;
+    marquee4: string;
+    marquee5: string;
+  };
+  hero: {
+    eyebrow: string;
+    lede: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+  };
   home: {
     topSecret: string;
     title: string;
@@ -46,9 +59,12 @@ export interface Translations {
     danger: string;
     allRegions: string;
     allLevels: string;
+    everyRegion: string;
+    anyDanger: string;
     filesFound: string;
     noFilesMatch: string;
     tryAdjusting: string;
+    emptyState: string;
   };
   cryptidCard: {
     file: string;
@@ -128,6 +144,19 @@ export const translations: Record<Locale, Translations> = {
       merch: 'Merch',
       contact: 'Contact',
     },
+    classifiedBar: {
+      marquee1: '★ CLASSIFIED INTEL ★ UNIDENTIFIED CREATURES REPORTED WORLDWIDE',
+      marquee2: '★ TOP SECRET ★ DRAGON EYE AGENCY ACTIVE INVESTIGATION IN PROGRESS',
+      marquee3: '★ ALERT ★ UNUSUAL ACTIVITY DETECTED — REMAIN VIGILANT',
+      marquee4: '★ RESTRICTED ★ ACCESS LEVEL 5 CLEARANCE REQUIRED',
+      marquee5: '★ BREAKING ★ NEW CRYPTID SIGHTINGS LOGGED IN DATABASE',
+    },
+    hero: {
+      eyebrow: 'CRYPTID OF THE MONTH',
+      lede: 'The Dragon Eye Agency investigates unexplained creatures worldwide. Browse classified case files and join our mission to discover the unknown.',
+      ctaPrimary: 'EXPLORE THE FILES',
+      ctaSecondary: 'VIEW ALL FILES',
+    },
     home: {
       topSecret: 'TOP SECRET CLEARANCE REQUIRED',
       title: 'Dragon Eye: Cryptid Investigation Files',
@@ -168,9 +197,12 @@ export const translations: Record<Locale, Translations> = {
       danger: 'Danger:',
       allRegions: 'All Regions',
       allLevels: 'All Levels',
+      everyRegion: 'Every Region',
+      anyDanger: 'Any Danger',
       filesFound: 'FILES FOUND',
       noFilesMatch: 'NO FILES MATCH YOUR SEARCH',
       tryAdjusting: 'Try adjusting your filters or search terms',
+      emptyState: 'No files found. Try adjusting your search or filters.',
     },
     cryptidCard: {
       file: 'FILE:',
@@ -248,6 +280,19 @@ export const translations: Record<Locale, Translations> = {
       merch: 'Marchandise',
       contact: 'Contact',
     },
+    classifiedBar: {
+      marquee1: '★ INTEL CLASSIFIÉ ★ CRÉATURES NON IDENTIFIÉES SIGNALÉES DANS LE MONDE ENTIER',
+      marquee2: '★ TOP SECRET ★ ENQUÊTE ACTIVE DE L\'AGENCE DRAGON EYE EN COURS',
+      marquee3: '★ ALERTE ★ ACTIVITÉ INHABITUELLE DÉTECTÉE — RESTEZ VIGILANT',
+      marquee4: '★ RESTREINT ★ AUTORISATION DE NIVEAU 5 REQUISE',
+      marquee5: '★ URGENT ★ NOUVELLES OBSERVATIONS DE CRÉATURES CRYPTIDES ENREGISTRÉES',
+    },
+    hero: {
+      eyebrow: 'CRÉATURE DU MOIS',
+      lede: 'L\'Agence Dragon Eye enquête sur des créatures inexpliquées à travers le monde. Parcourez les dossiers classifiés et rejoignez notre mission pour découvrir l\'inconnu.',
+      ctaPrimary: 'EXPLORER LES DOSSIERS',
+      ctaSecondary: 'VOIR TOUS LES DOSSIERS',
+    },
     home: {
       topSecret: 'AUTORISATION TOP SECRET REQUISE',
       title: 'Dragon Eye: Dossiers d\'Enquête sur les Créatures Cryptides',
@@ -288,9 +333,12 @@ export const translations: Record<Locale, Translations> = {
       danger: 'Danger:',
       allRegions: 'Toutes les Régions',
       allLevels: 'Tous les Niveaux',
+      everyRegion: 'Toute Région',
+      anyDanger: 'Tout Danger',
       filesFound: 'DOSSIERS TROUVÉS',
       noFilesMatch: 'AUCUN DOSSIER NE CORRESPOND À VOTRE RECHERCHE',
       tryAdjusting: 'Essayez d\'ajuster vos filtres ou termes de recherche',
+      emptyState: 'Aucun dossier trouvé. Essayez d\'ajuster votre recherche ou vos filtres.',
     },
     cryptidCard: {
       file: 'DOSSIER:',
