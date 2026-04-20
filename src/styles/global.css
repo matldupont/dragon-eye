@@ -1,7 +1,10 @@
-@import url("https: //fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Monomakh&display=swap");
+@import './fonts.css';
 @import "tailwindcss";
-@import './theme.css';
+@import './shadcn-tokens.css';
+@import './dragon-eye.css';
 
 @theme {
-  --font-monomakh: "Monomakh", serif;
+  --font-display: "Gloock", "Playfair Display", serif;
+  --font-body: "Caveat", "Shadows Into Light", cursive;
+  --font-mono: "Courier Prime", monospace;
 }
