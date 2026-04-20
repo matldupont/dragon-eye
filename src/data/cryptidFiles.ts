@@ -30,6 +30,7 @@ export interface CryptidFile {
   type: string;
   dangerLevel: 'Low' | 'Medium' | 'High' | 'Unknown';
   firstSighting: string;
+  status?: 'Under Investigation' | 'Sighted' | 'Confirmed' | 'Myth';
 }
 
 export const cryptidFiles: CryptidFile[] = [

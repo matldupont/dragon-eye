@@ -31,6 +31,7 @@ interface CryptidData {
   type: string;
   dangerLevel: 'Low' | 'Medium' | 'High' | 'Unknown';
   firstSighting: string;
+  status?: 'Under Investigation' | 'Sighted' | 'Confirmed' | 'Myth';
   imageFilename?: string;
 }
 
@@ -124,6 +125,7 @@ function updateCryptidFiles(cryptid: CryptidData) {
     type: "${cryptid.type.replace(/"/g, '\\"')}",
     dangerLevel: "${cryptid.dangerLevel}",
     firstSighting: "${cryptid.firstSighting.replace(/"/g, '\\"')}",
+    ${cryptid.status ? `status: "${cryptid.status}",` : ''}
   },`;
 
   // Insert before the closing bracket
