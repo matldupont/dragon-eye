@@ -1,0 +1,140 @@
+/* Hero — Field Journal */
+
+.hero-journal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+@media (max-width: 900px) { .hero-journal-grid { grid-template-columns: 1fr; } }
+
+.hero-journal-meta {
+  font-family: var(--de-body);
+  font-size: 1.4rem;
+  color: var(--de-ink-soft);
+  transform: rotate(-1deg);
+  display: inline-block;
+  border-bottom: 2px solid var(--de-accent);
+  padding: 0 8px 2px;
+}
+
+.hero-journal-title {
+  font-family: var(--de-display);
+  color: var(--de-ink);
+}
+.hero-journal-title em {
+  font-family: var(--de-body);
+  font-style: normal;
+  color: var(--de-accent);
+  font-size: 0.9em;
+  transform: rotate(-2deg);
+  display: inline-block;
+}
+
+.hero-journal-highlight {
+  background: linear-gradient(180deg, transparent 55%, var(--de-manila) 55%, var(--de-manila) 90%, transparent 90%);
+  padding: 0 2px;
+}
+
+.hero-journal-sign {
+  font-family: var(--de-body);
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  color: var(--de-ink-soft);
+  transform: rotate(-1deg);
+  display: inline-block;
+}
+
+.hero-journal-polaroid-stack {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.hero-journal-polaroid {
+  background: #fff;
+  padding: 18px 18px 70px;
+  box-shadow: 0 20px 40px -12px rgba(20,30,45,0.4);
+  position: relative;
+  transform: rotate(3deg);
+  max-width: 440px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.hero-journal-polaroid-back {
+  position: absolute;
+  top: 10px;
+  left: 10%;
+  transform: rotate(-6deg);
+  padding: 18px;
+  opacity: 0.6;
+  width: 80%;
+  z-index: 1;
+}
+
+.hero-journal-polaroid-img {
+  width: 100%;
+  aspect-ratio: 4/4;
+  object-fit: cover;
+  background: #d8c996;
+  display: block;
+}
+
+.hero-journal-polaroid-caption {
+  position: absolute;
+  bottom: 14px;
+  left: 18px;
+  right: 18px;
+  font-family: var(--de-body);
+  font-size: 1.3rem;
+  line-height: 1.1;
+  color: var(--de-ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.hero-journal-polaroid-name {
+  font-size: 2rem;
+  color: var(--de-accent);
+  font-weight: 700;
+}
+
+.hero-journal-polaroid .de-danger-pill {
+  position: absolute;
+  top: 24px;
+  right: -10px;
+  transform: rotate(6deg);
+  background: var(--de-paper);
+}
+
+.hero-journal-tape {
+  position: absolute;
+  top: -12px;
+  width: 90px;
+  height: 22px;
+  background: var(--de-tape);
+  opacity: 0.8;
+  z-index: 4;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.3) 0px, rgba(255,255,255,0.3) 4px,
+    transparent 4px, transparent 10px);
+}
+.hero-journal-tape-l { left: 10%; transform: rotate(-8deg); }
+.hero-journal-tape-r { right: 10%; transform: rotate(6deg); }
+
+.hero-journal-scribble {
+  position: absolute;
+  top: 30%;
+  right: -30px;
+  transform: rotate(8deg);
+  font-family: var(--de-body);
+  font-size: 1.4rem;
+  color: var(--de-accent);
+  z-index: 5;
+  padding-left: 30px;
+  border-left: 2px solid var(--de-accent);
+  max-width: 160px;
+}

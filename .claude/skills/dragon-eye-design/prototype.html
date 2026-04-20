@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Dragon Eye — Cryptid Investigation Files</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Caveat:wght@400;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/themes.css">
+<link rel="stylesheet" href="styles/hero.css">
+<link rel="stylesheet" href="styles/files.css">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><ellipse cx='32' cy='32' rx='30' ry='14' fill='none' stroke='%23000' stroke-width='3'/><circle cx='32' cy='32' r='11' fill='%23000'/><ellipse cx='32' cy='32' rx='4' ry='10' fill='white'/></svg>">
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div id="root"></div>
+
+<script src="src/data.js"></script>
+<script type="text/babel">
+const { useState, useEffect, useMemo } = React;
+
+// ============================================================
+// DRAGON EYE EMBLEM
+// ============================================================
+window.DragonEyeMark = function DragonEyeMark({ size = 34, style = {} }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none" style={style}>
+      <ellipse cx="32" cy="32" rx="30" ry="14" stroke="currentColor" strokeWidth="2.5" fill="none"/>
+      <circle cx="32" cy="32" r="11" fill="currentColor"/>
+      <ellipse cx="32" cy="32" rx="4" ry="10" fill="#000"/>
+      <circle cx="29" cy="28" r="2" fill="#fff"/>
+    </svg>
+  );
+};
+
+// ============================================================
+// CLASSIFIED MARQUEE BAR
+// ============================================================
+window.ClassifiedBar = function ClassifiedBar() {
+  const msg = "★ FIELD NOTES — ENTRY 47 — WEATHER: OVERCAST — MOON: WAXING — COFFEE: RESTOCKED — INVESTIGATIONS: 13 ACTIVE — ";
+  const content = msg.repeat(6);
+  return (
+    <div className="de-classbar">
+      <div className="de-classbar-track">{content}{content}</div>
+    </div>
+  );
+};
+
+// ============================================================
+// NAV
+// ============================================================
+window.Nav = function Nav() {
+  return (
+    <nav className="de-nav">
+      <div className="de-wrap de-nav-inner">
+        <div className="de-logo">
+          <window.DragonEyeMark size={30} />
+          <span>Dragon Eye</span>
+        </div>
+        <div className="de-nav-links">
+          <a href="#files">Files</a>
+          <a href="#about">About</a>
+          <a href="#merch">Evidence Locker</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+// ============================================================
+// DANGER PILL
+// ============================================================
+window.DangerPill = function DangerPill({ level }) {
+  const cls = `de-danger-pill de-danger-${level.toLowerCase()}`;
+  return (
+    <span className={cls}>
+      <span className="de-danger-dot"/>
+      {level}
+    </span>
+  );
+};
+
+// ============================================================
+// HERO — Cryptid of the Month
+// ============================================================
+window.Hero = function Hero({ featured, onOpen }) {
+  return (
+    <section className="de-hero hero-journal">
+      <div className="de-wrap">
+        <div className="hero-journal-grid">
+          <div>
+            <div className="hero-journal-meta">Field Entry · {featured.firstSighting}</div>
+            <h1 className="de-title-xl hero-journal-title">
+              Cryptid<br/>of the<br/><em>Month.</em>
+            </h1>
+            <p className="de-hero-sub">
+              Thirteen active investigations this season. I've been chasing this one{' '}
+              <span className="hero-journal-highlight">across the river country</span>{' '}
+              since the first report came in. Big wings. Red eyes. Bad feeling.
+            </p>
+            <div className="hero-journal-sign">
+              — M.<span style={{color:'var(--de-accent)'}}>D.</span>, lead investigator
+            </div>
+            <div style={{display:'flex', gap:'1rem', marginTop:'1.6rem', flexWrap:'wrap'}}>
+              <button className="de-btn" onClick={onOpen}>Read the file</button>
+              <a className="de-btn" href="#files" style={{background:'transparent', color:'var(--de-ink)', boxShadow:'none'}}>Browse all 13</a>
+            </div>
+          </div>
+          <div className="hero-journal-polaroid-stack">
+            <div className="hero-journal-polaroid hero-journal-polaroid-back">
+              <div className="hero-journal-polaroid-img" style={{background:'#2c3540'}}/>
+            </div>
+            <div className="hero-journal-polaroid">
+              <div className="hero-journal-tape hero-journal-tape-l"/>
+              <div className="hero-journal-tape hero-journal-tape-r"/>
+              <img src={featured.image} alt={featured.name} className="hero-journal-polaroid-img"/>
+              <div className="hero-journal-polaroid-caption">
+                <span className="hero-journal-polaroid-name">{featured.name}?</span>
+                <br/>
+                <span style={{fontSize:'1rem'}}>{featured.region} · {featured.firstSighting}</span>
+              </div>
+              <window.DangerPill level={featured.dangerLevel} />
+            </div>
+            <div className="hero-journal-scribble">"eyes glowed — camera<br/>wouldn't focus."</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ============================================================
+// FILES SECTION
+// ============================================================
+window.FilesSection = function FilesSection({ cryptids, onOpen }) {
+  const [q, setQ] = useState("");
+  const [region, setRegion] = useState("all");
+  const [danger, setDanger] = useState("all");
+
+  const regions = useMemo(() => {
+    const set = new Set(cryptids.map(c => c.region));
+    return ["all", ...Array.from(set)];
+  }, [cryptids]);
+
+  const dangers = ["all", "Low", "Medium", "High", "Unknown"];
+
+  const filtered = useMemo(() => {
+    const needle = q.trim().toLowerCase();
+    return cryptids.filter(c => {
+      if (region !== "all" && c.region !== region) return false;
+      if (danger !== "all" && c.dangerLevel !== danger) return false;
+      if (!needle) return true;
+      return (c.name + " " + c.codename + " " + c.region + " " + c.type + " " + (c.alias||""))
+        .toLowerCase().includes(needle);
+    });
+  }, [cryptids, q, region, danger]);
+
+  return (
+    <section className="de-section files-section" id="files">
+      <div className="de-wrap">
+        <div className="de-section-head">
+          <div>
+            <div className="de-eyebrow">Case Archive</div>
+            <h2 className="de-section-title">All my files</h2>
+          </div>
+          <p style={{maxWidth:'36ch', fontFamily:'var(--de-body)', fontSize:'1.2rem', lineHeight:1.4, margin:0, color:'var(--de-ink-soft)'}}>
+            I've got {cryptids.length} of them so far. Some are just rumors. Some I've seen.
+          </p>
+        </div>
+
+        <div className="de-search-row">
+          <div className="files-search">
+            <span className="files-search-icon">⌕</span>
+            <input className="de-input" type="text" placeholder="Scribble a name..." value={q} onChange={e => setQ(e.target.value)} />
+          </div>
+          <select className="de-input" value={region} onChange={e => setRegion(e.target.value)}>
+            {regions.map(r => <option key={r} value={r}>{r === 'all' ? 'Every region' : r}</option>)}
+          </select>
+          <select className="de-input" value={danger} onChange={e => setDanger(e.target.value)}>
+            {dangers.map(d => <option key={d} value={d}>{d === 'all' ? 'Any danger' : d}</option>)}
+          </select>
+        </div>
+
+        <div className="de-mono-label" style={{marginBottom:'1rem'}}>
+          {filtered.length} / {cryptids.length} entries
+        </div>
+
+        {filtered.length === 0 ? (
+          <div style={{padding:'3rem', textAlign:'center', border:'1px dashed var(--de-ink-soft)', fontFamily:'var(--de-body)', fontSize:'1.4rem'}}>
+            Nothing in the notebook matches that.
+          </div>
+        ) : (
+          <div className="de-files-grid">
+            {filtered.map((c, i) => (
+              <FileCard key={c.slug} cryptid={c} i={i} onOpen={() => onOpen(c)} />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
+
+function FileCard({ cryptid, i, onOpen }) {
+  const rot = ((i * 37) % 5) - 2;
+  return (
+    <article className="de-card" style={{animationDelay: `${i * 40}ms`, '--rot': `${rot}deg`}} onClick={onOpen}>
+      <div className="de-card-img-wrap">
+        <img src={cryptid.image} alt={cryptid.name} className="de-card-img" loading="lazy" />
+      </div>
+      <div className="de-card-info">
+        <h3 className="de-card-name">{cryptid.name}</h3>
+        <div className="de-card-meta">
+          <span>{cryptid.type}</span>
+          <window.DangerPill level={cryptid.dangerLevel}/>
+        </div>
+        <div className="de-card-region">{cryptid.region}</div>
+      </div>
+    </article>
+  );
+}
+
+// ============================================================
+// MODAL
+// ============================================================
+window.FileModal = function FileModal({ cryptid, onClose }) {
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => { window.removeEventListener('keydown', onKey); document.body.style.overflow = ''; };
+  }, [onClose]);
+
+  if (!cryptid) return null;
+
+  return (
+    <div className="de-modal-backdrop" onClick={onClose}>
+      <div className="de-modal de-modal-journal" onClick={e => e.stopPropagation()}>
+        <button className="de-modal-close" onClick={onClose} aria-label="Close">✕</button>
+        <ModalJournal c={cryptid}/>
+      </div>
+    </div>
+  );
+};
+
+function ModalJournal({ c }) {
+  return (
+    <div className="modal-journal">
+      <div className="modal-journal-tape modal-journal-tape-l"/>
+      <div className="modal-journal-tape modal-journal-tape-r"/>
+      <div className="modal-journal-body">
+        <div style={{position:'relative'}}>
+          <div className="hero-journal-polaroid">
+            <div className="hero-journal-tape hero-journal-tape-l" style={{top:'-10px'}}/>
+            <img src={c.image} alt={c.name} className="hero-journal-polaroid-img"/>
+            <div className="hero-journal-polaroid-caption">
+              <span className="hero-journal-polaroid-name">{c.name}</span>
+              <br/>
+              <span style={{fontSize:'1rem'}}>{c.firstSighting}</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className="hero-journal-meta">Entry · Case № {c.caseNumber}</div>
+          <h2 className="hero-journal-title" style={{fontSize:'3.5rem', margin:'0.2em 0'}}>
+            The <em>{c.name}</em> File
+          </h2>
+          <window.DangerPill level={c.dangerLevel}/>
+          <dl className="modal-journal-dl">
+            <dt>Codename</dt><dd>{c.codename}</dd>
+            <dt>Type</dt><dd>{c.type}</dd>
+            <dt>Where</dt><dd>{c.region}</dd>
+            <dt>Aliases</dt><dd>{c.alias || '—'}</dd>
+            <dt>Known associates</dt><dd>{c.knownAssociates || '—'}</dd>
+          </dl>
+          <p style={{fontFamily:'var(--de-body)', fontSize:'1.4rem', lineHeight:1.4, marginTop:'1rem'}}>
+            {c.description}
+          </p>
+          <div className="hero-journal-sign">— M.<span style={{color:'var(--de-accent)'}}>D.</span></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// APP
+// ============================================================
+function App() {
+  const [open, setOpen] = useState(null);
+  const featured = window.CRYPTIDS.find(c => c.slug === window.FEATURED_SLUG) || window.CRYPTIDS[0];
+
+  return (
+    <>
+      <window.ClassifiedBar/>
+      <window.Nav/>
+      <window.Hero featured={featured} onOpen={() => setOpen(featured)}/>
+      <window.FilesSection cryptids={window.CRYPTIDS} onOpen={setOpen}/>
+
+      <section className="de-about de-section" id="about">
+        <div className="de-wrap de-about-grid">
+          <div>
+            <div className="de-eyebrow">Who we are</div>
+            <h2 className="de-section-title">About the Agency</h2>
+          </div>
+          <div className="de-about-card">
+            <p style={{fontFamily:'var(--de-body)', fontSize:'1.4rem', lineHeight:1.6, margin:'0 0 1rem'}}>
+              Dragon Eye is a kid-friendly agency, ages 8 to 13. We snoop around town and look for clues during school hours on Mondays and Wednesdays.
+            </p>
+            <p style={{fontFamily:'var(--de-body)', fontSize:'1.4rem', lineHeight:1.6, margin:'0 0 1rem'}}>
+              Strategy meetings every Monday and Wednesday morning — exclusive to Dragon Eye members.
+            </p>
+            <p style={{fontFamily:'var(--de-body)', fontSize:'1.4rem', lineHeight:1.6, margin:0}}>
+              We meet at Dragon Eye HQ, in the heart of the city. Address classified.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <footer className="de-footer">
+        <div className="de-wrap de-footer-inner">
+          <div>© 2026 Dragon Eye Agency · All files classified</div>
+          <div>{window.CRYPTIDS.length} active cases · Last updated 04.18.2026</div>
+        </div>
+      </footer>
+
+      {open && <window.FileModal cryptid={open} onClose={() => setOpen(null)}/>}
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+
+</body>
+</html>

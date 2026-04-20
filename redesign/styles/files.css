@@ -1,0 +1,263 @@
+/* Files section + modal + about */
+
+.files-section {
+  position: relative;
+}
+
+.files-search {
+  position: relative;
+}
+.files-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: var(--de-ink-soft);
+  pointer-events: none;
+  z-index: 2;
+}
+.files-search .de-input { padding-left: 36px; }
+
+.de-card-region {
+  font-family: var(--de-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--de-ink-soft);
+  margin-top: 2px;
+}
+
+body[data-theme="journal"] .de-card-region {
+  font-family: var(--de-body);
+  font-size: 1rem;
+}
+
+/* Card overlays */
+.card-xfiles-hud {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--de-mono);
+  font-size: 0.72rem;
+  color: var(--de-ink);
+  text-shadow: 0 0 4px var(--de-ink);
+  z-index: 2;
+}
+
+.card-secret-stamp {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--de-ink);
+  padding: 3px 8px;
+  z-index: 2;
+}
+
+body[data-theme="xfiles"] .card-secret-stamp { display: none; }
+body[data-theme="journal"] .card-xfiles-hud { display: none; }
+body[data-theme="journal"] .card-secret-stamp { display: none; }
+
+/* Modals body */
+.modal-secret { padding: 2rem clamp(1rem, 3vw, 3rem); }
+.modal-secret-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--de-ink);
+  margin-bottom: 2rem;
+}
+.modal-secret-body {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+}
+@media (max-width: 800px) { .modal-secret-body { grid-template-columns: 1fr; } }
+.modal-secret-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border: 2px solid var(--de-ink);
+  filter: sepia(0.3) contrast(0.95);
+  box-shadow: 8px 8px 0 var(--de-ink);
+}
+.modal-secret-dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 16px;
+  font-family: var(--de-mono);
+  font-size: 0.85rem;
+}
+.modal-secret-dl dt {
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--de-ink-soft);
+  font-size: 0.75rem;
+}
+.modal-secret-dl dd { margin: 0; }
+
+.modal-xfiles { padding: 2rem clamp(1rem, 3vw, 3rem); }
+.modal-xfiles-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--de-mono);
+  color: var(--de-ink);
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--de-ink-soft);
+}
+.modal-xfiles-pre {
+  background: #000;
+  color: var(--de-ink);
+  padding: 14px;
+  font-family: var(--de-mono);
+  font-size: 1rem;
+  border: 1px solid var(--de-ink-soft);
+  margin: 1rem 0 0;
+  overflow-x: auto;
+}
+.modal-xfiles-body {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+@media (max-width: 800px) { .modal-xfiles-body { grid-template-columns: 1fr; } }
+.modal-xfiles-screen {
+  position: relative;
+  aspect-ratio: 4/4;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--de-ink-soft);
+}
+.modal-xfiles-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-family: var(--de-body);
+  font-size: 1.15rem;
+}
+
+.modal-journal { padding: 2rem clamp(1rem, 3vw, 3rem); position: relative; }
+.modal-journal-tape {
+  position: absolute;
+  top: -12px;
+  width: 120px;
+  height: 28px;
+  background: var(--de-tape);
+  opacity: 0.85;
+  z-index: 3;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.3) 0px, rgba(255,255,255,0.3) 4px, transparent 4px, transparent 10px);
+}
+.modal-journal-tape-l { left: 15%; transform: rotate(-4deg); }
+.modal-journal-tape-r { right: 15%; transform: rotate(3deg); }
+.modal-journal-body {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2.5rem;
+  margin-top: 1rem;
+}
+@media (max-width: 800px) { .modal-journal-body { grid-template-columns: 1fr; } }
+.modal-journal-dl {
+  margin: 1.2rem 0 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 14px;
+  font-family: var(--de-body);
+  font-size: 1.2rem;
+}
+.modal-journal-dl dt {
+  font-family: var(--de-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  color: var(--de-ink-soft);
+  align-self: center;
+}
+.modal-journal-dl dd { margin: 0; }
+
+/* ABOUT */
+.de-about {
+  padding: clamp(2rem, 4vw, 4rem) 0;
+}
+.de-about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 3rem;
+  align-items: start;
+}
+@media (max-width: 800px) { .de-about-grid { grid-template-columns: 1fr; } }
+
+.de-about-card {
+  padding: 1.8rem;
+  border: 1px solid var(--de-ink-soft);
+}
+body[data-theme="secret"] .de-about-card {
+  background: var(--de-paper-2);
+}
+body[data-theme="xfiles"] .de-about-card {
+  background: var(--de-paper-2);
+  border-color: var(--de-ink);
+}
+body[data-theme="journal"] .de-about-card {
+  background: #fff;
+  border: 2px solid var(--de-ink);
+  box-shadow: 6px 6px 0 var(--de-manila);
+}
+
+/* FOOTER */
+.de-footer {
+  padding: 3rem 0 2rem;
+  border-top: 1px solid var(--de-ink-soft);
+  margin-top: 3rem;
+  font-family: var(--de-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--de-ink-soft);
+}
+.de-footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* TWEAKS PANEL */
+.tweaks-panel {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 500;
+  background: #111;
+  color: #eee;
+  padding: 14px 16px;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  display: none;
+  min-width: 240px;
+}
+.tweaks-panel.open { display: block; }
+.tweaks-panel h4 {
+  margin: 0 0 10px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #888;
+}
+.tweaks-panel label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  cursor: pointer;
+}
+.tweaks-panel label:hover { color: #fff; }
+.tweaks-panel input[type="radio"] { accent-color: #c94a2a; }

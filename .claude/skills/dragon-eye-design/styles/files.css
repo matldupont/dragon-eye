@@ -1,0 +1,108 @@
+/* Files section + modal + about — Field Journal */
+
+.files-section {
+  position: relative;
+}
+
+.files-search {
+  position: relative;
+}
+.files-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: var(--de-ink-soft);
+  pointer-events: none;
+  z-index: 2;
+}
+.files-search .de-input { padding-left: 36px; }
+
+.de-card-region {
+  font-family: var(--de-body);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: var(--de-ink-soft);
+  margin-top: 2px;
+}
+
+/* Modal — journal */
+.modal-journal { padding: 2rem clamp(1rem, 3vw, 3rem); position: relative; }
+
+.modal-journal-tape {
+  position: absolute;
+  top: -12px;
+  width: 120px;
+  height: 28px;
+  background: var(--de-tape);
+  opacity: 0.85;
+  z-index: 3;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.3) 0px, rgba(255,255,255,0.3) 4px, transparent 4px, transparent 10px);
+}
+.modal-journal-tape-l { left: 15%; transform: rotate(-4deg); }
+.modal-journal-tape-r { right: 15%; transform: rotate(3deg); }
+
+.modal-journal-body {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2.5rem;
+  margin-top: 1rem;
+}
+@media (max-width: 800px) { .modal-journal-body { grid-template-columns: 1fr; } }
+
+.modal-journal-dl {
+  margin: 1.2rem 0 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 14px;
+  font-family: var(--de-body);
+  font-size: 1.2rem;
+}
+.modal-journal-dl dt {
+  font-family: var(--de-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  color: var(--de-ink-soft);
+  align-self: center;
+}
+.modal-journal-dl dd { margin: 0; }
+
+/* ABOUT */
+.de-about {
+  padding: clamp(2rem, 4vw, 4rem) 0;
+}
+.de-about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 3rem;
+  align-items: start;
+}
+@media (max-width: 800px) { .de-about-grid { grid-template-columns: 1fr; } }
+
+.de-about-card {
+  padding: 1.8rem;
+  background: #fff;
+  border: 2px solid var(--de-ink);
+  box-shadow: 6px 6px 0 var(--de-manila);
+}
+
+/* FOOTER */
+.de-footer {
+  padding: 3rem 0 2rem;
+  border-top: 1px solid var(--de-ink-soft);
+  margin-top: 3rem;
+  font-family: var(--de-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--de-ink-soft);
+}
+.de-footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

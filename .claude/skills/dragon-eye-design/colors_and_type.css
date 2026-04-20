@@ -1,0 +1,75 @@
+/* ============================================
+   Dragon Eye Design System — Colors & Typography
+   ============================================
+   Single theme: Field Journal (investigator notebook)
+   ============================================ */
+
+/* ---------- GOOGLE FONTS ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Gloock&family=Caveat:wght@400;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* ============================================
+   FIELD JOURNAL TOKENS
+   ============================================ */
+:root {
+  /* Surfaces */
+  --de-paper:   #f3ead6;
+  --de-paper-2: #e8dcb8;
+  --de-paper-3: #d8c996;
+
+  /* Ink */
+  --de-ink:      #1d2e3a;
+  --de-ink-soft: #486274;
+
+  /* Accents */
+  --de-accent:   #c94a2a;   /* terra cotta */
+  --de-accent-2: #2f5c3a;   /* field green */
+  --de-danger:   #a02014;
+  --de-manila:   #d8a84a;
+  --de-tape:     #f5d96a;
+
+  /* Shadow */
+  --de-shadow: 0 14px 30px -10px rgba(20, 30, 45, 0.3);
+
+  /* Typography */
+  --de-display: "Gloock", "Playfair Display", serif;
+  --de-body:    "Caveat", "Shadows Into Light", cursive;
+  --de-mono:    "Courier Prime", monospace;
+  --de-label:   "Gloock", serif;
+}
+
+/* ============================================
+   SEMANTIC TYPE SCALE
+   ============================================ */
+:root {
+  --de-text-2xl: clamp(3rem, 8vw, 6.5rem);
+  --de-text-xl:  clamp(1.8rem, 4vw, 3rem);
+  --de-text-lg:  1.4rem;
+  --de-text-base: 1rem;
+  --de-text-sm:  0.85rem;
+  --de-text-xs:  0.72rem;
+  --de-text-xxs: 0.65rem;
+
+  --de-tracking-wide:  0.22em;
+  --de-tracking-mid:   0.15em;
+  --de-tracking-tight: -0.01em;
+
+  --de-leading-tight: 0.95;
+  --de-leading-snug:  1.1;
+  --de-leading-normal: 1.5;
+  --de-leading-relaxed: 1.6;
+}
+
+/* ============================================
+   SEMANTIC COLOR ALIASES
+   ============================================
+   background:  var(--de-paper)
+   text:        var(--de-ink)
+   muted text:  var(--de-ink-soft)
+   primary CTA: var(--de-accent)
+   secondary:   var(--de-accent-2)
+   danger:      var(--de-danger)
+   highlight:   var(--de-manila)
+   tape:        var(--de-tape)
+
+   Surface hierarchy: paper > paper-2 > paper-3 (progressively darker/richer)
+*/

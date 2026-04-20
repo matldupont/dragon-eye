@@ -1,0 +1,137 @@
+/* ============================================
+   Dragon Eye — shared layout + journal base
+   ============================================ */
+
+:root {
+  --max: 1400px;
+  --pad: clamp(1rem, 3vw, 2rem);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--de-paper);
+  color: var(--de-ink);
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(200, 170, 100, 0.25) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(120, 90, 50, 0.18) 0%, transparent 50%),
+    repeating-linear-gradient(90deg,
+      transparent 0px, transparent 31px,
+      rgba(70, 100, 130, 0.08) 31px, rgba(70, 100, 130, 0.08) 32px),
+    repeating-linear-gradient(0deg,
+      transparent 0px, transparent 31px,
+      rgba(70, 100, 130, 0.06) 31px, rgba(70, 100, 130, 0.06) 32px);
+}
+
+img { max-width: 100%; display: block; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; padding: 0; }
+a { color: inherit; }
+
+/* ---------- GRID HELPERS ---------- */
+
+.de-wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+.de-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ---------- REUSABLE MARKINGS ---------- */
+
+.de-classified-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: var(--de-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+}
+
+/* ---------- KEYFRAMES ---------- */
+
+@keyframes de-pulse-danger {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+
+@keyframes de-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes de-tape-sway {
+  0%, 100% { transform: rotate(var(--r, -2deg)); }
+  50% { transform: rotate(calc(var(--r, -2deg) + 0.5deg)); }
+}
+
+/* ============================================
+   SHARED TYPOGRAPHIC ATOMS
+   ============================================ */
+
+.de-eyebrow {
+  font-family: var(--de-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--de-accent);
+}
+
+.de-mono-label {
+  font-family: var(--de-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--de-ink-soft);
+}
+
+.de-title-xl {
+  font-family: var(--de-display);
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin: 0;
+  font-weight: 700;
+}
+
+/* ============================================
+   DANGER BADGES
+   ============================================ */
+
+.de-danger-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--de-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1.5px solid currentColor;
+}
+
+.de-danger-dot {
+  width: 8px; height: 8px;
+  background: currentColor;
+  border-radius: 50%;
+  animation: de-pulse-danger 1.4s infinite;
+}
+
+.de-danger-low { color: var(--de-accent-2); }
+.de-danger-medium { color: var(--de-manila); }
+.de-danger-high { color: var(--de-danger); }
+.de-danger-unknown { color: var(--de-ink-soft); }
