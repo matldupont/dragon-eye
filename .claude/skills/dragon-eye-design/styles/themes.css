@@ -1,0 +1,310 @@
+/* ============================================
+   Component styles — Field Journal
+   ============================================ */
+
+/* ---------- NAV ---------- */
+
+.de-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(6px);
+  padding: 14px 0;
+  background: rgba(243, 234, 214, 0.9);
+  border-bottom: 2px solid var(--de-ink);
+}
+
+.de-nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.de-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--de-label);
+  font-size: 1.05rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.de-logo-mark {
+  width: 34px; height: 34px;
+}
+
+.de-nav-links {
+  display: flex;
+  gap: 1.8rem;
+  font-family: var(--de-label);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.de-nav-links a {
+  text-decoration: none;
+  padding: 6px 2px;
+  position: relative;
+}
+
+.de-nav-links a:hover { color: var(--de-accent); }
+
+/* ---------- CLASSIFIED BAR ---------- */
+
+.de-classbar {
+  font-family: var(--de-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 6px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--de-ink);
+  color: var(--de-paper);
+}
+
+.de-classbar-track {
+  display: inline-block;
+  animation: de-marquee 50s linear infinite;
+}
+
+@keyframes de-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ---------- HERO ---------- */
+
+.de-hero {
+  padding: clamp(2rem, 6vw, 5rem) 0 clamp(2rem, 4vw, 3rem);
+  position: relative;
+}
+
+.de-hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: end;
+}
+
+.de-hero-meta {
+  display: flex;
+  gap: 2rem;
+  font-family: var(--de-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--de-ink-soft);
+  margin-bottom: 1.2rem;
+}
+
+.de-hero-sub {
+  font-family: var(--de-body);
+  font-size: 1.6rem;
+  line-height: 1.35;
+  max-width: 44ch;
+  margin-top: 1.5rem;
+  color: var(--de-ink);
+}
+
+/* ---------- BUTTONS ---------- */
+
+.de-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 14px 24px;
+  font-family: var(--de-label);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  background: var(--de-ink);
+  color: var(--de-paper);
+  border: 2px solid var(--de-ink);
+  text-decoration: none;
+  box-shadow: 4px 4px 0 var(--de-manila);
+}
+
+.de-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--de-manila);
+}
+
+/* ---------- FILE CARDS ---------- */
+
+.de-section {
+  padding: clamp(2rem, 5vw, 4rem) 0;
+}
+
+.de-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 2rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.de-section-title {
+  font-family: var(--de-display);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin: 0;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.de-files-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: clamp(1rem, 2vw, 1.8rem);
+}
+
+.de-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: #fff;
+  padding: 10px 10px 18px;
+  box-shadow: var(--de-shadow);
+  transform: rotate(var(--rot, -1deg));
+  transition: transform 0.3s cubic-bezier(.2,.8,.2,1), box-shadow 0.3s ease;
+  animation: de-fade-up 0.6s both;
+}
+
+.de-card:hover {
+  transform: rotate(0deg) translateY(-4px);
+}
+
+.de-card-img-wrap {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+}
+
+.de-card-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.de-card:hover .de-card-img { transform: scale(1.04); }
+
+/* JOURNAL washi tape on cards */
+.de-card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 40%;
+  width: 80px;
+  height: 22px;
+  background: var(--de-tape);
+  opacity: 0.85;
+  transform: rotate(-3deg);
+  z-index: 3;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.3) 0px,
+    rgba(255,255,255,0.3) 4px,
+    transparent 4px, transparent 10px);
+}
+
+.de-card-info {
+  padding: 12px 2px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.de-card-name {
+  font-family: var(--de-body);
+  font-size: 2rem;
+  line-height: 1;
+  margin: 0;
+  color: var(--de-accent);
+}
+
+.de-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--de-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--de-ink-soft);
+}
+
+/* ---------- SEARCH + FILTERS ---------- */
+
+.de-search-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.de-input {
+  font: inherit;
+  font-family: var(--de-body);
+  font-size: 1.2rem;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.6);
+  color: var(--de-ink);
+  border: 2px solid var(--de-ink);
+  outline: none;
+  transition: border 0.2s;
+  width: 100%;
+}
+
+.de-input:focus { border-color: var(--de-accent); }
+
+/* ---------- MODAL ---------- */
+
+.de-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  animation: de-fade-up 0.25s both;
+  backdrop-filter: blur(4px);
+}
+
+.de-modal {
+  background: var(--de-paper);
+  max-width: 1000px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+  animation: de-fade-up 0.35s both;
+  border: 3px solid var(--de-ink);
+}
+
+.de-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  background: var(--de-ink);
+  color: var(--de-paper);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--de-mono);
+}
+
+.de-modal-close:hover { background: var(--de-accent); }
