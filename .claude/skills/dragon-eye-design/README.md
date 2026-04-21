@@ -105,4 +105,4 @@ The repo uses `@lucide/astro` for Astro-side icons (not replicated in this desig
 | `src/hero.jsx` | Hero (Cryptid of the Month) component |
 | `src/files.jsx` | FilesSection + FileModal components |
 | `src/data.js` | Cryptid sample data |
-| `images/` | Cryptid photos and hero image |
+| `src/assets/` (repo root) | Cryptid photos — referenced as `../../../src/assets/` from prototype |
