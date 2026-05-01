@@ -186,7 +186,19 @@ export const cryptidTranslations: Record<Locale, CryptidTranslations> = {
       region: "Eastern European forests, particularly Russia and Slavic regions [TRANSLATION NEEDED]",
       type: "Witch [TRANSLATION NEEDED]",
       firstSighting: "Mid-18th century (legends dating back to medieval period) [TRANSLATION NEEDED]",
+    },    "dover-demon-file": {
+      title: "Le Dossier Dover Demon",
+      name: "Dover Demon",
+      imageAlt: "Photo signalétique de Dover Demon",
+      description: "A mysterious humanoid creature sighted in Dover, Massachusetts over three nights in 1977. Described as having a large head, glowing orange eyes, long thin limbs, and peach-colored skin. Only a few documented sightings exist. [TRANSLATION NEEDED]",
+      alias: "Dover Monster [TRANSLATION NEEDED]",
+      address: "Dover, Massachusetts, USA [TRANSLATION NEEDED]",
+      knownAssociates: "Local Witnesses, Cryptozoologists [TRANSLATION NEEDED]",
+      region: "Dover, Massachusetts, USA [TRANSLATION NEEDED]",
+      type: "Humanoid [TRANSLATION NEEDED]",
+      firstSighting: "April 21, 1977 [TRANSLATION NEEDED]",
     },
+
   },
 };
 
