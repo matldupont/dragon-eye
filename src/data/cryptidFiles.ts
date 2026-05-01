@@ -13,6 +13,7 @@ import skinwalkerfile from "../assets/skinwalker-file.png";
 import lavaliskfile from "../assets/lavalisk-file.png";
 import pukwudgiefile from "../assets/pukwudgie-file.png";
 import babayagafile from "../assets/babayaga-file.png";
+import doverdemonfile from "../assets/Alert.png";
 
 export interface CryptidFile {
   slug: string;
@@ -278,5 +279,24 @@ export const cryptidFiles: CryptidFile[] = [
     dangerLevel: "High",
     firstSighting: "Mid-18th century (legends dating back to medieval period)",
   }
+
+  {
+    slug: "dover-demon-file",
+    title: "The Dover Demon File",
+    name: "Dover Demon",
+    image: doverdemonfile,
+    imageAlt: "Dover Demon mugshot",
+    description: "A mysterious humanoid creature sighted in Dover, Massachusetts over three nights in 1977. Described as having a large head, glowing orange eyes, long thin limbs, and peach-colored skin. Only a few documented sightings exist.",
+    caseNumber: "242560",
+    alias: "Dover Monster",
+    address: "Dover, Massachusetts, USA",
+    knownAssociates: "Local Witnesses, Cryptozoologists",
+    codename: "DOVERDEM-242560",
+    region: "Dover, Massachusetts, USA",
+    type: "Humanoid",
+    dangerLevel: "Low",
+    firstSighting: "April 21, 1977",
+    
+  },
 ];
 
