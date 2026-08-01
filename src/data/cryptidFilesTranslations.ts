@@ -186,7 +186,19 @@ export const cryptidTranslations: Record<Locale, CryptidTranslations> = {
       region: "Eastern European forests, particularly Russia and Slavic regions [TRANSLATION NEEDED]",
       type: "Witch [TRANSLATION NEEDED]",
       firstSighting: "Mid-18th century (legends dating back to medieval period) [TRANSLATION NEEDED]",
+    },    "hopkinsville-goblins-file": {
+      title: "Le Dossier Hopkinsville Goblins",
+      name: "Hopkinsville Goblins",
+      imageAlt: "Photo signalétique de Hopkinsville Goblins",
+      description: "Small, silvery, humanoid creatures with large ears, glowing eyes, and clawed hands, reported in Hopkinsville, Kentucky. Multiple witnesses claimed these creatures surrounded their farmhouse and attempted to enter. [TRANSLATION NEEDED]",
+      alias: "Kelly-Hopkinsville Encounter, Little Green Men [TRANSLATION NEEDED]",
+      address: "Kentucky, USA [TRANSLATION NEEDED]",
+      knownAssociates: "Sutton Family, Local Police [TRANSLATION NEEDED]",
+      region: "Kentucky, USA [TRANSLATION NEEDED]",
+      type: "Alien Humanoid [TRANSLATION NEEDED]",
+      firstSighting: "August 21, 1955 [TRANSLATION NEEDED]",
     },
+
   },
 };
 
