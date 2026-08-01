@@ -13,6 +13,7 @@ import skinwalkerfile from "../assets/skinwalker-file.png";
 import lavaliskfile from "../assets/lavalisk-file.png";
 import pukwudgiefile from "../assets/pukwudgie-file.png";
 import babayagafile from "../assets/babayaga-file.png";
+import hopkinsvillegoblinsfile from "../assets/Alert.png";
 
 export interface CryptidFile {
   slug: string;
@@ -278,5 +279,24 @@ export const cryptidFiles: CryptidFile[] = [
     dangerLevel: "High",
     firstSighting: "Mid-18th century (legends dating back to medieval period)",
   }
+
+  {
+    slug: "hopkinsville-goblins-file",
+    title: "The Hopkinsville Goblins File",
+    name: "Hopkinsville Goblins",
+    image: hopkinsvillegoblinsfile,
+    imageAlt: "Hopkinsville Goblins mugshot",
+    description: "Small, silvery, humanoid creatures with large ears, glowing eyes, and clawed hands, reported in Hopkinsville, Kentucky. Multiple witnesses claimed these creatures surrounded their farmhouse and attempted to enter.",
+    caseNumber: "275111",
+    alias: "Kelly-Hopkinsville Encounter, Little Green Men",
+    address: "Kentucky, USA",
+    knownAssociates: "Sutton Family, Local Police",
+    codename: "HOPKINSV-275111",
+    region: "Kentucky, USA",
+    type: "Alien Humanoid",
+    dangerLevel: "Medium",
+    firstSighting: "August 21, 1955",
+    
+  },
 ];
 
