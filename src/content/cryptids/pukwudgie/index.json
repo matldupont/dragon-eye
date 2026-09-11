@@ -1,0 +1,28 @@
+{
+  "caseNumber": "899093",
+  "codename": "PUKWUDGI-899093",
+  "dangerLevel": "Medium",
+  "status": "Sighted",
+  "addedOn": "2026-01-07",
+  "image": "./photo.png",
+  "en": {
+    "name": "Pukwudgie",
+    "description": "The Pukwudgie is a diminutive humanoid cryptid, standing 2-3 feet tall, with gray skin, large ears and noses, and porcupine-like quills running down its back. Originating from Native American folklore, particularly the Wampanoag and Algonquian tribes, it is known as a trickster spirit of the forest that can shapeshift, turn invisible, and wield magic to disorient or harm those who disrespect it. Once harmonious with humans, it turned hostile due to betrayal or jealousy, now luring victims into danger or attacking with arrows and spears.",
+    "alias": "Puk-Wudjie, Bokwjimen, Puck-wudj-ininee, Bagwajinini, Bogwejimenak",
+    "location": "Northeastern United States, Great Lakes region, Massachusetts, Indiana, Delaware, southeastern Canada",
+    "knownAssociates": "Enemies of Maushop the giant and Granny Squannit",
+    "region": "Northeastern United States, Great Lakes region, Massachusetts, Indiana, Delaware, southeastern Canada",
+    "type": "Humanoid trickster spirit",
+    "firstSighting": "Approximately 9,000 years ago in Wampanoag oral traditions"
+  },
+  "fr": {
+    "name": "Pukwudgie",
+    "description": "Le Pukwudgie est un petit cryptide humanoïde de 60 à 90 centimètres, à la peau grise, aux grandes oreilles et au gros nez, avec des piquants de porc-épic le long du dos. Issu du folklore autochtone d'Amérique du Nord, en particulier des Wampanoags et des peuples algonquiens, c'est un esprit farceur de la forêt capable de changer de forme, de devenir invisible et d'utiliser la magie pour désorienter ou blesser ceux qui lui manquent de respect. Autrefois en harmonie avec les humains, il serait devenu hostile par jalousie ou après une trahison. Aujourd'hui, il attire ses victimes vers le danger ou les attaque avec des flèches et des lances.",
+    "alias": "Puk-Wudjie, Bokwjimen, Puck-wudj-ininee, Bagwajinini, Bogwejimenak",
+    "location": "Nord-est des États-Unis, région des Grands Lacs, Massachusetts, Indiana, Delaware, sud-est du Canada",
+    "knownAssociates": "Ennemis du géant Maushop et de Granny Squannit",
+    "region": "Nord-est des États-Unis, région des Grands Lacs, Massachusetts, Indiana, Delaware, sud-est du Canada",
+    "type": "Esprit farceur humanoïde",
+    "firstSighting": "Il y a environ 9 000 ans, dans les traditions orales wampanoags"
+  }
+}

@@ -1,45 +1,29 @@
 ---
-import { getAlternatePaths } from '../i18n/routing';
 import type { Locale } from '../i18n/translations';
+import { locales, localizePath, toLocale } from '../i18n/utils';
 
-// Get locale from URL pathname - more reliable than getLocaleFromAstro
-let currentLocale: 'en' | 'fr' = 'en';
-const currentPath = typeof Astro !== 'undefined' ? Astro.url.pathname : '/';
-try {
-  // @ts-ignore
-  if (typeof Astro !== 'undefined' && Astro.url) {
-    const pathname = Astro.url.pathname;
-    currentLocale = pathname.startsWith('/fr/') || pathname === '/fr' || pathname === '/fr/' ? 'fr' : 'en';
-  }
-} catch {
-  currentLocale = 'en';
-}
-const alternatePaths = getAlternatePaths(currentPath);
-
-const languages: { code: Locale; name: string }[] = [
-  { code: 'en', name: 'English' },
-  { code: 'fr', name: 'Français' },
-];
+const currentLocale = toLocale(Astro.currentLocale);
+const names: Record<Locale, string> = { en: 'English', fr: 'Français' };
 ---
 
 <div class="flex items-center gap-2">
-  {languages.map((lang) => {
-    const isActive = currentLocale === lang.code;
-    const path = lang.code === 'en' ? alternatePaths.en : alternatePaths.fr;
-    
+  {locales.map((code) => {
+    const isActive = currentLocale === code;
+
     return (
       <a
-        href={path}
+        href={localizePath(Astro.url.pathname, code)}
+        hreflang={code}
+        aria-current={isActive ? 'page' : undefined}
         class={`px-3 py-1 text-sm font-['Courier_New'] transition-colors ${
           isActive
             ? 'bg-lime-400 text-black'
             : 'text-purple-300 hover:text-lime-400 border border-purple-700 hover:border-lime-400 hover:shadow-[0_0_20px_rgba(163,230,53,0.4)]'
         }`}
-        aria-label={`Switch to ${lang.name}`}
+        aria-label={`Switch to ${names[code]}`}
       >
-        {lang.code.toUpperCase()}
+        {code.toUpperCase()}
       </a>
     );
   })}
 </div>
-

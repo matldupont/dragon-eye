@@ -1,10 +1,9 @@
 ---
 import "../styles/global.css";
 import Nav from "../components/Nav/Nav.astro";
-import { getLocaleFromAstro } from "../i18n/routing";
+import { toLocale } from "../i18n/utils";
 
-const locale = getLocaleFromAstro();
-const lang = locale === 'fr' ? 'fr' : 'en';
+const lang = toLocale(Astro.currentLocale);
 ---
 
 <!doctype html>
@@ -18,7 +17,7 @@ const lang = locale === 'fr' ? 'fr' : 'en';
   </head>
   <body>
     <div id="container">
-     
+
        <div class="min-h-screen bg-[#0f0f0f] text-white">
         <Nav />
         <main class="flex flex-col gap-y-4 pb-12">

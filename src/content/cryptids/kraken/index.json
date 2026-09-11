@@ -1,0 +1,28 @@
+{
+  "caseNumber": "513700",
+  "codename": "KRAKEN-513700",
+  "dangerLevel": "High",
+  "status": "Confirmed",
+  "addedOn": "2026-01-07",
+  "image": "./photo.png",
+  "en": {
+    "name": "Kraken",
+    "description": "The Kraken is a colossal cephalopod-like sea monster with tentacles capable of ensnaring and sinking entire ships, often described as island-sized with eyes as large as dinner plates. It lurks in the deep ocean, creating massive whirlpools by diving and luring prey with fish-attracting scents. Sailors report it dragging vessels and crews to watery depths, embodying the terror of the unknown seas.",
+    "alias": "Hafgufa",
+    "location": "Deep waters of the North Atlantic Ocean",
+    "knownAssociates": "None; solitary creature",
+    "region": "Norwegian Sea, coasts of Norway, Greenland, and Iceland",
+    "type": "Sea Monster",
+    "firstSighting": "1180, mentioned by King Sverre of Norway"
+  },
+  "fr": {
+    "name": "Kraken",
+    "description": "Le Kraken est un monstre marin colossal ressemblant à une pieuvre géante, dont les tentacules peuvent enlacer et couler des navires entiers. On le dit aussi grand qu'une île, avec des yeux larges comme des assiettes. Il se cache dans les profondeurs de l'océan, crée d'énormes tourbillons en plongeant et attire ses proies avec des odeurs qui appâtent les poissons. Les marins racontent qu'il entraîne navires et équipages vers les abysses : il incarne la terreur des mers inconnues.",
+    "alias": "Hafgufa",
+    "location": "Eaux profondes de l'océan Atlantique Nord",
+    "knownAssociates": "Aucun ; créature solitaire",
+    "region": "Mer de Norvège, côtes de la Norvège, du Groenland et de l'Islande",
+    "type": "Monstre marin",
+    "firstSighting": "1180, mentionné par le roi Sverre de Norvège"
+  }
+}

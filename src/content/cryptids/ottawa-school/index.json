@@ -1,0 +1,24 @@
+{
+  "caseNumber": "532976",
+  "codename": "OTTAWA-532976",
+  "dangerLevel": "Unknown",
+  "status": "Under Investigation",
+  "addedOn": "2026-01-04",
+  "image": "./photo.png",
+  "en": {
+    "name": "Unknown",
+    "description": "In Ottawa, there's a little school that's rumored to be haunted. Many people have seen strange things there. Near the girls' washroom, situated under the stairs, you might find something weird: a small door. At times, shrieking, creaking and footsteps can be heard from within. Upon further inspection, only paint buckets and pipes can be found. When the kids are at recess and the teachers are taking a break, something happens to the class phones. The screens begin to flash yellow warning signs. If you check the plant box, you will see a face. This sight can induce headaches in some people, but not all.",
+    "location": "Ottawa, Ontario",
+    "region": "Ottawa, Ontario",
+    "type": "Unknown",
+    "firstSighting": "Unknown"
+  },
+  "fr": {
+    "name": "Inconnu",
+    "description": "À Ottawa, il y a une petite école qui serait hantée. Beaucoup de gens y ont vu des choses étranges. Près des toilettes des filles, sous l'escalier, vous pourriez trouver quelque chose de bizarre : une petite porte. Parfois, on entend de l'intérieur des cris, des grincements et des bruits de pas. Pourtant, quand on y regarde de plus près, on ne trouve que des pots de peinture et des tuyaux. Quand les enfants sont en récréation et que les enseignants font une pause, il se passe quelque chose avec les téléphones des classes : les écrans se mettent à clignoter avec des signaux d'avertissement jaunes. Si vous regardez dans la jardinière, vous verrez un visage. Cette vision peut donner mal à la tête à certaines personnes, mais pas à toutes.",
+    "location": "Ottawa, Ontario",
+    "region": "Ottawa, Ontario",
+    "type": "Inconnu",
+    "firstSighting": "Inconnue"
+  }
+}

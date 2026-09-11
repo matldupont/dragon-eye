@@ -1,0 +1,28 @@
+{
+  "caseNumber": "417084",
+  "codename": "UNICORN-417084",
+  "dangerLevel": "Unknown",
+  "status": "Myth",
+  "addedOn": "2026-01-06",
+  "image": "./photo.png",
+  "en": {
+    "name": "Unicorn",
+    "description": "A legendary equine creature characterized by a single spiraling horn projecting from its forehead, though historical accounts and skeletal evidence suggest the animal may have possessed two backward-pointing horns similar to a giraffe. Unicorn sightings span multiple continents and centuries, with descriptions varying from purely mythical to potentially based on real but misidentified animals.",
+    "alias": "African Unicorn, Arabian Unicorn, Tahish, Elasmotherium (prehistoric relative)",
+    "location": "Indus Valley (ancient seals), Mecca region (16th century sighting), Bambos Berg region Africa (early 1800s)",
+    "knownAssociates": "Okapi (confirmed real species, formerly classified as cryptid), Komodo Dragon (formerly cryptid, now confirmed species)",
+    "region": "Global (Primary regions: India, Arabia, Africa, Medieval Europe)",
+    "type": "Large Equine/Ungulate",
+    "firstSighting": "1804 (European documentation by John Barrow); Ancient Greek and Medieval texts reference earlier sightings"
+  },
+  "fr": {
+    "name": "Licorne",
+    "description": "Une créature équine légendaire reconnaissable à la corne unique en spirale qui pousse sur son front, même si des récits historiques et des restes de squelettes suggèrent que l'animal aurait pu porter deux cornes tournées vers l'arrière, comme celles d'une girafe. Les observations de licornes s'étendent sur plusieurs continents et plusieurs siècles, et les descriptions vont du pur mythe à de vrais animaux mal identifiés.",
+    "alias": "Licorne africaine, Licorne d'Arabie, Tahish, Elasmotherium (parent préhistorique)",
+    "location": "Vallée de l'Indus (sceaux antiques), région de La Mecque (observation au XVIe siècle), région du Bambos Berg en Afrique (début des années 1800)",
+    "knownAssociates": "Okapi (espèce réelle confirmée, autrefois classée parmi les cryptides), dragon de Komodo (ancien cryptide, espèce aujourd'hui confirmée)",
+    "region": "Mondial (principales régions : Inde, Arabie, Afrique, Europe médiévale)",
+    "type": "Grand équidé / ongulé",
+    "firstSighting": "1804 (documentée en Europe par John Barrow) ; des textes de la Grèce antique et du Moyen Âge mentionnent des observations plus anciennes"
+  }
+}
