@@ -70,6 +70,15 @@
   border-top: 1px dashed var(--de-ink);
 }
 
+/* Manila is too low-contrast for small colored text: labels in ink, danger pill on paper */
+.hero-secret-caption .de-mono-label {
+  color: var(--de-ink);
+}
+
+.hero-secret-folder .de-danger-pill {
+  background: var(--de-paper);
+}
+
 .hero-secret-paperclip {
   position: absolute;
   top: -10px;

@@ -58,7 +58,7 @@ Tokens are CSS custom properties on `:root`. See `colors_and_type.css` for the f
 | `--de-paper-3` | `#c9bb8e` | Deepest paper tone |
 | `--de-ink` | `#2a2620` | Text, rules, classified bar, primary button, case-number tags |
 | `--de-ink-soft` | `#5a4d35` | Muted text: mono labels, metadata, input borders, dashed rules |
-| `--de-accent` | `#a82c1e` | Stamp red: stamps, eyebrows, `CASE FILE` labels, hover and focus |
+| `--de-accent` | `#a0281b` | Stamp red: stamps, eyebrows, `CASE FILE` labels, hover and focus |
 | `--de-accent-2` | `#1a3c2e` | Confidential green: secondary stamps (`EYES ONLY`), Low danger |
 | `--de-danger` | `#8a1a0f` | High danger |
 | `--de-caution` | `#7a4e0e` | Medium danger |
@@ -74,7 +74,7 @@ The site changes two of the prototype's colors and adds one token so text meets 
 | Token | Prototype | Site | Why |
 |-------|-----------|------|-----|
 | `--de-ink-soft` | `#6b5d42` | `#5a4d35` | Too little contrast for small text on `--de-paper-2`: 4.05:1 → 5.20:1 |
-| `--de-accent` | `#b83222` | `#a82c1e` | WCAG AA text contrast: 4.49:1 → 5.19:1 on `--de-paper` |
+| `--de-accent` | `#b83222` | `#a0281b` | Small labels on `--de-paper-2` (`CASE FILE`, evidence tags): 3.77:1 → 4.71:1 |
 | `--de-caution` | — (Medium used `--de-manila`) | `#7a4e0e` (new) | Manila was unreadable as text (1.51:1 on `--de-paper-2`); caution gives 4.53:1 |
 
 Contrast of the text tokens against each surface (flat colors, ignoring the paper grain):
@@ -83,12 +83,12 @@ Contrast of the text tokens against each surface (flat colors, ignoring the pape
 |------|-----------------|-------------------|------------------|
 | `--de-ink` | 11.30 | 9.49 | 6.30 |
 | `--de-ink-soft` | 6.20 | 5.20 | 3.45 |
-| `--de-accent` | 5.19 | 4.35 | 2.89 |
+| `--de-accent` | 5.61 | 4.71 | 3.13 |
 | `--de-accent-2` | 9.12 | 7.66 | 5.09 |
 | `--de-danger` | 7.06 | 5.93 | 3.94 |
 | `--de-caution` | 5.40 | 4.53 | 3.01 |
 
-Anything below 4.5:1 is only good enough for large text (3:1). On `--de-paper-2`, keep `--de-accent` to large text and incidental marks such as the `CASE FILE` label. On the manila folder, set small text in `--de-ink` (the prototype's folder caption labels and danger pill still sit below 4.5:1 there). `--de-paper` text on `--de-ink` (classified bar, case-number tags, primary button) is 11.30:1.
+Every text token passes on `--de-paper` and `--de-paper-2`. The manila folder is the exception: set small text there in `--de-ink` and put danger pills on a `--de-paper` background (both handled in `styles/hero.css`). `--de-paper` text on `--de-ink` (classified bar, case-number tags, primary button) is 11.30:1, and on `--de-accent` (primary button hover) 5.61:1.
 
 ### Typography
 

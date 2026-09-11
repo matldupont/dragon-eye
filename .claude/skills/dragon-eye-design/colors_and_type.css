@@ -22,7 +22,7 @@
   --de-ink-soft: #5a4d35;   /* prototype #6b5d42 — too little contrast for small text on paper-2 */
 
   /* Accents */
-  --de-accent:   #a82c1e;   /* stamp red — prototype #b83222, darkened for WCAG AA text contrast */
+  --de-accent:   #a0281b;   /* stamp red — prototype #b83222, darkened for WCAG AA text contrast */
   --de-accent-2: #1a3c2e;   /* confidential green */
   --de-danger:   #8a1a0f;   /* High danger */
   --de-caution:  #7a4e0e;   /* Medium danger — manila was unreadable as text */
