@@ -10,7 +10,7 @@
     "description": "The Lavalisk is a serpentine reptile with molten orange scales that glow faintly in darkness, capable of exhaling superheated steam from gill-like vents along its neck. Sightings describe it slithering through geothermal vents and abandoned mines, leaving trails of scorched earth and sulfurous fumes. Locals believe it feeds on mineral deposits, growing larger with each volcanic eruption.",
     "alias": "Steam Serpent, Geyser Wyrm",
     "location": "Yellowstone National Park, Wyoming, USA",
-    "region": "Yellowstone National Park, Wyoming, USA",
+    "region": "Yellowstone, USA",
     "type": "Thermic Reptilian",
     "firstSighting": "July 14, 1934"
   },
@@ -19,7 +19,7 @@
     "description": "Le Lavalisk est un reptile serpentiforme aux écailles orange comme de la lave, qui luisent faiblement dans l'obscurité. Il peut souffler de la vapeur brûlante par des fentes semblables à des ouïes le long de son cou. Les témoins le décrivent se faufilant dans les évents géothermiques et les mines abandonnées, laissant derrière lui des traînées de terre brûlée et des vapeurs de soufre. Les habitants pensent qu'il se nourrit de gisements minéraux et qu'il grandit à chaque éruption volcanique.",
     "alias": "Serpent de vapeur, Wyrm des geysers",
     "location": "Parc national de Yellowstone, Wyoming, États-Unis",
-    "region": "Parc national de Yellowstone, Wyoming, États-Unis",
+    "region": "Yellowstone, États-Unis",
     "type": "Reptilien thermique",
     "firstSighting": "14 juillet 1934"
   }

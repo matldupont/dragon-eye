@@ -1,0 +1,60 @@
+---
+import { Image } from 'astro:assets';
+import Link from './Nav/Link.astro';
+import DangerPill from './DangerPill.astro';
+import type { LocalizedCryptid } from '../lib/cryptids';
+import { format, getTranslations, isoDate, toLocale } from '../i18n/utils';
+
+interface Props {
+  featured: LocalizedCryptid;
+  /** Number of files in the archive, quoted in the lede. */
+  total: number;
+}
+
+const { featured, total } = Astro.props;
+const t = getTranslations(toLocale(Astro.currentLocale));
+const firstAlias = featured.alias?.split(',')[0].trim();
+const [line1, line2, line3] = t.hero.title;
+---
+
+<section class="de-hero" aria-labelledby="hero-title">
+  <div class="de-wrap de-hero-grid">
+    <div>
+      <p class="de-hero-meta">
+        <span>{t.hero.dossierNo} {featured.caseNumber}</span>
+        <span>{t.hero.filed} {isoDate(featured.addedOn)}</span>
+        <span>{t.hero.clearance}</span>
+      </p>
+      <h1 id="hero-title" class="de-title-xl">{line1}<br />{line2}<br />{line3}</h1>
+      <p class="de-hero-sub">
+        {format(t.hero.lede, { count: total })} <b>{featured.name}</b>{firstAlias ? format(t.hero.aliasSuffix, { alias: firstAlias }) : '.'}
+      </p>
+      <div class="de-hero-actions">
+        <Link to={`/files/${featured.id}/`} class="de-btn de-btn-primary">▸ {t.hero.openDossier}</Link>
+        <Link to="/files/" class="de-btn">{t.hero.browseFiles}</Link>
+      </div>
+    </div>
+
+    <div class="de-folder">
+      <p class="de-folder-tab">{t.hero.caseTab} {featured.caseNumber}</p>
+      <Image
+        src={featured.image}
+        alt={format(t.file.photoAlt, { name: featured.name })}
+        width={900}
+        class="de-folder-photo"
+        loading="eager"
+      />
+      <div class="de-folder-stamps" aria-hidden="true">
+        <span class="de-stamp">{t.hero.stampTopSecret}</span>
+        <span class="de-stamp de-stamp-green">{t.hero.stampEyesOnly}</span>
+      </div>
+      <div class="de-folder-caption">
+        <p class="de-mono-label">{t.hero.subject}</p>
+        <p class="de-folder-name">{featured.name}</p>
+        <p class="de-mono-label">{t.hero.location} · {featured.region} · {t.hero.firstSeen} · {featured.firstSighting}</p>
+        <DangerPill level={featured.dangerLevel} />
+      </div>
+      <div class="de-paperclip" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>

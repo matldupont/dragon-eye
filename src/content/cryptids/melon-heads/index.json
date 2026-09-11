@@ -10,7 +10,7 @@
     "description": "The Melon Heads are small, humanoid creatures with grotesquely enlarged, bulbous heads resembling melons, said to roam dense woods seeking human contact. Legend claims a mad doctor in the forest experimented on children from a mental hospital, causing their heads to swell unnaturally through horrific procedures. One night, the children revolted, burned down the doctor's house, and now wander as feral beings with sharp teeth and pale skin.",
     "alias": "Melonheads",
     "location": "Kirtland, Ohio, USA",
-    "region": "Kirtland, Ohio, USA",
+    "region": "Ohio, USA",
     "type": "Mutated Humanoid",
     "firstSighting": "1960s"
   },
@@ -19,7 +19,7 @@
     "description": "Les Melon Heads sont de petites créatures humanoïdes à la tête énorme et bombée, semblable à un melon, qui rôderaient dans les bois épais à la recherche de contact humain. Selon la légende, un docteur fou vivant dans la forêt aurait mené des expériences sur des enfants d'un hôpital psychiatrique, faisant enfler leur tête de façon anormale par d'horribles procédés. Une nuit, les enfants se seraient révoltés et auraient incendié la maison du docteur. Depuis, ils erreraient comme des êtres sauvages aux dents pointues et à la peau pâle.",
     "alias": "Têtes de melon",
     "location": "Kirtland, Ohio, États-Unis",
-    "region": "Kirtland, Ohio, États-Unis",
+    "region": "Ohio, États-Unis",
     "type": "Humanoïde muté",
     "firstSighting": "Années 1960"
   }

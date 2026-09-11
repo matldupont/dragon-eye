@@ -10,7 +10,7 @@
     "description": "Baba Yaga is a fearsome witch from Slavic folklore, known for residing in a hut that stands on chicken legs deep in the forest, surrounded by a fence of human bones. She travels by flying in a giant mortar propelled by a pestle, sometimes sweeping her tracks with a broom, and is both a cannibalistic devourer of children and an enigmatic helper to worthy heroes. Her dual nature makes her a harbinger of transformation, rewarding the clever while punishing trespassers who fail her impossible tasks.",
     "alias": "Babayaga, Iagaia Baba",
     "location": "Eastern European forests, particularly Russia and Slavic regions",
-    "region": "Eastern European forests, particularly Russia and Slavic regions",
+    "region": "Eastern Europe",
     "type": "Witch",
     "firstSighting": "Mid-18th century (legends dating back to medieval period)"
   },
@@ -19,7 +19,7 @@
     "description": "Baba Yaga est une redoutable sorcière du folklore slave. Elle vit au fond de la forêt dans une cabane perchée sur des pattes de poulet, entourée d'une clôture d'os humains. Elle se déplace en volant dans un mortier géant qu'elle propulse avec un pilon, effaçant parfois ses traces avec un balai. À la fois dévoreuse d'enfants et mystérieuse alliée des héros qui le méritent, elle incarne la transformation : elle récompense les plus malins et punit les intrus qui échouent à ses épreuves impossibles.",
     "alias": "Babayaga, Iagaia Baba",
     "location": "Forêts d'Europe de l'Est, en particulier la Russie et les régions slaves",
-    "region": "Forêts d'Europe de l'Est, en particulier la Russie et les régions slaves",
+    "region": "Europe de l'Est",
     "type": "Sorcière",
     "firstSighting": "Milieu du XVIIIe siècle (légendes remontant au Moyen Âge)"
   }

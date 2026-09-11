@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import { format, getTranslations, isoDate, toLocale } from '../i18n/utils';
+
+const t = getTranslations(toLocale(Astro.currentLocale));
+const entries = await getCollection('cryptids');
+const lastUpdated = new Date(Math.max(...entries.map((entry) => entry.data.addedOn.getTime())));
+---
+
+<footer class="de-footer">
+  <div class="de-wrap de-footer-inner">
+    <p>{format(t.footer.copyright, { year: new Date().getFullYear() })}</p>
+    <p>{format(t.footer.activeCases, { count: entries.length, date: isoDate(lastUpdated) })}</p>
+  </div>
+</footer>

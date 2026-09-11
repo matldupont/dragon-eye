@@ -1,0 +1,20 @@
+---
+import { getTranslations, toLocale } from '../i18n/utils';
+
+interface Props {
+  status: 'Under Investigation' | 'Sighted' | 'Confirmed' | 'Myth';
+}
+
+const keys = {
+  'Under Investigation': 'underInvestigation',
+  Sighted: 'sighted',
+  Confirmed: 'confirmed',
+  Myth: 'myth',
+} as const;
+
+const { status } = Astro.props;
+const t = getTranslations(toLocale(Astro.currentLocale));
+const key = keys[status];
+---
+
+<span class={`de-stamp de-stamp-${key}`}>{t.statusLabels[key]}</span>

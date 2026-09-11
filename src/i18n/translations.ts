@@ -1,414 +1,411 @@
-export type Locale = 'en' | 'fr';
+export type Locale = "en" | "fr";
+
+type DangerKey = "low" | "medium" | "high" | "unknown";
+type StatusKey = "underInvestigation" | "sighted" | "confirmed" | "myth";
+
+interface ProductCopy {
+  title: string;
+  description: string;
+}
 
 export interface Translations {
-  nav: {
-    files: string;
-    merch: string;
-    contact: string;
-  };
-  classifiedBar: {
-    marquee1: string;
-    marquee2: string;
-    marquee3: string;
-    marquee4: string;
-    marquee5: string;
-  };
+  meta: { siteTitle: string; description: string };
+  nav: { label: string; home: string; files: string; about: string; merch: string; skipToContent: string };
+  classifiedBar: string[];
   hero: {
-    eyebrow: string;
+    dossierNo: string;
+    filed: string;
+    clearance: string;
+    title: [string, string, string];
     lede: string;
-    ctaPrimary: string;
-    ctaSecondary: string;
-  };
-  home: {
-    topSecret: string;
-    title: string;
-    welcome: string;
-    exploreFiles: string;
-    cryptidOfTheMonth: string;
-    featuredFile: string;
-    caseFile: string;
-    firstSeen: string;
+    aliasSuffix: string;
+    openDossier: string;
+    browseFiles: string;
+    caseTab: string;
+    stampTopSecret: string;
+    stampEyesOnly: string;
+    subject: string;
     location: string;
-    viewFullFile: string;
-    latestFiles: string;
-    viewAllFiles: string;
+    firstSeen: string;
   };
-  about: {
+  home: { latestEyebrow: string; latestTitle: string; browseAll: string };
+  files: {
+    pageTitle: string;
+    eyebrow: string;
     title: string;
-    description1: string;
-    description2: string;
-    description3: string;
+    lede: string;
+    searchLabel: string;
+    searchPlaceholder: string;
+    regionLabel: string;
+    dangerLabel: string;
+    allRegions: string;
+    allLevels: string;
+    resultsCount: string;
+    noResults: string;
+    noResultsHint: string;
   };
+  card: { caseFile: string; location: string };
+  file: {
+    back: string;
+    dossierNo: string;
+    clearance: string;
+    clearanceLevel: string;
+    exhibit: string;
+    photoAlt: string;
+    codename: string;
+    type: string;
+    region: string;
+    location: string;
+    firstSighting: string;
+    alias: string;
+    associates: string;
+    caseNotes: string;
+    relatedTitle: string;
+  };
+  dangerLevels: Record<DangerKey, string> & { label: string };
+  statusLabels: Record<StatusKey, string>;
+  about: { eyebrow: string; title: string; paragraphs: string[] };
+  footer: { copyright: string; activeCases: string };
+  notFound: { title: string; message: string; back: string };
   merch: {
-    evidenceLocker: string;
+    pageTitle: string;
+    eyebrow: string;
     title: string;
     description: string;
+    filterLabel: string;
     allItems: string;
     dragonEyeAgency: string;
     cryptidCollection: string;
     comingSoon: string;
     comingSoonDescription: string;
-  };
-  files: {
-    classifiedDatabase: string;
-    title: string;
-    description: string;
-    searchPlaceholder: string;
-    filters: string;
-    region: string;
-    danger: string;
-    allRegions: string;
-    allLevels: string;
-    everyRegion: string;
-    anyDanger: string;
-    filesFound: string;
-    noFilesMatch: string;
-    tryAdjusting: string;
-    emptyState: string;
-  };
-  cryptidCard: {
-    file: string;
-    region: string;
-    type: string;
-    openFile: string;
-  };
-  fileDetails: {
-    caseNumber: string;
-    alias: string;
-    knownAssociates: string;
-    codename: string;
-    region: string;
-    type: string;
-    dangerLevel: string;
-    firstSighting: string;
-    description: string;
-    backToFiles: string;
-    photographicEvidence: string;
-    dossierInformation: string;
-    location: string;
-    status: string;
-    investigatorCaseNotes: string;
-    relatedFiles: string;
-  };
-  dangerLevels: {
-    low: string;
-    medium: string;
-    high: string;
-    unknown: string;
-    label: string;
-  };
-  statusLabels: {
-    sighted: string;
-    underInvestigation: string;
-    confirmed: string;
-    myth: string;
+    evidenceTag: string;
   };
   product: {
-    addToCart: string;
-    closeModal: string;
-    tshirt: {
-      title: string;
-      description: string;
-    };
-    cap: {
-      title: string;
-      description: string;
-    };
-    detectiveKit: {
-      title: string;
-      description: string;
-    };
-    badge: {
-      title: string;
-      description: string;
-    };
-    stickerPack: {
-      title: string;
-      description: string;
-    };
-    sweatpants: {
-      title: string;
-      description: string;
-    };
-    plushies: {
-      title: string;
-      description: string;
-    };
+    closePhoto: string;
+    viewLarger: string;
+    photoOptions: string;
+    photoOption: string;
+    tshirt: ProductCopy;
+    cap: ProductCopy;
+    detectiveKit: ProductCopy;
+    badge: ProductCopy;
+    stickerPack: ProductCopy;
+    sweatpants: ProductCopy;
+    plushies: ProductCopy;
   };
 }
 
 export const translations: Record<Locale, Translations> = {
   en: {
+    meta: {
+      siteTitle: "Dragon Eye",
+      description: "Classified case files on legendary creatures, kept by the kid investigators of the Dragon Eye Agency.",
+    },
     nav: {
-      files: 'Files',
-      merch: 'Merch',
-      contact: 'Contact',
+      label: "Main",
+      home: "Dragon Eye home",
+      files: "Files",
+      about: "About",
+      merch: "Evidence Locker",
+      skipToContent: "Skip to content",
     },
-    classifiedBar: {
-      marquee1: '★ CLASSIFIED INTEL ★ UNIDENTIFIED CREATURES REPORTED WORLDWIDE',
-      marquee2: '★ TOP SECRET ★ DRAGON EYE AGENCY ACTIVE INVESTIGATION IN PROGRESS',
-      marquee3: '★ ALERT ★ UNUSUAL ACTIVITY DETECTED — REMAIN VIGILANT',
-      marquee4: '★ RESTRICTED ★ ACCESS LEVEL 5 CLEARANCE REQUIRED',
-      marquee5: '★ BREAKING ★ NEW CRYPTID SIGHTINGS LOGGED IN DATABASE',
-    },
+    classifiedBar: [
+      "★ Classified intel ★ Unidentified creatures reported worldwide",
+      "★ Top secret ★ Dragon Eye Agency investigation in progress",
+      "★ Alert ★ Unusual activity detected — remain vigilant",
+      "★ Restricted ★ Level 5 clearance required",
+      "★ Breaking ★ New cryptid sightings logged in the database",
+    ],
     hero: {
-      eyebrow: 'CRYPTID OF THE MONTH',
-      lede: 'The Dragon Eye Agency investigates unexplained creatures worldwide. Browse classified case files and join our mission to discover the unknown.',
-      ctaPrimary: 'EXPLORE THE FILES',
-      ctaSecondary: 'VIEW ALL FILES',
+      dossierNo: "Dossier №",
+      filed: "Filed",
+      clearance: "Clearance // LVL 5",
+      title: ["Cryptid", "of the", "month."],
+      lede: "{count} active investigations. One creature selected for deep file review. This month the Dragon Eye Agency turns its glass on",
+      aliasSuffix: " — also known as {alias}.",
+      openDossier: "Open dossier",
+      browseFiles: "Browse all files",
+      caseTab: "Case",
+      stampTopSecret: "Top secret",
+      stampEyesOnly: "Eyes only",
+      subject: "Subject",
+      location: "Location",
+      firstSeen: "First seen",
     },
     home: {
-      topSecret: 'TOP SECRET CLEARANCE REQUIRED',
-      title: 'Dragon Eye: Cryptid Investigation Files',
-      welcome: "Welcome to the Dragon Eye Agency! We're a team of kid-friendly cryptid investigators uncovering mysteries across the world. Browse our files, learn about legendary creatures, and join our mission to discover the unknown!",
-      exploreFiles: 'EXPLORE THE FILES',
-      cryptidOfTheMonth: 'CRYPTID OF THE MONTH',
-      featuredFile: '★ FEATURED FILE: CRYPTID OF THE MONTH ★',
-      caseFile: 'CASE FILE:',
-      firstSeen: 'FIRST SEEN:',
-      location: 'LOCATION:',
-      viewFullFile: 'VIEW FULL FILE →',
-      latestFiles: 'Latest Files',
-      viewAllFiles: 'VIEW ALL FILES →',
-    },
-    about: {
-      title: 'About',
-      description1: "Dragon Eye is a kid friendly club, rated 8 to 13. We snoop around town and look for clues during school hours on Mondays and Wednesdays.",
-      description2: "Strategy meetings are held every Monday and Wednesday morning, and are exclusive to Dragon Eye members.",
-      description3: "We meet at the Dragon Eye HQ, which is located in the heart of the city.",
-    },
-    merch: {
-      evidenceLocker: 'AGENCY EVIDENCE LOCKER',
-      title: 'Agency Evidence Locker',
-      description: 'Get official Dragon Eye gear and cryptid collectibles! All proceeds support our ongoing investigations. Items coming soon!',
-      allItems: 'ALL ITEMS',
-      dragonEyeAgency: 'DRAGON EYE AGENCY',
-      cryptidCollection: 'CRYPTID COLLECTION',
-      comingSoon: 'COMING SOON!',
-      comingSoonDescription: 'Our merchandise shop is currently under construction. Check back soon to grab your favorite cryptid gear! Follow us on social media for launch updates.',
+      latestEyebrow: "Case archive",
+      latestTitle: "Latest files",
+      browseAll: "Browse all {count} files",
     },
     files: {
-      classifiedDatabase: 'CLASSIFIED DATABASE',
-      title: 'Cryptid Files',
-      description: 'Browse our complete archive of cryptid investigations. Use the search and filters below to find specific cases.',
-      searchPlaceholder: 'Search by name, codename, or region...',
-      filters: 'FILTERS:',
-      region: 'Region:',
-      danger: 'Danger:',
-      allRegions: 'All Regions',
-      allLevels: 'All Levels',
-      everyRegion: 'Every Region',
-      anyDanger: 'Any Danger',
-      filesFound: 'FILES FOUND',
-      noFilesMatch: 'NO FILES MATCH YOUR SEARCH',
-      tryAdjusting: 'Try adjusting your filters or search terms',
-      emptyState: 'No files found. Try adjusting your search or filters.',
+      pageTitle: "Case files",
+      eyebrow: "Case archive",
+      title: "Classified database",
+      lede: "{count} subjects. Browse by region or threat level. Clearance checks apply.",
+      searchLabel: "Search the files",
+      searchPlaceholder: "Subject, codename, region…",
+      regionLabel: "Region",
+      dangerLabel: "Threat level",
+      allRegions: "All regions",
+      allLevels: "All threat levels",
+      resultsCount: "{shown} / {total} files found",
+      noResults: "No records match your query.",
+      noResultsHint: "Try another name or clear the filters.",
     },
-    cryptidCard: {
-      file: 'FILE:',
-      region: 'REGION:',
-      type: 'TYPE:',
-      openFile: 'OPEN FILE →',
+    card: {
+      caseFile: "Case file",
+      location: "Loc",
     },
-    fileDetails: {
-      caseNumber: 'CASE NUMBER:',
-      alias: 'ALIAS:',
-      knownAssociates: 'KNOWN ASSOCIATES:',
-      codename: 'CODENAME:',
-      region: 'REGION:',
-      type: 'TYPE:',
-      dangerLevel: 'DANGER LEVEL:',
-      firstSighting: 'FIRST SIGHTING:',
-      description: 'DESCRIPTION:',
-      backToFiles: '← BACK TO FILES',
-      photographicEvidence: 'PHOTOGRAPHIC EVIDENCE',
-      dossierInformation: 'DOSSIER INFORMATION',
-      location: 'LOCATION',
-      status: 'STATUS',
-      investigatorCaseNotes: 'INVESTIGATOR CASE NOTES',
-      relatedFiles: 'Related Files',
+    file: {
+      back: "← Back to the archive",
+      dossierNo: "Dossier №",
+      clearance: "Clearance",
+      clearanceLevel: "LVL 5",
+      exhibit: "Photographic evidence · Exhibit A",
+      photoAlt: "Evidence photo of {name}",
+      codename: "Codename",
+      type: "Type",
+      region: "Region",
+      location: "Location",
+      firstSighting: "First sighting",
+      alias: "Alias",
+      associates: "Known associates",
+      caseNotes: "Investigator case notes",
+      relatedTitle: "Related files",
     },
     dangerLevels: {
-      low: 'Low',
-      medium: 'Medium',
-      high: 'High',
-      unknown: 'Unknown',
-      label: 'DANGER:',
+      low: "Low",
+      medium: "Medium",
+      high: "High",
+      unknown: "Unknown",
+      label: "Danger level",
     },
     statusLabels: {
-      sighted: 'Sighted',
-      underInvestigation: 'Under Investigation',
-      confirmed: 'Confirmed',
-      myth: 'Myth',
+      underInvestigation: "Under investigation",
+      sighted: "Sighted",
+      confirmed: "Confirmed",
+      myth: "Myth",
+    },
+    about: {
+      eyebrow: "Who we are",
+      title: "About Dragon Eye",
+      paragraphs: [
+        "Dragon Eye is a kid-friendly agency for ages 8 to 13. We snoop around town and look for clues during school hours on Mondays and Wednesdays.",
+        "Strategy meetings happen every Monday and Wednesday morning, and they are for Dragon Eye members only.",
+        "We meet at Dragon Eye HQ, in the heart of the city. The exact address is classified.",
+      ],
+    },
+    footer: {
+      copyright: "© {year} Dragon Eye Agency · All files classified",
+      activeCases: "{count} active cases · Last updated {date}",
+    },
+    notFound: {
+      title: "File not found",
+      message: "This file has been redacted, misplaced, or never existed.",
+      back: "Back to the archive",
+    },
+    merch: {
+      pageTitle: "Evidence Locker",
+      eyebrow: "Agency evidence locker",
+      title: "Evidence locker",
+      description: "Get official Dragon Eye gear and cryptid collectibles! All proceeds support our ongoing investigations.",
+      filterLabel: "Filter items",
+      allItems: "All items",
+      dragonEyeAgency: "Dragon Eye Agency",
+      cryptidCollection: "Cryptid collection",
+      comingSoon: "Coming soon",
+      comingSoonDescription: "Our merchandise shop is currently under construction. Check back soon to grab your favorite cryptid gear!",
+      evidenceTag: "Evidence №",
     },
     product: {
-      addToCart: 'ADD TO CART',
-      closeModal: 'Close modal',
+      closePhoto: "Close photo",
+      viewLarger: "View a larger photo of {name}",
+      photoOptions: "Photo options",
+      photoOption: "Photo {n}",
       tshirt: {
-        title: 'Dragon Eye T-Shirt',
-        description: 'Show your Dragon Eye pride with our official club t-shirt. Two styles available.',
+        title: "Dragon Eye T-Shirt",
+        description: "Show your Dragon Eye pride with our official club t-shirt. Two styles available.",
       },
       cap: {
-        title: 'Dragon Eye Cap',
-        description: 'Stay cool while on the hunt for clues with our stylish cap.',
+        title: "Dragon Eye Cap",
+        description: "Stay cool while on the hunt for clues with our stylish cap.",
       },
       detectiveKit: {
-        title: 'Junior Detective Kit',
-        description: 'Everything you need to start your detective journey, including a magnifying glass.',
+        title: "Junior Detective Kit",
+        description: "Everything you need to start your detective journey, including a magnifying glass.",
       },
       badge: {
-        title: 'Dragon Eye Badge',
-        description: 'Official member badge - show that you\'re part of the Dragon Eye detective club.',
+        title: "Dragon Eye Badge",
+        description: "Official member badge - show that you're part of the Dragon Eye detective club.",
       },
       stickerPack: {
-        title: 'Sticker Pack',
-        description: 'Decorate your notebooks and gear with these cool Dragon Eye stickers.',
+        title: "Sticker Pack",
+        description: "Decorate your notebooks and gear with these cool Dragon Eye stickers.",
       },
       sweatpants: {
-        title: 'Dragon Eye Sweatpants',
-        description: 'Stay comfortable during stakeouts and detective work with our cozy sweatpants.',
+        title: "Dragon Eye Sweatpants",
+        description: "Stay comfortable during stakeouts and detective work with our cozy sweatpants.",
       },
       plushies: {
-        title: 'Dragon Eye Plushies',
-        description: 'Collect all three cryptid plushies: Big Foot, Dragon, and Loch Ness Monster. Perfect companions for your detective adventures.',
+        title: "Dragon Eye Plushies",
+        description: "Collect all three cryptid plushies: Big Foot, Dragon, and Loch Ness Monster. Perfect companions for your detective adventures.",
       },
     },
   },
   fr: {
+    meta: {
+      siteTitle: "Dragon Eye",
+      description: "Les dossiers classifiés des créatures légendaires, tenus par les jeunes enquêteurs de l'Agence Dragon Eye.",
+    },
     nav: {
-      files: 'Dossiers',
-      merch: 'Marchandise',
-      contact: 'Contact',
+      label: "Principal",
+      home: "Accueil Dragon Eye",
+      files: "Dossiers",
+      about: "À propos",
+      merch: "Dépôt de preuves",
+      skipToContent: "Aller au contenu",
     },
-    classifiedBar: {
-      marquee1: '★ INTEL CLASSIFIÉ ★ CRÉATURES NON IDENTIFIÉES SIGNALÉES DANS LE MONDE ENTIER',
-      marquee2: '★ TOP SECRET ★ ENQUÊTE ACTIVE DE L\'AGENCE DRAGON EYE EN COURS',
-      marquee3: '★ ALERTE ★ ACTIVITÉ INHABITUELLE DÉTECTÉE — RESTEZ VIGILANT',
-      marquee4: '★ RESTREINT ★ AUTORISATION DE NIVEAU 5 REQUISE',
-      marquee5: '★ URGENT ★ NOUVELLES OBSERVATIONS DE CRÉATURES CRYPTIDES ENREGISTRÉES',
-    },
+    classifiedBar: [
+      "★ Intel classifié ★ Créatures non identifiées signalées dans le monde entier",
+      "★ Très secret ★ Enquête de l'Agence Dragon Eye en cours",
+      "★ Alerte ★ Activité inhabituelle détectée — restez vigilants",
+      "★ Accès restreint ★ Autorisation de niveau 5 requise",
+      "★ Urgent ★ Nouvelles observations de cryptides enregistrées",
+    ],
     hero: {
-      eyebrow: 'CRÉATURE DU MOIS',
-      lede: 'L\'Agence Dragon Eye enquête sur des créatures inexpliquées à travers le monde. Parcourez les dossiers classifiés et rejoignez notre mission pour découvrir l\'inconnu.',
-      ctaPrimary: 'EXPLORER LES DOSSIERS',
-      ctaSecondary: 'VOIR TOUS LES DOSSIERS',
+      dossierNo: "Dossier №",
+      filed: "Classé le",
+      clearance: "Autorisation // niv. 5",
+      title: ["Créature", "du", "mois."],
+      lede: "{count} enquêtes actives. Une créature sélectionnée pour un examen approfondi. Ce mois-ci, l'Agence Dragon Eye braque sa loupe sur",
+      aliasSuffix: " — alias {alias}.",
+      openDossier: "Ouvrir le dossier",
+      browseFiles: "Voir tous les dossiers",
+      caseTab: "Dossier",
+      stampTopSecret: "Très secret",
+      stampEyesOnly: "Confidentiel",
+      subject: "Sujet",
+      location: "Lieu",
+      firstSeen: "Première observation",
     },
     home: {
-      topSecret: 'AUTORISATION TOP SECRET REQUISE',
-      title: 'Dragon Eye: Dossiers d\'Enquête sur les Créatures Cryptides',
-      welcome: 'Bienvenue à l\'Agence Dragon Eye! Nous sommes une équipe d\'enquêteurs de créatures cryptides adaptés aux enfants qui découvrent des mystères à travers le monde. Parcourez nos dossiers, apprenez-en sur les créatures légendaires et rejoignez notre mission pour découvrir l\'inconnu!',
-      exploreFiles: 'EXPLORER LES DOSSIERS',
-      cryptidOfTheMonth: 'CRÉATURE DU MOIS',
-      featuredFile: '★ DOSSIER EN VEDETTE: CRÉATURE DU MOIS ★',
-      caseFile: 'DOSSIER:',
-      firstSeen: 'PREMIÈRE OBSERVATION:',
-      location: 'LIEU:',
-      viewFullFile: 'VOIR LE DOSSIER COMPLET →',
-      latestFiles: 'Derniers Dossiers',
-      viewAllFiles: 'VOIR TOUS LES DOSSIERS →',
-    },
-    about: {
-      title: 'À propos',
-      description1: 'Dragon Eye est un club adapté aux enfants, classé de 8 à 13 ans. Nous fouinons en ville et cherchons des indices pendant les heures d\'école les lundis et mercredis.',
-      description2: 'Les réunions de stratégie ont lieu tous les lundis et mercredis matin, et sont exclusives aux membres de Dragon Eye.',
-      description3: 'Nous nous rencontrons au QG de Dragon Eye, qui est situé au cœur de la ville.',
-    },
-    merch: {
-      evidenceLocker: 'DÉPÔT DE PREUVES DE L\'AGENCE',
-      title: 'Dépôt de Preuves de l\'Agence',
-      description: 'Obtenez des articles officiels Dragon Eye et des objets de collection de créatures cryptides! Tous les profits soutiennent nos enquêtes en cours. Articles à venir bientôt!',
-      allItems: 'TOUS LES ARTICLES',
-      dragonEyeAgency: 'AGENCE DRAGON EYE',
-      cryptidCollection: 'COLLECTION CRYPTIDE',
-      comingSoon: 'BIENTÔT DISPONIBLE!',
-      comingSoonDescription: 'Notre boutique de marchandises est actuellement en construction. Revenez bientôt pour obtenir votre équipement de créature cryptide préféré! Suivez-nous sur les réseaux sociaux pour les mises à jour de lancement.',
+      latestEyebrow: "Archives",
+      latestTitle: "Derniers dossiers",
+      browseAll: "Voir les {count} dossiers",
     },
     files: {
-      classifiedDatabase: 'BASE DE DONNÉES CLASSIFIÉE',
-      title: 'Dossiers de Créatures Cryptides',
-      description: 'Parcourez nos archives complètes d\'enquêtes sur les créatures cryptides. Utilisez la recherche et les filtres ci-dessous pour trouver des cas spécifiques.',
-      searchPlaceholder: 'Rechercher par nom, nom de code ou région...',
-      filters: 'FILTRES:',
-      region: 'Région:',
-      danger: 'Danger:',
-      allRegions: 'Toutes les Régions',
-      allLevels: 'Tous les Niveaux',
-      everyRegion: 'Toute Région',
-      anyDanger: 'Tout Danger',
-      filesFound: 'DOSSIERS TROUVÉS',
-      noFilesMatch: 'AUCUN DOSSIER NE CORRESPOND À VOTRE RECHERCHE',
-      tryAdjusting: 'Essayez d\'ajuster vos filtres ou termes de recherche',
-      emptyState: 'Aucun dossier trouvé. Essayez d\'ajuster votre recherche ou vos filtres.',
+      pageTitle: "Dossiers",
+      eyebrow: "Archives",
+      title: "Base de données classifiée",
+      lede: "{count} sujets. Filtrez par région ou par niveau de menace. Vérification d'autorisation en vigueur.",
+      searchLabel: "Rechercher dans les dossiers",
+      searchPlaceholder: "Sujet, nom de code, région…",
+      regionLabel: "Région",
+      dangerLabel: "Niveau de menace",
+      allRegions: "Toutes les régions",
+      allLevels: "Tous les niveaux de menace",
+      resultsCount: "{shown} / {total} dossiers trouvés",
+      noResults: "Aucun dossier ne correspond à votre recherche.",
+      noResultsHint: "Essayez un autre nom ou retirez les filtres.",
     },
-    cryptidCard: {
-      file: 'DOSSIER:',
-      region: 'RÉGION:',
-      type: 'TYPE:',
-      openFile: 'OUVRIR LE DOSSIER →',
+    card: {
+      caseFile: "Dossier",
+      location: "Lieu",
     },
-    fileDetails: {
-      caseNumber: 'NUMÉRO DE DOSSIER:',
-      alias: 'ALIAS:',
-      knownAssociates: 'ASSOCIÉS CONNUS:',
-      codename: 'NOM DE CODE:',
-      region: 'RÉGION:',
-      type: 'TYPE:',
-      dangerLevel: 'NIVEAU DE DANGER:',
-      firstSighting: 'PREMIÈRE OBSERVATION:',
-      description: 'DESCRIPTION:',
-      backToFiles: '← RETOUR AUX DOSSIERS',
-      photographicEvidence: 'PREUVE PHOTOGRAPHIQUE',
-      dossierInformation: 'INFORMATIONS DU DOSSIER',
-      location: 'LIEU',
-      status: 'STATUT',
-      investigatorCaseNotes: 'NOTES DE CAS DE L\'ENQUÊTEUR',
-      relatedFiles: 'Dossiers Connexes',
+    file: {
+      back: "← Retour aux archives",
+      dossierNo: "Dossier №",
+      clearance: "Autorisation",
+      clearanceLevel: "Niv. 5",
+      exhibit: "Preuve photographique · Pièce A",
+      photoAlt: "Photo de preuve : {name}",
+      codename: "Nom de code",
+      type: "Type",
+      region: "Région",
+      location: "Lieu",
+      firstSighting: "Première observation",
+      alias: "Alias",
+      associates: "Associés connus",
+      caseNotes: "Notes de l'enquêteur",
+      relatedTitle: "Dossiers liés",
     },
     dangerLevels: {
-      low: 'Faible',
-      medium: 'Moyen',
-      high: 'Élevé',
-      unknown: 'Inconnu',
-      label: 'DANGER:',
+      low: "Faible",
+      medium: "Moyen",
+      high: "Élevé",
+      unknown: "Inconnu",
+      label: "Niveau de danger",
     },
     statusLabels: {
-      sighted: 'Observé',
-      underInvestigation: 'Sous Enquête',
-      confirmed: 'Confirmé',
-      myth: 'Mythe',
+      underInvestigation: "Sous enquête",
+      sighted: "Observé",
+      confirmed: "Confirmé",
+      myth: "Mythe",
+    },
+    about: {
+      eyebrow: "Qui sommes-nous",
+      title: "À propos de Dragon Eye",
+      paragraphs: [
+        "Dragon Eye est une agence pour les jeunes de 8 à 13 ans. Nous fouinons en ville à la recherche d'indices pendant les heures d'école, les lundis et les mercredis.",
+        "Les réunions de stratégie ont lieu tous les lundis et mercredis matin, et sont réservées aux membres de Dragon Eye.",
+        "Nous nous retrouvons au QG de Dragon Eye, au cœur de la ville. L'adresse exacte est classifiée.",
+      ],
+    },
+    footer: {
+      copyright: "© {year} Agence Dragon Eye · Tous les dossiers sont classifiés",
+      activeCases: "{count} dossiers actifs · Mis à jour le {date}",
+    },
+    notFound: {
+      title: "Dossier introuvable",
+      message: "Ce dossier a été caviardé, égaré, ou n'a jamais existé.",
+      back: "Retour aux archives",
+    },
+    merch: {
+      pageTitle: "Dépôt de preuves",
+      eyebrow: "Dépôt de preuves de l'agence",
+      title: "Dépôt de preuves",
+      description: "Obtenez des articles officiels Dragon Eye et des objets de collection cryptides! Tous les profits soutiennent nos enquêtes en cours.",
+      filterLabel: "Filtrer les articles",
+      allItems: "Tous les articles",
+      dragonEyeAgency: "Agence Dragon Eye",
+      cryptidCollection: "Collection cryptide",
+      comingSoon: "Bientôt disponible",
+      comingSoonDescription: "Notre boutique est en construction. Revenez bientôt pour obtenir votre équipement cryptide préféré!",
+      evidenceTag: "Preuve №",
     },
     product: {
-      addToCart: 'AJOUTER AU PANIER',
-      closeModal: 'Fermer la fenêtre',
+      closePhoto: "Fermer la photo",
+      viewLarger: "Agrandir la photo : {name}",
+      photoOptions: "Choix de photo",
+      photoOption: "Photo {n}",
       tshirt: {
-        title: 'T-Shirt Dragon Eye',
-        description: 'Montrez votre fierté Dragon Eye avec notre t-shirt officiel du club. Deux styles disponibles.',
+        title: "T-Shirt Dragon Eye",
+        description: "Montrez votre fierté Dragon Eye avec notre t-shirt officiel du club. Deux styles disponibles.",
       },
       cap: {
-        title: 'Casquette Dragon Eye',
-        description: 'Restez au frais pendant la chasse aux indices avec notre casquette élégante.',
+        title: "Casquette Dragon Eye",
+        description: "Restez au frais pendant la chasse aux indices avec notre casquette élégante.",
       },
       detectiveKit: {
-        title: 'Kit de Détective Junior',
-        description: 'Tout ce dont vous avez besoin pour commencer votre parcours de détective, y compris une loupe.',
+        title: "Kit de détective junior",
+        description: "Tout ce dont vous avez besoin pour commencer votre parcours de détective, y compris une loupe.",
       },
       badge: {
-        title: 'Badge Dragon Eye',
-        description: 'Badge de membre officiel - montrez que vous faites partie du club de détectives Dragon Eye.',
+        title: "Badge Dragon Eye",
+        description: "Badge de membre officiel : montrez que vous faites partie du club de détectives Dragon Eye.",
       },
       stickerPack: {
-        title: 'Pack d\'Autocollants',
-        description: 'Décorez vos cahiers et votre équipement avec ces autocollants Dragon Eye cool.',
+        title: "Pack d'autocollants",
+        description: "Décorez vos cahiers et votre équipement avec ces autocollants Dragon Eye.",
       },
       sweatpants: {
-        title: 'Pantalon de Survêtement Dragon Eye',
-        description: 'Restez à l\'aise pendant les filatures et le travail de détective avec notre pantalon de survêtement confortable.',
+        title: "Pantalon de survêtement Dragon Eye",
+        description: "Restez à l'aise pendant les filatures et le travail de détective avec notre pantalon de survêtement confortable.",
       },
       plushies: {
-        title: 'Peluches Dragon Eye',
-        description: 'Collectionnez les trois peluches de créatures cryptides : Big Foot, Dragon et Monstre du Loch Ness. Compagnons parfaits pour vos aventures de détective.',
+        title: "Peluches Dragon Eye",
+        description: "Collectionnez les trois peluches cryptides : Big Foot, Dragon et Monstre du Loch Ness. Des compagnons parfaits pour vos aventures de détective.",
       },
     },
   },
 };
-
