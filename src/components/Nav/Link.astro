@@ -1,5 +1,5 @@
 ---
-import { getLocaleFromAstro, addLocaleToPath, getLocaleFromPathname } from '../../i18n/routing';
+import { localizePath, toLocale } from '../../i18n/utils';
 
 interface Props {
   to?: string;
@@ -8,21 +8,11 @@ interface Props {
 }
 
 const { to, href, class: className } = Astro.props;
-const currentPath = Astro.url.pathname;
-// Use pathname-based detection as primary method (more reliable)
-const currentLocale = getLocaleFromPathname(currentPath);
-const basePath = to || href || '#';
-
-// Preserve locale for internal links
-let linkHref = basePath;
-if (!basePath.startsWith('http') && !basePath.startsWith('#') && !basePath.startsWith('mailto:') && !basePath.startsWith('javascript:')) {
-  linkHref = addLocaleToPath(basePath, currentLocale);
-}
-
-const isActive = currentPath === linkHref || currentPath === `${linkHref}/` || `${currentPath}/` === linkHref;
+const target = to ?? href ?? '#';
+// Internal links stay in the current language
+const linkHref = target.startsWith('/') ? localizePath(target, toLocale(Astro.currentLocale)) : target;
 ---
 
 <a href={linkHref} class={className}>
   <slot />
 </a>
-

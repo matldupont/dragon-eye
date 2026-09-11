@@ -1,13 +1,12 @@
 ---
-import { getTranslations, getLocaleFromAstro } from '../i18n/utils';
+import { getTranslations, toLocale } from '../i18n/utils';
 
 interface Props {
   level: 'Low' | 'Medium' | 'High' | 'Unknown';
 }
 
 const { level } = Astro.props;
-const locale = getLocaleFromAstro();
-const t = getTranslations(locale);
+const t = getTranslations(toLocale(Astro.currentLocale));
 
 const colors = {
   Low: 'bg-lime-500/20 text-lime-400 border-lime-400',

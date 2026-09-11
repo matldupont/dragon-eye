@@ -1,0 +1,28 @@
+{
+  "caseNumber": "413286",
+  "codename": "BANSHEE-413286",
+  "dangerLevel": "Medium",
+  "status": "Confirmed",
+  "addedOn": "2026-01-04",
+  "image": "./photo.jpg",
+  "en": {
+    "name": "Banshee",
+    "description": "The banshee, or 'bean sídhe' in Irish, is a female spirit in Irish folklore whose mournful wail is an omen of death. Often appearing as a pale woman with long, flowing white or silver hair and red eyes from endless weeping, she's typically dressed in a grey cloak over a white dress. Banshees are known to follow specific Irish families, particularly those with 'O' or 'Mc' in their names. Their cry, described as a combination of a wail and a keening song, is said to be heard at night when a family member is about to die. Some accounts describe them washing the blood-stained clothes of those who are about to die in streams. While terrifying, the banshee is not malevolent - she merely warns of inevitable fate. Modern sightings continue to be reported across Ireland and in areas with strong Irish heritage.",
+    "alias": "Bean Sídhe, Bean Chaointe, Badhbh, The Washer at the Ford",
+    "location": "Ireland",
+    "knownAssociates": "The Dullahan, Fairy Folk, Ancient Irish Families",
+    "region": "Ireland",
+    "type": "Spirit",
+    "firstSighting": "8th century"
+  },
+  "fr": {
+    "name": "Banshee",
+    "description": "La banshee, ou 'bean sídhe' en irlandais, est un esprit féminin du folklore irlandais dont le gémissement funèbre est un présage de mort. Elle apparaît souvent sous les traits d'une femme pâle aux longs cheveux blancs ou argentés et aux yeux rougis par des pleurs incessants, généralement vêtue d'une cape grise sur une robe blanche. Les banshees suivraient certaines familles irlandaises, en particulier celles dont le nom commence par 'O' ou 'Mc'. Leur cri, mélange de gémissement et de chant de deuil, se ferait entendre la nuit lorsqu'un membre de la famille est sur le point de mourir. Certains récits les décrivent lavant dans les ruisseaux les vêtements tachés de sang de ceux qui vont mourir. Bien que terrifiante, la banshee n'est pas malveillante : elle avertit simplement d'un destin inévitable. Des observations modernes continuent d'être signalées partout en Irlande et dans les régions de forte tradition irlandaise.",
+    "alias": "Bean Sídhe, Bean Chaointe, Badhbh, La Laveuse au Gué",
+    "location": "Irlande",
+    "knownAssociates": "Le Dullahan, le Peuple des Fées, les anciennes familles irlandaises",
+    "region": "Irlande",
+    "type": "Esprit",
+    "firstSighting": "VIIIe siècle"
+  }
+}

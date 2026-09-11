@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { getTranslations, getLocaleFromAstro } from '../i18n/utils';
+import { getTranslations, toLocale } from '../i18n/utils';
 
 interface ImageOption {
   src: any;
@@ -8,18 +8,7 @@ interface ImageOption {
 }
 
 const { emoji, title, description, price, imageOptions } = Astro.props;
-// Get locale from URL pathname - more reliable than getLocaleFromAstro in some cases
-let locale: 'en' | 'fr' = 'en';
-try {
-  // @ts-ignore
-  if (typeof Astro !== 'undefined' && Astro.url) {
-    const pathname = Astro.url.pathname;
-    locale = pathname.startsWith('/fr/') || pathname === '/fr' || pathname === '/fr/' ? 'fr' : 'en';
-  }
-} catch {
-  locale = 'en';
-}
-const t = getTranslations(locale);
+const t = getTranslations(toLocale(Astro.currentLocale));
 const hasImageOptions = imageOptions && imageOptions.length > 0;
 
 // Generate a unique ID for this product instance

@@ -1,42 +1,21 @@
 ---
-import FileDetails from "../../components/FileDetails.astro";
-import Layout from "../../layouts/Layout.astro";
-import { cryptidFiles } from "../../data/cryptidFiles";
-import { addLocaleToPath } from "../../i18n/routing";
-import { getLocaleFromAstro } from "../../i18n/routing";
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import FileDetails from '../../components/FileDetails.astro';
+import type { CryptidEntry } from '../../lib/cryptids';
 
 export async function getStaticPaths() {
-  const locales = ['en', 'fr'];
-  const paths = [];
-  
-  for (const locale of locales) {
-    for (const file of cryptidFiles) {
-      paths.push({
-        params: {
-          slug: file.slug,
-        },
-        props: {
-          locale,
-        },
-      });
-    }
-  }
-  
-  return paths;
+  const entries = await getCollection('cryptids');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
 }
 
-const { params } = Astro;
-const locale = getLocaleFromAstro();
-
-const cryptid = cryptidFiles.find((f) => f.slug === params.slug);
-
-if (!cryptid) {
-  const filesPath = locale === 'fr' ? '/fr/files' : '/files';
-  return Astro.redirect(filesPath, 404);
+interface Props {
+  entry: CryptidEntry;
 }
 
+const { entry } = Astro.props;
 ---
+
 <Layout>
-  <FileDetails cryptid={cryptid} />
+  <FileDetails entry={entry} />
 </Layout>
-  

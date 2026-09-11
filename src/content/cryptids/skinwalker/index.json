@@ -1,0 +1,28 @@
+{
+  "caseNumber": "714843",
+  "codename": "SKINWALK-714843",
+  "dangerLevel": "High",
+  "status": "Confirmed",
+  "addedOn": "2026-01-07",
+  "image": "./photo.png",
+  "en": {
+    "name": "Skinwalker",
+    "description": "Skinwalkers are malevolent shapeshifters from Navajo legend, known as yee naaldlooshii, who gain their powers by corrupting sacred medicine practices or committing grave taboos, allowing them to transform into animals like coyotes, wolves, or bears. They possess humans by eye contact, control nocturnal creatures, and summon spirits of the dead, embodying pure evil that Navajo people avoid naming to prevent summoning them. Nearly impossible to kill except with weapons dipped in white ash, they lurk in the American Southwest, blending animalistic traits even in human form.",
+    "alias": "Yee naaldlooshii",
+    "location": "Skinwalker Ranch, northeast Utah",
+    "knownAssociates": "Ute tribe (cursed by Navajo skinwalkers); associated with Pueblo, Apache, Hopi legends",
+    "region": "Four Corners region: Navajo Reservation areas in northeast Arizona, northwest New Mexico, southeast Utah, southwest Colorado; notably Skinwalker Ranch, Utah.",
+    "type": "Shapeshifting witch",
+    "firstSighting": "Pre-colonial Navajo oral traditions; modern publicity from 1996 Utah family encounters at Skinwalker Ranch."
+  },
+  "fr": {
+    "name": "Skinwalker",
+    "description": "Les skinwalkers sont des métamorphes malveillants de la légende navajo, appelés yee naaldlooshii. Ils obtiendraient leurs pouvoirs en corrompant des pratiques médicinales sacrées ou en brisant de graves tabous, ce qui leur permettrait de se transformer en animaux comme le coyote, le loup ou l'ours. On raconte qu'ils peuvent posséder les humains d'un simple regard, contrôler les créatures nocturnes et invoquer les esprits des morts. Le peuple navajo évite même de prononcer leur nom, de peur de les attirer. Presque impossibles à vaincre, sauf avec des armes trempées dans de la cendre blanche, ils rôdent dans le sud-ouest américain et gardent des traits animaux même sous forme humaine.",
+    "alias": "Yee naaldlooshii",
+    "location": "Skinwalker Ranch, nord-est de l'Utah",
+    "knownAssociates": "Tribu ute (maudite par des skinwalkers navajos) ; associés aux légendes pueblo, apache et hopi",
+    "region": "Région des Four Corners : zones de la réserve navajo au nord-est de l'Arizona, au nord-ouest du Nouveau-Mexique, au sud-est de l'Utah et au sud-ouest du Colorado ; notamment le Skinwalker Ranch, en Utah.",
+    "type": "Sorcier métamorphe",
+    "firstSighting": "Traditions orales navajos précoloniales ; médiatisation moderne après les rencontres d'une famille de l'Utah au Skinwalker Ranch en 1996."
+  }
+}

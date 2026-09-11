@@ -1,0 +1,28 @@
+{
+  "caseNumber": "483165",
+  "codename": "BIGFOOT-483165",
+  "dangerLevel": "Low",
+  "status": "Sighted",
+  "addedOn": "2026-01-04",
+  "image": "./photo.jpg",
+  "en": {
+    "name": "Bigfoot",
+    "description": "Known for his big feet, excellent strength and incredible hiding skills. He is a master of the woods. He spends the day eating and hiding from humans. He is just very shy.",
+    "alias": "Sasquatch",
+    "location": "Pacific Northwest, USA",
+    "knownAssociates": "Yeti, Jacko, Skunk Ape",
+    "region": "Pacific Northwest, USA",
+    "type": "Humanoid",
+    "firstSighting": "1920s"
+  },
+  "fr": {
+    "name": "Bigfoot",
+    "description": "Connu pour ses grands pieds, sa force exceptionnelle et ses incroyables talents de camouflage. C'est un maître des bois. Il passe ses journées à manger et à se cacher des humains. Il est tout simplement très timide.",
+    "alias": "Sasquatch",
+    "location": "Nord-Ouest du Pacifique, États-Unis",
+    "knownAssociates": "Yéti, Jacko, Skunk Ape",
+    "region": "Nord-Ouest du Pacifique, États-Unis",
+    "type": "Humanoïde",
+    "firstSighting": "Années 1920"
+  }
+}
