@@ -1,0 +1,28 @@
+{
+  "caseNumber": "932574",
+  "codename": "GHOST-932574",
+  "dangerLevel": "Low",
+  "status": "Myth",
+  "addedOn": "2026-01-04",
+  "image": "./photo.jpg",
+  "en": {
+    "name": "Ghost",
+    "description": "Most of these ghosts are harmless. They just died with unfinished business. You are safe as long as that business isn't revenge. They're only visible under black light.",
+    "alias": "Spirit, Specter, Phantom, Soul, Ghoul, Poltergeist",
+    "location": "Everywhere",
+    "knownAssociates": "Grim Reaper, other dearly departed",
+    "region": "Worldwide",
+    "type": "Spirit",
+    "firstSighting": "Ancient times"
+  },
+  "fr": {
+    "name": "Fantôme",
+    "description": "La plupart de ces fantômes sont inoffensifs. Ils sont simplement morts avec des affaires inachevées. Vous êtes en sécurité tant que cette affaire n'est pas une vengeance. Ils ne sont visibles qu'à la lumière noire.",
+    "alias": "Esprit, Spectre, Revenant, Âme, Goule, Poltergeist",
+    "location": "Partout",
+    "knownAssociates": "La Faucheuse, autres chers disparus",
+    "region": "Monde entier",
+    "type": "Esprit",
+    "firstSighting": "Temps anciens"
+  }
+}

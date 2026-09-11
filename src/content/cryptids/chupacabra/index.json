@@ -1,0 +1,28 @@
+{
+  "caseNumber": "951995",
+  "codename": "CHUPACABRA-951995",
+  "dangerLevel": "High",
+  "status": "Under Investigation",
+  "addedOn": "2026-01-04",
+  "image": "./photo.jpg",
+  "en": {
+    "name": "Chupacabra",
+    "description": "First reported in Puerto Rico in 1995, the Chupacabra (Spanish for 'goat-sucker') is known for attacking and drinking the blood of livestock. Described as a reptilian creature with leathery skin, spikes down its back, and glowing red eyes, sightings have spread throughout Latin America and the southern United States.",
+    "alias": "Goat Sucker, Blood Drainer",
+    "location": "Puerto Rico, Mexico, Southern United States",
+    "knownAssociates": "Livestock Attacks, Farmers, Rural Communities",
+    "region": "Latin America, Southern USA",
+    "type": "Reptilian",
+    "firstSighting": "March 1995"
+  },
+  "fr": {
+    "name": "Chupacabra",
+    "description": "Signalé pour la première fois à Porto Rico en 1995, le Chupacabra (« suceur de chèvres » en espagnol) est connu pour attaquer le bétail et boire son sang. On le décrit comme une créature reptilienne à la peau coriace, avec des épines le long du dos et des yeux rouges lumineux. Les observations se sont répandues dans toute l'Amérique latine et le sud des États-Unis.",
+    "alias": "Suceur de chèvres, Buveur de sang",
+    "location": "Porto Rico, Mexique, sud des États-Unis",
+    "knownAssociates": "Attaques de bétail, agriculteurs, communautés rurales",
+    "region": "Amérique latine, sud des États-Unis",
+    "type": "Reptilien",
+    "firstSighting": "Mars 1995"
+  }
+}

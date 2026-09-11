@@ -1,124 +1,80 @@
 ---
-import type { CryptidFile } from '../data/cryptidFiles';
 import { Image } from 'astro:assets';
 import Link from './Nav/Link.astro';
-import StatusBadge from './StatusBadge.astro';
 import DangerBadge from './DangerBadge.astro';
-import { getTranslations, getLocaleFromAstro } from '../i18n/utils';
-import { getTranslatedCryptidFile } from '../data/cryptidFilesTranslations';
+import type { LocalizedCryptid } from '../lib/cryptids';
+import { getTranslations, toLocale } from '../i18n/utils';
 
 interface Props {
-  cryptid: CryptidFile & {
-    id?: string;
-    codename?: string;
-    status?: 'Sighted' | 'Under Investigation' | 'Confirmed' | 'Myth';
-    dangerLevel?: 'Low' | 'Medium' | 'High' | 'Unknown';
-    region?: string;
-    type?: string;
-  };
+  cryptid: LocalizedCryptid;
   variant?: 'default' | 'compact';
 }
 
-type ExtendedCryptidCard = CryptidFile & {
-  id?: string;
-  codename?: string;
-  status?: 'Sighted' | 'Under Investigation' | 'Confirmed' | 'Myth';
-  dangerLevel?: 'Low' | 'Medium' | 'High' | 'Unknown';
-  region?: string;
-  type?: string;
-};
-
-const { cryptid: originalCryptid, variant = 'default' } = Astro.props as { cryptid: ExtendedCryptidCard; variant?: 'default' | 'compact' };
-// Get locale from URL pathname - more reliable than getLocaleFromAstro in some cases
-let locale: 'en' | 'fr' = 'en';
-try {
-  // @ts-ignore
-  if (typeof Astro !== 'undefined' && Astro.url) {
-    const pathname = Astro.url.pathname;
-    locale = pathname.startsWith('/fr/') || pathname === '/fr' || pathname === '/fr/' ? 'fr' : 'en';
-  }
-} catch {
-  locale = 'en';
-}
-const t = getTranslations(locale);
-// Get translated version of the cryptid
-const cryptid = getTranslatedCryptidFile(originalCryptid, locale) as ExtendedCryptidCard;
-// Preserve extended properties
-if ('status' in originalCryptid) cryptid.status = originalCryptid.status;
-if ('dangerLevel' in originalCryptid) cryptid.dangerLevel = originalCryptid.dangerLevel;
-const fileUrl = `/files/${cryptid.slug}`;
+const { cryptid, variant = 'default' } = Astro.props;
+const t = getTranslations(toLocale(Astro.currentLocale));
+const fileUrl = `/files/${cryptid.id}/`;
+const place = cryptid.location ?? cryptid.region;
 ---
 
 {variant === 'compact' ? (
-  <Link 
+  <Link
     to={fileUrl}
     class="block bg-purple-950/30 border-2 border-purple-800/50 p-3 hover:border-lime-400 transition-all hover:shadow-[0_0_20px_rgba(163,230,53,0.4)] group"
   >
     <div class="flex gap-3">
       <div class="w-20 h-20 bg-black/50 border border-purple-700 flex-shrink-0 overflow-hidden">
-        <Image 
-          src={cryptid.image} 
-          alt={cryptid.imageAlt}
+        <Image
+          src={cryptid.image}
+          alt={cryptid.name}
           class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
         />
       </div>
       <div class="flex-1 min-w-0">
         <div class="font-['Courier_New'] text-lime-400 mb-1">
-          {cryptid.codename || cryptid.caseNumber}
+          {cryptid.codename}
         </div>
         <h3 class="font-medium truncate mb-1">{cryptid.name}</h3>
         <div class="text-purple-300">
-          {cryptid.address || cryptid.region || 'Unknown'}
+          {place}
         </div>
       </div>
     </div>
   </Link>
 ) : (
-  <Link 
+  <Link
     to={fileUrl}
     class="block bg-purple-950/30 border-2 border-purple-800/50 hover:border-lime-400 transition-all hover:shadow-[0_0_20px_rgba(163,230,53,0.4)] group"
   >
     {/* Mugshot Area */}
     <div class="relative aspect-[4/3] bg-black/50 border-b-2 border-purple-700 overflow-hidden">
-      <Image 
-        src={cryptid.image} 
-        alt={cryptid.imageAlt}
+      <Image
+        src={cryptid.image}
+        alt={cryptid.name}
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
       />
-      {cryptid.status && (
-        <div class="absolute top-2 left-2">
-          <StatusBadge status={cryptid.status} />
-        </div>
-      )}
       <div class="absolute bottom-0 left-0 right-0 bg-black/80 p-2 font-['Courier_New'] text-lime-400">
-        {t.cryptidCard.file} {cryptid.codename || cryptid.caseNumber}
+        {t.cryptidCard.file} {cryptid.codename}
       </div>
     </div>
 
     {/* Info Area */}
     <div class="p-4">
       <h3 class="font-medium mb-2">{cryptid.name}</h3>
-      
+
       <div class="space-y-2 text-purple-300">
-        {(cryptid.address || cryptid.region) && (
-          <div class="flex items-center gap-2">
-            <span class="text-lime-400 font-['Courier_New']">{t.cryptidCard.region}</span>
-            <span>{cryptid.address || cryptid.region}</span>
-          </div>
-        )}
-        {cryptid.type && (
-          <div class="flex items-center gap-2">
-            <span class="text-lime-400 font-['Courier_New']">{t.cryptidCard.type}</span>
-            <span>{cryptid.type}</span>
-          </div>
-        )}
+        <div class="flex items-center gap-2">
+          <span class="text-lime-400 font-['Courier_New']">{t.cryptidCard.region}</span>
+          <span>{place}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-lime-400 font-['Courier_New']">{t.cryptidCard.type}</span>
+          <span>{cryptid.type}</span>
+        </div>
       </div>
 
-      {cryptid.dangerLevel && (
-        <div class="mt-3 pt-3 border-t border-purple-800">
-          <DangerBadge level={cryptid.dangerLevel} />
-        </div>
-      )}
+      <div class="mt-3 pt-3 border-t border-purple-800">
+        <DangerBadge level={cryptid.dangerLevel} />
+      </div>
 
       <div class="mt-4 w-full px-4 py-2 bg-lime-400 text-black hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-all font-['Courier_New'] font-medium text-center">
         {t.cryptidCard.openFile}

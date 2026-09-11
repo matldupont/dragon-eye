@@ -1,69 +1,35 @@
 ---
 import { Image } from "astro:assets";
-import { ArrowLeft, MapPin, Calendar, TriangleAlert } from "@lucide/astro";
-import type { CryptidFile } from "../data/cryptidFiles";
-import { cryptidFiles } from "../data/cryptidFiles";
-import { getTranslatedCryptidFile } from "../data/cryptidFilesTranslations";
+import { Calendar, MapPin } from "@lucide/astro";
 import DangerBadge from "./DangerBadge.astro";
 import StatusBadge from "./StatusBadge.astro";
 import CryptidCard from "./CryptidCard.astro";
 import Link from "./Nav/Link.astro";
-import { getTranslations, getLocaleFromAstro } from '../i18n/utils';
+import { getCryptids, localizeCryptid, type CryptidEntry } from "../lib/cryptids";
+import { getTranslations, toLocale } from "../i18n/utils";
 
 interface Props {
-  cryptid: CryptidFile & {
-    status?: 'Sighted' | 'Under Investigation' | 'Confirmed' | 'Myth';
-    caseNotes?: string[];
-    location?: string;
-  };
+  entry: CryptidEntry;
 }
 
-// Type guard to check if cryptid has extended properties
-type ExtendedCryptid = CryptidFile & {
-  status?: 'Sighted' | 'Under Investigation' | 'Confirmed' | 'Myth';
-  caseNotes?: string[];
-  location?: string;
-};
-
-const { cryptid: originalCryptid } = Astro.props as { cryptid: ExtendedCryptid };
-// Get locale from URL pathname - more reliable than getLocaleFromAstro in some cases
-let locale: 'en' | 'fr' = 'en';
-try {
-  // @ts-ignore
-  if (typeof Astro !== 'undefined' && Astro.url) {
-    const pathname = Astro.url.pathname;
-    locale = pathname.startsWith('/fr/') || pathname === '/fr' || pathname === '/fr/' ? 'fr' : 'en';
-  }
-} catch {
-  locale = 'en';
-}
+const locale = toLocale(Astro.currentLocale);
 const t = getTranslations(locale);
-// Get translated version of the cryptid
-const cryptid = getTranslatedCryptidFile(originalCryptid, locale) as ExtendedCryptid;
-// Preserve extended properties
-if ('status' in originalCryptid) cryptid.status = originalCryptid.status;
-if ('caseNotes' in originalCryptid) cryptid.caseNotes = originalCryptid.caseNotes;
-if ('location' in originalCryptid) cryptid.location = originalCryptid.location;
+const cryptid = localizeCryptid(Astro.props.entry, locale);
+const aliases = cryptid.alias ? cryptid.alias.split(",").map((a) => a.trim()) : [];
 
-// Handle aliases - convert string to array if needed
-const aliases = cryptid.alias ? cryptid.alias.split(',').map(a => a.trim()) : [];
-
-// Get related files (same region or type, excluding current)
-// Note: We compare using original data, but display translated versions
-const relatedFiles = cryptidFiles
-  .filter(c => c.slug !== originalCryptid.slug && (c.region === originalCryptid.region || c.type === originalCryptid.type))
-  .slice(0, 3)
-  .map(c => getTranslatedCryptidFile(c, locale));
+// Related files: same region or type, excluding the current one
+const relatedFiles = (await getCryptids(locale))
+  .filter((c) => c.id !== cryptid.id && (c.region === cryptid.region || c.type === cryptid.type))
+  .slice(0, 3);
 ---
 
 <div class="min-h-screen bg-[#0f0f0f] py-8">
   <div class="container mx-auto px-4">
     {/* Back Button */}
     <Link
-      to="/files"
+      to="/files/"
       class="flex items-center gap-2 px-4 py-2 border border-lime-400 text-lime-400 hover:bg-lime-400 hover:text-black hover:shadow-[0_0_20px_rgba(163,230,53,0.4)] transition-all font-['Courier_New'] mb-8 inline-block w-fit"
     >
-
       {t.fileDetails.backToFiles}
     </Link>
 
@@ -79,13 +45,13 @@ const relatedFiles = cryptidFiles
             <h1 class="mb-2">{cryptid.name}</h1>
             {aliases.length > 0 && (
               <div class="text-purple-300">
-                <span class="text-lime-400 font-['Courier_New']">{t.fileDetails.alias}</span>{' '}
-                {aliases.join(', ')}
+                <span class="text-lime-400 font-['Courier_New']">{t.fileDetails.alias}</span>{" "}
+                {aliases.join(", ")}
               </div>
             )}
           </div>
           <div class="flex flex-wrap gap-2">
-            {cryptid.status && <StatusBadge status={cryptid.status} />}
+            <StatusBadge status={cryptid.status} />
             <DangerBadge level={cryptid.dangerLevel} />
           </div>
         </div>
@@ -97,9 +63,9 @@ const relatedFiles = cryptidFiles
         <div class="bg-purple-950/30 border-2 border-purple-800 p-4">
           <div class="bg-black/50 border border-purple-700 mb-4">
             <div class="aspect-square relative overflow-hidden">
-              <Image 
-                src={cryptid.image} 
-                alt={cryptid.imageAlt}
+              <Image
+                src={cryptid.image}
+                alt={cryptid.name}
                 class="w-full h-full object-cover"
               />
             </div>
@@ -115,7 +81,7 @@ const relatedFiles = cryptidFiles
             <h3 class="text-lime-400 font-['Courier_New'] mb-4 border-b border-purple-700 pb-2">
               {t.fileDetails.dossierInformation}
             </h3>
-            
+
             <div class="space-y-4">
               <div>
                 <div class="flex items-center gap-2 text-lime-400 font-['Courier_New'] mb-1">
@@ -130,7 +96,7 @@ const relatedFiles = cryptidFiles
                   <MapPin class="w-4 h-4" />
                   {t.fileDetails.location}
                 </div>
-                <div class="text-purple-100 pl-6">{cryptid.location || cryptid.address}</div>
+                <div class="text-purple-100 pl-6">{cryptid.location ?? cryptid.region}</div>
               </div>
 
               <div>
@@ -143,14 +109,12 @@ const relatedFiles = cryptidFiles
                 <div class="text-purple-100 pl-6">{cryptid.region}</div>
               </div>
 
-              {cryptid.status && (
-                <div>
-                  <div class="text-lime-400 font-['Courier_New'] mb-1">{t.fileDetails.status}</div>
-                  <div class="pl-6">
-                    <StatusBadge status={cryptid.status} />
-                  </div>
+              <div>
+                <div class="text-lime-400 font-['Courier_New'] mb-1">{t.fileDetails.status}</div>
+                <div class="pl-6">
+                  <StatusBadge status={cryptid.status} />
                 </div>
-              )}
+              </div>
 
               {cryptid.knownAssociates && (
                 <div>
@@ -173,32 +137,6 @@ const relatedFiles = cryptidFiles
         </div>
       </div>
 
-      {/* Case Notes Section */}
-      {cryptid.caseNotes && cryptid.caseNotes.length > 0 && (
-        <div class="bg-yellow-400/10 border-2 border-yellow-400 p-6 mb-8">
-          <div class="flex items-center gap-2 mb-4">
-            <TriangleAlert class="w-6 h-6 text-yellow-400" />
-            <h3 class="text-yellow-400 font-['Courier_New']">
-              {t.fileDetails.investigatorCaseNotes}
-            </h3>
-          </div>
-          <div class="space-y-3">
-            {cryptid.caseNotes?.map((note: string, index: number) => (
-              <div 
-                class="bg-black/30 border-l-4 border-yellow-400 p-4 text-purple-100"
-              >
-                <div class="flex gap-3">
-                  <span class="text-yellow-400 font-['Courier_New'] flex-shrink-0">
-                    [{index + 1}]
-                  </span>
-                  <span>{note}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* Related Files */}
       {relatedFiles.length > 0 && (
         <div>
@@ -206,7 +144,7 @@ const relatedFiles = cryptidFiles
             {t.fileDetails.relatedFiles}
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {relatedFiles.map(related => (
+            {relatedFiles.map((related) => (
               <CryptidCard cryptid={related} variant="compact" />
             ))}
           </div>

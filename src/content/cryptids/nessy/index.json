@@ -1,0 +1,28 @@
+{
+  "caseNumber": "753221",
+  "codename": "NESSY-753221",
+  "dangerLevel": "Medium",
+  "status": "Under Investigation",
+  "addedOn": "2026-01-04",
+  "image": "./photo.jpg",
+  "en": {
+    "name": "Nessy",
+    "description": "The cryptid of the Scottish lake. Known for their sharp teeth and snake-like appearance. It does not like to be disturbed.",
+    "alias": "Loch Ness Monster, Nessie",
+    "location": "Loch Ness, Scotland",
+    "knownAssociates": "Ogopogo",
+    "region": "Scotland",
+    "type": "Aquatic",
+    "firstSighting": "565 AD"
+  },
+  "fr": {
+    "name": "Nessy",
+    "description": "La créature cryptide du lac écossais. Connue pour ses dents acérées et son allure de serpent. Elle n'aime pas être dérangée.",
+    "alias": "Monstre du Loch Ness, Nessie",
+    "location": "Loch Ness, Écosse",
+    "knownAssociates": "Ogopogo",
+    "region": "Écosse",
+    "type": "Aquatique",
+    "firstSighting": "565 apr. J.-C."
+  }
+}

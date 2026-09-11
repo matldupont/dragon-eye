@@ -1,41 +1,23 @@
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import { translations, type Locale, type Translations } from './translations';
-import { getLocaleFromPathname, getLocaleFromAstro } from './routing';
 
-// Re-export getLocaleFromAstro for convenience
-export { getLocaleFromAstro };
+export const locales: Locale[] = ['en', 'fr'];
 
-/**
- * Get translations for the current locale
- */
-export function getTranslations(locale?: Locale): Translations {
-  const currentLocale = locale || getLocaleFromPathname();
-  return translations[currentLocale] || translations.en;
+/** Narrow `Astro.currentLocale` (a plain string) to a supported locale. */
+export function toLocale(value: string | undefined): Locale {
+  return value === 'fr' ? 'fr' : 'en';
 }
 
-/**
- * Get a nested translation value by path
- * Example: getTranslation('nav.files') => 'Files' or 'Dossiers'
- */
-export function getTranslation(path: string, locale?: Locale): string {
-  const t = getTranslations(locale);
-  const keys = path.split('.');
-  let value: any = t;
-  
-  for (const key of keys) {
-    if (value && typeof value === 'object' && key in value) {
-      value = value[key];
-    } else {
-      return path; // Return path if translation not found
-    }
-  }
-  
-  return typeof value === 'string' ? value : path;
+export function getTranslations(locale: Locale): Translations {
+  return translations[locale];
 }
 
-/**
- * Shortcut function for getTranslation
- */
-export function t(path: string, locale?: Locale): string {
-  return getTranslation(path, locale);
+/** Drop the locale prefix: "/fr/files/bigfoot/" → "/files/bigfoot/". */
+export function stripLocale(pathname: string): string {
+  return pathname.replace(/^\/fr(?=\/|$)/, '') || '/';
 }
 
+/** The same page in another locale: localizePath("/files/", "fr") → "/fr/files/". */
+export function localizePath(pathname: string, locale: Locale): string {
+  return getRelativeLocaleUrl(locale, stripLocale(pathname).replace(/^\//, ''));
+}
