@@ -18,7 +18,7 @@
   --de-ink-soft: #5a4d35;
 
   /* Accents — stamp red darkened from #b83222 for AA text contrast */
-  --de-accent: #a82c1e;
+  --de-accent: #a0281b;
   --de-accent-2: #1a3c2e;
   --de-danger: #8a1a0f;
   --de-caution: #7a4e0e; /* Medium danger: the prototype's manila was unreadable as text */
@@ -448,6 +448,11 @@
 
 .de-folder-caption .de-mono-label {
   color: var(--de-ink);
+}
+
+/* Danger colors are too low-contrast on manila, so the pill sits on paper */
+.de-folder .de-danger-pill {
+  background: var(--de-paper);
 }
 
 .de-folder-name {
