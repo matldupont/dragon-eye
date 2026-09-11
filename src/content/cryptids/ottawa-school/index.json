@@ -4,7 +4,9 @@
   "dangerLevel": "Unknown",
   "status": "Under Investigation",
   "addedOn": "2026-01-04",
-  "image": "./photo.png",
+  "image": "./photo.jpg",
+  "photoPrompt": "An empty old school hallway with no people, figures or creatures anywhere in view: a small wooden door under the staircase stands slightly open onto darkness, an old classroom telephone on a plain bare wall gives off an eerie yellow glow, and the leaves of a potted plant form only the faint suggestion of a watching face.",
+  "photoSubject": "place",
   "en": {
     "name": "Unknown",
     "description": "In Ottawa, there's a little school that's rumored to be haunted. Many people have seen strange things there. Near the girls' washroom, situated under the stairs, you might find something weird: a small door. At times, shrieking, creaking and footsteps can be heard from within. Upon further inspection, only paint buckets and pipes can be found. When the kids are at recess and the teachers are taking a break, something happens to the class phones. The screens begin to flash yellow warning signs. If you check the plant box, you will see a face. This sight can induce headaches in some people, but not all.",
