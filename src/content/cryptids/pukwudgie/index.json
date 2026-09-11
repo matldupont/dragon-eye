@@ -4,7 +4,8 @@
   "dangerLevel": "Medium",
   "status": "Sighted",
   "addedOn": "2026-01-07",
-  "image": "./photo.png",
+  "image": "./photo.jpg",
+  "photoPrompt": "A Pukwudgie, a small grey-skinned forest trickster about two feet tall with big ears, a large nose and porcupine-like quills down its back, peeking out from behind a mossy log in a northeastern forest.",
   "en": {
     "name": "Pukwudgie",
     "description": "The Pukwudgie is a diminutive humanoid cryptid, standing 2-3 feet tall, with gray skin, large ears and noses, and porcupine-like quills running down its back. Originating from Native American folklore, particularly the Wampanoag and Algonquian tribes, it is known as a trickster spirit of the forest that can shapeshift, turn invisible, and wield magic to disorient or harm those who disrespect it. Once harmonious with humans, it turned hostile due to betrayal or jealousy, now luring victims into danger or attacking with arrows and spears.",

@@ -4,7 +4,8 @@
   "dangerLevel": "Medium",
   "status": "Sighted",
   "addedOn": "2026-01-06",
-  "image": "./photo.png",
+  "image": "./photo.jpg",
+  "photoPrompt": "The Melon Heads: small figures in old worn shirts with oversized round bald heads and wide curious eyes, peeking out from between the trees of a dense Ohio forest.",
   "en": {
     "name": "Melon Heads",
     "description": "The Melon Heads are small, humanoid creatures with grotesquely enlarged, bulbous heads resembling melons, said to roam dense woods seeking human contact. Legend claims a mad doctor in the forest experimented on children from a mental hospital, causing their heads to swell unnaturally through horrific procedures. One night, the children revolted, burned down the doctor's house, and now wander as feral beings with sharp teeth and pale skin.",

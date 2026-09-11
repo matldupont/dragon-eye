@@ -4,7 +4,8 @@
   "dangerLevel": "Unknown",
   "status": "Myth",
   "addedOn": "2026-01-06",
-  "image": "./photo.png",
+  "image": "./photo.jpg",
+  "photoPrompt": "A unicorn: an elegant white horse-like creature with a single long spiral horn on its forehead and a flowing mane, standing in a misty meadow at the edge of an ancient forest.",
   "en": {
     "name": "Unicorn",
     "description": "A legendary equine creature characterized by a single spiraling horn projecting from its forehead, though historical accounts and skeletal evidence suggest the animal may have possessed two backward-pointing horns similar to a giraffe. Unicorn sightings span multiple continents and centuries, with descriptions varying from purely mythical to potentially based on real but misidentified animals.",

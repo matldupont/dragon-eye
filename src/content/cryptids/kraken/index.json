@@ -4,7 +4,8 @@
   "dangerLevel": "High",
   "status": "Confirmed",
   "addedOn": "2026-01-07",
-  "image": "./photo.png",
+  "image": "./photo.jpg",
+  "photoPrompt": "The Kraken, a colossal octopus-like sea monster with huge curling tentacles rising out of dark stormy waves around an old wooden sailing ship.",
   "en": {
     "name": "Kraken",
     "description": "The Kraken is a colossal cephalopod-like sea monster with tentacles capable of ensnaring and sinking entire ships, often described as island-sized with eyes as large as dinner plates. It lurks in the deep ocean, creating massive whirlpools by diving and luring prey with fish-attracting scents. Sailors report it dragging vessels and crews to watery depths, embodying the terror of the unknown seas.",

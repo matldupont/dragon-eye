@@ -4,7 +4,8 @@
   "dangerLevel": "High",
   "status": "Confirmed",
   "addedOn": "2026-01-07",
-  "image": "./photo.png",
+  "image": "./photo.jpg",
+  "photoPrompt": "A skinwalker from Navajo legend: a shadowy furry coyote-like shapeshifter standing upright with glowing eyes on a moonlit desert mesa with red rock formations, no feathers, beads or jewelry.",
   "en": {
     "name": "Skinwalker",
     "description": "Skinwalkers are malevolent shapeshifters from Navajo legend, known as yee naaldlooshii, who gain their powers by corrupting sacred medicine practices or committing grave taboos, allowing them to transform into animals like coyotes, wolves, or bears. They possess humans by eye contact, control nocturnal creatures, and summon spirits of the dead, embodying pure evil that Navajo people avoid naming to prevent summoning them. Nearly impossible to kill except with weapons dipped in white ash, they lurk in the American Southwest, blending animalistic traits even in human form.",

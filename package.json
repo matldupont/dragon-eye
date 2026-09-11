@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "deploy": "astro build && wrangler deploy"
+    "deploy": "astro build && wrangler deploy",
+    "photo": "node scripts/generate-cryptid-photo.mjs"
   },
   "dependencies": {
     "@lucide/astro": "^1.44.0",

@@ -4,7 +4,8 @@
   "dangerLevel": "Medium",
   "status": "Under Investigation",
   "addedOn": "2026-01-07",
-  "image": "./photo.png",
+  "image": "./photo.jpg",
+  "photoPrompt": "The Lavalisk, a long serpent-like reptile with glowing molten-orange scales and wisps of steam rising from vents along its neck, slithering between steaming geysers in Yellowstone.",
   "en": {
     "name": "Lavalisk",
     "description": "The Lavalisk is a serpentine reptile with molten orange scales that glow faintly in darkness, capable of exhaling superheated steam from gill-like vents along its neck. Sightings describe it slithering through geothermal vents and abandoned mines, leaving trails of scorched earth and sulfurous fumes. Locals believe it feeds on mineral deposits, growing larger with each volcanic eruption.",

@@ -37,6 +37,10 @@ const cryptids = defineCollection({
       // The most recently added cryptid is the Cryptid of the Month.
       addedOn: z.coerce.date(),
       image: image(),
+      // Scene description (English) used by scripts/generate-cryptid-photo.mjs
+      photoPrompt: text.optional(),
+      // "place" for files with no creature in frame: the photo uses paper-only style references
+      photoSubject: z.enum(['creature', 'place']).optional(),
       en: cryptidText,
       fr: cryptidText,
     }),
