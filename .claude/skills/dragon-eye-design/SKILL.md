@@ -1,6 +1,6 @@
 ---
 name: dragon-eye-design
-description: Use this skill to generate well-branded interfaces and assets for Dragon Eye, either for production or throwaway prototypes/mocks/etc. Contains essential design guidelines, colors, type, fonts, assets, and UI kit components for prototyping. Supports the Field Journal visual theme (handwritten notebook, polaroids, washi tape, scrapbook).
+description: Use this skill to generate well-branded interfaces and assets for Dragon Eye, either for production or throwaway prototypes/mocks/etc. Contains essential design guidelines, colors, type, fonts, assets, and UI kit components for prototyping. Uses the single Dossier / Top Secret visual theme (manila folders, rubber stamps, typewriter type on aged paper).
 user-invocable: true
 ---
 

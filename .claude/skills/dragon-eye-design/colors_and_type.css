@@ -1,40 +1,41 @@
 /* ============================================
    Dragon Eye Design System — Colors & Typography
    ============================================
-   Single theme: Field Journal (investigator notebook)
+   Single theme: Dossier / Top Secret (manila dossier)
+   Tokens live on :root — there is no theme switch.
    ============================================ */
 
 /* ---------- GOOGLE FONTS ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Gloock&family=Caveat:wght@400;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;500;700&display=swap');
 
 /* ============================================
-   FIELD JOURNAL TOKENS
+   DOSSIER TOKENS
    ============================================ */
 :root {
   /* Surfaces */
-  --de-paper:   #f3ead6;
-  --de-paper-2: #e8dcb8;
-  --de-paper-3: #d8c996;
+  --de-paper:   #e8dfc4;
+  --de-paper-2: #d9cda9;
+  --de-paper-3: #c9bb8e;
 
   /* Ink */
-  --de-ink:      #1d2e3a;
-  --de-ink-soft: #486274;
+  --de-ink:      #2a2620;
+  --de-ink-soft: #5a4d35;   /* prototype #6b5d42 — too little contrast for small text on paper-2 */
 
   /* Accents */
-  --de-accent:   #c94a2a;   /* terra cotta */
-  --de-accent-2: #2f5c3a;   /* field green */
-  --de-danger:   #a02014;
-  --de-manila:   #d8a84a;
-  --de-tape:     #f5d96a;
+  --de-accent:   #a82c1e;   /* stamp red — prototype #b83222, darkened for WCAG AA text contrast */
+  --de-accent-2: #1a3c2e;   /* confidential green */
+  --de-danger:   #8a1a0f;   /* High danger */
+  --de-caution:  #7a4e0e;   /* Medium danger — manila was unreadable as text */
+  --de-manila:   #c9a25a;   /* folders and tabs — a surface, never text */
 
   /* Shadow */
-  --de-shadow: 0 14px 30px -10px rgba(20, 30, 45, 0.3);
+  --de-shadow: 0 10px 40px -12px rgba(30, 22, 10, 0.45);
 
   /* Typography */
-  --de-display: "Gloock", "Playfair Display", serif;
-  --de-body:    "Caveat", "Shadows Into Light", cursive;
-  --de-mono:    "Courier Prime", monospace;
-  --de-label:   "Gloock", serif;
+  --de-display: "Special Elite", "Courier Prime", monospace;
+  --de-body:    "Special Elite", "Courier Prime", monospace;
+  --de-mono:    "Courier Prime", ui-monospace, monospace;
+  --de-label:   "Oswald", Impact, sans-serif;
 }
 
 /* ============================================
@@ -62,14 +63,14 @@
 /* ============================================
    SEMANTIC COLOR ALIASES
    ============================================
-   background:  var(--de-paper)
-   text:        var(--de-ink)
-   muted text:  var(--de-ink-soft)
-   primary CTA: var(--de-accent)
-   secondary:   var(--de-accent-2)
-   danger:      var(--de-danger)
-   highlight:   var(--de-manila)
-   tape:        var(--de-tape)
+   background:    var(--de-paper)
+   text:          var(--de-ink)
+   muted text:    var(--de-ink-soft)
+   primary CTA:   var(--de-accent)
+   secondary:     var(--de-accent-2)
+   danger (High): var(--de-danger)
+   caution (Med): var(--de-caution)
+   folders/tabs:  var(--de-manila)   (surface only, never text)
 
    Surface hierarchy: paper > paper-2 > paper-3 (progressively darker/richer)
 */

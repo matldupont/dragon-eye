@@ -1,5 +1,5 @@
 /* ============================================
-   Component styles — Field Journal
+   Component styles — Dossier
    ============================================ */
 
 /* ---------- NAV ---------- */
@@ -10,8 +10,8 @@
   z-index: 100;
   backdrop-filter: blur(6px);
   padding: 14px 0;
-  background: rgba(243, 234, 214, 0.9);
-  border-bottom: 2px solid var(--de-ink);
+  background: rgba(232, 223, 196, 0.85); /* --de-paper at 85% */
+  border-bottom: 1px dashed var(--de-ink-soft);
 }
 
 .de-nav-inner {
@@ -104,8 +104,8 @@
 
 .de-hero-sub {
   font-family: var(--de-body);
-  font-size: 1.6rem;
-  line-height: 1.35;
+  font-size: 1.15rem;
+  line-height: 1.55;
   max-width: 44ch;
   margin-top: 1.5rem;
   color: var(--de-ink);
@@ -120,23 +120,57 @@
   padding: 14px 24px;
   font-family: var(--de-label);
   font-size: 0.8rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
-  background: var(--de-ink);
-  color: var(--de-paper);
-  border: 2px solid var(--de-ink);
+  transition: all 0.18s ease;
+  border: 2px solid currentColor;
+  background: transparent;
   text-decoration: none;
-  box-shadow: 4px 4px 0 var(--de-manila);
 }
 
 .de-btn:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 var(--de-manila);
+  background: var(--de-ink);
+  color: var(--de-paper);
 }
 
-/* ---------- FILE CARDS ---------- */
+.de-btn.de-btn-primary {
+  background: var(--de-ink);
+  color: var(--de-paper);
+}
+
+.de-btn.de-btn-primary:hover {
+  background: var(--de-accent);
+}
+
+/* ---------- STAMPS ---------- */
+
+.de-stamp {
+  display: inline-block;
+  font-family: var(--de-label);
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border: 3px solid var(--de-accent);
+  color: var(--de-accent);
+  transform: rotate(-4deg);
+  font-weight: 700;
+  opacity: 0.85;
+  position: relative;
+}
+
+.de-stamp::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 -1 1'/></filter><rect width='100' height='100' filter='url(%23n)'/></svg>");
+  mix-blend-mode: lighten;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ---------- SECTIONS + FILE CARDS ---------- */
 
 .de-section {
   padding: clamp(2rem, 5vw, 4rem) 0;
@@ -156,7 +190,7 @@
   font-size: clamp(1.8rem, 4vw, 3rem);
   margin: 0;
   line-height: 1;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .de-files-grid {
@@ -169,16 +203,27 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  background: #fff;
-  padding: 10px 10px 18px;
+  background: var(--de-paper-2);
+  border: 1px solid var(--de-ink-soft);
   box-shadow: var(--de-shadow);
-  transform: rotate(var(--rot, -1deg));
+  padding: 14px;
   transition: transform 0.3s cubic-bezier(.2,.8,.2,1), box-shadow 0.3s ease;
   animation: de-fade-up 0.6s both;
 }
 
-.de-card:hover {
-  transform: rotate(0deg) translateY(-4px);
+.de-card:hover { transform: translateY(-4px); }
+
+/* "CASE FILE" corner label */
+.de-card::before {
+  content: "CASE FILE";
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  font-family: var(--de-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--de-accent);
+  z-index: 2;
 }
 
 .de-card-img-wrap {
@@ -187,6 +232,7 @@
   overflow: hidden;
 }
 
+/* No sepia filter on photos — see README > Imagery */
 .de-card-img {
   width: 100%; height: 100%;
   object-fit: cover;
@@ -194,26 +240,6 @@
 }
 
 .de-card:hover .de-card-img { transform: scale(1.04); }
-
-/* JOURNAL washi tape on cards */
-.de-card::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: 40%;
-  width: 80px;
-  height: 22px;
-  background: var(--de-tape);
-  opacity: 0.85;
-  transform: rotate(-3deg);
-  z-index: 3;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(255,255,255,0.3) 0px,
-    rgba(255,255,255,0.3) 4px,
-    transparent 4px, transparent 10px);
-}
 
 .de-card-info {
   padding: 12px 2px 4px;
@@ -223,11 +249,10 @@
 }
 
 .de-card-name {
-  font-family: var(--de-body);
-  font-size: 2rem;
+  font-family: var(--de-display);
+  font-size: 1.4rem;
   line-height: 1;
   margin: 0;
-  color: var(--de-accent);
 }
 
 .de-card-meta {
@@ -251,12 +276,11 @@
 
 .de-input {
   font: inherit;
-  font-family: var(--de-body);
-  font-size: 1.2rem;
+  font-family: var(--de-mono);
   padding: 12px 16px;
-  background: rgba(255,255,255,0.6);
+  background: transparent;
   color: var(--de-ink);
-  border: 2px solid var(--de-ink);
+  border: 1.5px solid var(--de-ink-soft);
   outline: none;
   transition: border 0.2s;
   width: 100%;
@@ -281,6 +305,7 @@
 
 .de-modal {
   background: var(--de-paper);
+  border: 1px solid var(--de-ink);
   max-width: 1000px;
   width: 100%;
   max-height: 90vh;
@@ -288,7 +313,6 @@
   position: relative;
   box-shadow: 0 40px 80px rgba(0,0,0,0.5);
   animation: de-fade-up 0.35s both;
-  border: 3px solid var(--de-ink);
 }
 
 .de-modal-close {

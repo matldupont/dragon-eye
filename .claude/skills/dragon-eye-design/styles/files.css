@@ -1,4 +1,4 @@
-/* Files section + modal + about — Field Journal */
+/* Files section + card overlay + dossier modal + about + footer — Dossier */
 
 .files-section {
   position: relative;
@@ -20,55 +20,62 @@
 .files-search .de-input { padding-left: 36px; }
 
 .de-card-region {
-  font-family: var(--de-body);
-  font-size: 1rem;
-  letter-spacing: 0.05em;
+  font-family: var(--de-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
   color: var(--de-ink-soft);
   margin-top: 2px;
 }
 
-/* Modal — journal */
-.modal-journal { padding: 2rem clamp(1rem, 3vw, 3rem); position: relative; }
-
-.modal-journal-tape {
+/* Card overlay — case-number tag on the photo */
+.card-secret-stamp {
   position: absolute;
-  top: -12px;
-  width: 120px;
-  height: 28px;
-  background: var(--de-tape);
-  opacity: 0.85;
-  z-index: 3;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
-  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.3) 0px, rgba(255,255,255,0.3) 4px, transparent 4px, transparent 10px);
+  top: 8px;
+  left: 8px;
+  background: var(--de-ink);
+  padding: 3px 8px;
+  z-index: 2;
 }
-.modal-journal-tape-l { left: 15%; transform: rotate(-4deg); }
-.modal-journal-tape-r { right: 15%; transform: rotate(3deg); }
 
-.modal-journal-body {
+/* Modal — dossier sheet */
+.modal-secret { padding: 2rem clamp(1rem, 3vw, 3rem); }
+.modal-secret-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--de-ink);
+  margin-bottom: 2rem;
+}
+.modal-secret-body {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
-  gap: 2.5rem;
-  margin-top: 1rem;
+  gap: 2rem;
 }
-@media (max-width: 800px) { .modal-journal-body { grid-template-columns: 1fr; } }
-
-.modal-journal-dl {
-  margin: 1.2rem 0 0;
+@media (max-width: 800px) { .modal-secret-body { grid-template-columns: 1fr; } }
+/* No sepia filter on photos — see README > Imagery */
+.modal-secret-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border: 2px solid var(--de-ink);
+  box-shadow: 8px 8px 0 var(--de-ink);
+}
+.modal-secret-dl {
+  margin: 0;
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 6px 14px;
-  font-family: var(--de-body);
-  font-size: 1.2rem;
-}
-.modal-journal-dl dt {
+  gap: 8px 16px;
   font-family: var(--de-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.75rem;
-  color: var(--de-ink-soft);
-  align-self: center;
+  font-size: 0.85rem;
 }
-.modal-journal-dl dd { margin: 0; }
+.modal-secret-dl dt {
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--de-ink-soft);
+  font-size: 0.75rem;
+}
+.modal-secret-dl dd { margin: 0; }
 
 /* ABOUT */
 .de-about {
@@ -84,9 +91,8 @@
 
 .de-about-card {
   padding: 1.8rem;
-  background: #fff;
-  border: 2px solid var(--de-ink);
-  box-shadow: 6px 6px 0 var(--de-manila);
+  border: 1px solid var(--de-ink-soft);
+  background: var(--de-paper-2);
 }
 
 /* FOOTER */
