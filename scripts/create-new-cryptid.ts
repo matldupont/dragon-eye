@@ -53,7 +53,7 @@ async function main() {
     
     execSync(
       `pnpm tsx scripts/generate-cryptid.ts ${quotedArgs.join(' ')}`,
-      { cwd: rootDir, stdio: 'inherit', shell: true }
+      { cwd: rootDir, stdio: 'inherit' }
     );
 
     // Step 2: Update files
