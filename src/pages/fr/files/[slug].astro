@@ -2,7 +2,8 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
 import FileDetails from '../../../components/FileDetails.astro';
-import type { CryptidEntry } from '../../../lib/cryptids';
+import { localizeCryptid, type CryptidEntry } from '../../../lib/cryptids';
+import { toLocale } from '../../../i18n/utils';
 
 export async function getStaticPaths() {
   const entries = await getCollection('cryptids');
@@ -13,9 +14,9 @@ interface Props {
   entry: CryptidEntry;
 }
 
-const { entry } = Astro.props;
+const cryptid = localizeCryptid(Astro.props.entry, toLocale(Astro.currentLocale));
 ---
 
-<Layout>
-  <FileDetails entry={entry} />
+<Layout title={cryptid.name} description={cryptid.description}>
+  <FileDetails cryptid={cryptid} />
 </Layout>

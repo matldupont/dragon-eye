@@ -1,177 +1,106 @@
 ---
-import { Filter, Search } from '@lucide/astro';
 import Layout from '../layouts/Layout.astro';
 import CryptidCard from '../components/CryptidCard.astro';
 import { getCryptids } from '../lib/cryptids';
-import { getTranslations, toLocale } from '../i18n/utils';
+import { format, getTranslations, toLocale } from '../i18n/utils';
 
 const locale = toLocale(Astro.currentLocale);
 const t = getTranslations(locale);
 const cryptids = await getCryptids(locale);
 
-// Unique regions for the filter, in the current language
-const regions = ['all', ...new Set(cryptids.map((c) => c.region))];
-const dangerLevels = ['all', 'Low', 'Medium', 'High', 'Unknown'] as const;
+// Filter options, in the current language
+const regions = [...new Set(cryptids.map((c) => c.region))].sort((a, b) => a.localeCompare(b, locale));
+const dangerLevels = ['Low', 'Medium', 'High', 'Unknown'] as const;
 const dangerLabel = (level: (typeof dangerLevels)[number]) =>
-  level === 'all' ? t.files.allLevels : t.dangerLevels[level.toLowerCase() as 'low' | 'medium' | 'high' | 'unknown'];
+  t.dangerLevels[level.toLowerCase() as Lowercase<typeof level>];
 ---
 
-<Layout>
-  <div class="min-h-screen bg-[#0f0f0f] py-12">
-    <div class="container mx-auto px-4">
-      {/* Header */}
-      <div class="mb-12 text-center">
-        <div class="inline-block px-4 py-2 bg-lime-400/10 border border-lime-400 rounded-sm mb-4">
-          <span class="text-lime-400 font-['Courier_New']">{t.files.classifiedDatabase}</span>
+<Layout title={t.files.pageTitle}>
+  <section class="de-section" aria-labelledby="files-title">
+    <div class="de-wrap">
+      <div class="de-section-head">
+        <div>
+          <p class="de-eyebrow">{t.files.eyebrow}</p>
+          <h1 id="files-title" class="de-section-title">{t.files.title}</h1>
         </div>
-        <h1 class="mb-4">{t.files.title}</h1>
-        <p class="text-purple-200 max-w-2xl mx-auto">
-          {t.files.description}
-        </p>
+        <p class="de-section-lede">{format(t.files.lede, { count: cryptids.length })}</p>
       </div>
 
-      {/* Search and Filters */}
-      <div class="max-w-5xl mx-auto mb-12 space-y-4">
-        {/* Search Bar */}
-        <div class="relative">
-          <Search class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-lime-400" />
-          <input
-            type="text"
-            id="search-input"
-            placeholder={t.files.searchPlaceholder}
-            class="w-full pl-12 pr-4 py-4 bg-purple-950/50 border-2 border-purple-800 text-white placeholder-purple-400 focus:outline-none focus:border-lime-400 transition-colors font-['Courier_New']"
-          />
-        </div>
+      <form id="files-filters" class="de-search-row" role="search">
+        <label class="de-field de-field-search">
+          <span class="de-sr-only">{t.files.searchLabel}</span>
+          <span class="de-search-icon" aria-hidden="true">⌕</span>
+          <input id="search-input" class="de-input" type="search" placeholder={t.files.searchPlaceholder} autocomplete="off" />
+        </label>
+        <label class="de-field">
+          <span class="de-sr-only">{t.files.regionLabel}</span>
+          <select id="filter-region" class="de-input">
+            <option value="all">{t.files.allRegions}</option>
+            {regions.map((region) => <option value={region}>{region}</option>)}
+          </select>
+        </label>
+        <label class="de-field">
+          <span class="de-sr-only">{t.files.dangerLabel}</span>
+          <select id="filter-danger" class="de-input">
+            <option value="all">{t.files.allLevels}</option>
+            {dangerLevels.map((level) => <option value={level}>{dangerLabel(level)}</option>)}
+          </select>
+        </label>
+      </form>
 
-        {/* Filters */}
-        <div class="flex flex-col md:flex-row gap-4 items-start md:items-center p-4 bg-purple-950/30 border border-purple-800">
-          <div class="flex items-center gap-2">
-            <Filter class="w-5 h-5 text-lime-400" />
-            <span class="text-lime-400 font-['Courier_New']">{t.files.filters}</span>
-          </div>
+      <p id="results-count" class="de-mono-label de-results-count" aria-live="polite" data-template={t.files.resultsCount}>
+        {format(t.files.resultsCount, { shown: cryptids.length, total: cryptids.length })}
+      </p>
 
-          <div class="flex flex-col md:flex-row gap-4 flex-1 min-w-0 w-full md:w-auto">
-            <div class="flex items-center gap-2 w-full min-w-0">
-              <label for="filter-region" class="text-purple-300 font-['Courier_New'] whitespace-nowrap flex-shrink-0">{t.files.region}</label>
-              <select
-                id="filter-region"
-                class="px-3 py-2 bg-black border border-purple-700 text-white focus:outline-none focus:border-lime-400 font-['Courier_New'] flex-1 min-w-0 max-w-full"
-              >
-                {regions.map((region) => (
-                  <option value={region}>
-                    {region === 'all' ? t.files.allRegions : region}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div class="flex items-center gap-2 w-full min-w-0">
-              <label for="filter-danger" class="text-purple-300 font-['Courier_New'] whitespace-nowrap flex-shrink-0">{t.files.danger}</label>
-              <select
-                id="filter-danger"
-                class="px-3 py-2 bg-black border border-purple-700 text-white focus:outline-none focus:border-lime-400 font-['Courier_New'] flex-1 min-w-0 max-w-full"
-              >
-                {dangerLevels.map((level) => (
-                  <option value={level}>
-                    {dangerLabel(level)}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div id="results-count" class="text-purple-300 font-['Courier_New'] whitespace-nowrap" data-files-found-text={t.files.filesFound}>
-            {cryptids.length} {t.files.filesFound}
-          </div>
-        </div>
-      </div>
-
-      {/* Results Grid */}
-      <div id="results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {cryptids.map((cryptid) => (
-          <div
-            class="cryptid-card-wrapper"
-            data-name={cryptid.name.toLowerCase()}
-            data-codename={cryptid.codename.toLowerCase()}
-            data-region={cryptid.region.toLowerCase()}
+      <ul id="results-grid" class="de-files-grid">
+        {cryptids.map((cryptid, index) => (
+          <li
+            data-search={[cryptid.name, cryptid.codename, cryptid.region, cryptid.type, cryptid.alias ?? ''].join(' ').toLowerCase()}
+            data-region={cryptid.region}
             data-danger={cryptid.dangerLevel}
           >
-            <CryptidCard cryptid={cryptid} />
-          </div>
+            <CryptidCard cryptid={cryptid} index={index} />
+          </li>
         ))}
-      </div>
+      </ul>
 
-      <div id="no-results" class="text-center py-16 hidden">
-        <div class="text-purple-400 font-['Courier_New'] mb-4">
-          {t.files.noFilesMatch}
-        </div>
-        <p class="text-purple-300">
-          {t.files.tryAdjusting}
-        </p>
+      <div id="no-results" class="de-empty" hidden>
+        <p>{t.files.noResults}</p>
+        <p class="de-mono-label">{t.files.noResultsHint}</p>
       </div>
     </div>
-  </div>
+  </section>
 
   <script>
-    const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
-    const filterRegion = document.getElementById('filter-region') as HTMLSelectElement | null;
-    const filterDanger = document.getElementById('filter-danger') as HTMLSelectElement | null;
-    const resultsGrid = document.getElementById('results-grid') as HTMLElement | null;
-    const resultsCount = document.getElementById('results-count') as HTMLElement | null;
-    const noResults = document.getElementById('no-results') as HTMLElement | null;
-    const cardWrappers = document.querySelectorAll('.cryptid-card-wrapper') as NodeListOf<HTMLElement>;
+    import { format } from '../i18n/format';
 
-    if (!searchInput || !filterRegion || !filterDanger || !resultsGrid || !resultsCount || !noResults) {
-      console.error('Required elements not found');
-    } else {
-      function filterCryptids() {
-        if (!searchInput || !filterRegion || !filterDanger || !resultsGrid || !resultsCount || !noResults) return;
+    const form = document.getElementById('files-filters') as HTMLFormElement;
+    const search = document.getElementById('search-input') as HTMLInputElement;
+    const region = document.getElementById('filter-region') as HTMLSelectElement;
+    const danger = document.getElementById('filter-danger') as HTMLSelectElement;
+    const count = document.getElementById('results-count') as HTMLElement;
+    const empty = document.getElementById('no-results') as HTMLElement;
+    const items = [...document.querySelectorAll<HTMLElement>('#results-grid > li')];
+    const template = count.dataset.template ?? '{shown} / {total}';
 
-        const searchTerm = searchInput.value.toLowerCase();
-        const selectedRegion = filterRegion.value;
-        const selectedDanger = filterDanger.value;
+    function applyFilters() {
+      const needle = search.value.trim().toLowerCase();
+      let shown = 0;
 
-        let visibleCount = 0;
-
-        cardWrappers.forEach(wrapper => {
-          const name = wrapper.dataset.name || '';
-          const codename = wrapper.dataset.codename || '';
-          const region = wrapper.dataset.region || '';
-          const danger = wrapper.dataset.danger || '';
-
-          const matchesSearch = !searchTerm ||
-            name.includes(searchTerm) ||
-            codename.includes(searchTerm) ||
-            region.includes(searchTerm);
-
-          const matchesRegion = selectedRegion === 'all' || region === selectedRegion.toLowerCase();
-          const matchesDanger = selectedDanger === 'all' || danger === selectedDanger;
-
-          if (matchesSearch && matchesRegion && matchesDanger) {
-            wrapper.style.display = '';
-            visibleCount++;
-          } else {
-            wrapper.style.display = 'none';
-          }
-        });
-
-        // Update results count
-        const filesFoundText = resultsCount.getAttribute('data-files-found-text') || 'FILES FOUND';
-        resultsCount.textContent = `${visibleCount} ${filesFoundText}`;
-
-        // Show/hide no results message
-        if (visibleCount === 0) {
-          noResults.classList.remove('hidden');
-          resultsGrid.classList.add('hidden');
-        } else {
-          noResults.classList.add('hidden');
-          resultsGrid.classList.remove('hidden');
-        }
+      for (const item of items) {
+        const matches =
+          (!needle || (item.dataset.search ?? '').includes(needle)) &&
+          (region.value === 'all' || item.dataset.region === region.value) &&
+          (danger.value === 'all' || item.dataset.danger === danger.value);
+        item.hidden = !matches;
+        if (matches) shown++;
       }
 
-      searchInput.addEventListener('input', filterCryptids);
-      filterRegion.addEventListener('change', filterCryptids);
-      filterDanger.addEventListener('change', filterCryptids);
+      count.textContent = format(template, { shown, total: items.length });
+      empty.hidden = shown > 0;
     }
+
+    form.addEventListener('submit', (event) => event.preventDefault());
+    form.addEventListener('input', applyFilters);
   </script>
 </Layout>

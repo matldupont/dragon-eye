@@ -1,51 +1,40 @@
 ---
 import "../styles/global.css";
+import ClassifiedBar from "../components/ClassifiedBar.astro";
 import Nav from "../components/Nav/Nav.astro";
-import { toLocale } from "../i18n/utils";
+import Footer from "../components/Footer.astro";
+import { getTranslations, toLocale } from "../i18n/utils";
 
-const lang = toLocale(Astro.currentLocale);
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const locale = toLocale(Astro.currentLocale);
+const t = getTranslations(locale);
+const { title, description = t.meta.description } = Astro.props;
+
+const pageTitle = title ? `${title} · ${t.meta.siteTitle}` : t.meta.siteTitle;
+const metaDescription = description.length > 160 ? `${description.slice(0, 157).replace(/\s+\S*$/, "")}…` : description;
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Dragon Eye</title>
+    <meta name="description" content={metaDescription} />
+    <title>{pageTitle}</title>
   </head>
-  <body>
-    <div id="container">
-
-       <div class="min-h-screen bg-[#0f0f0f] text-white">
-        <Nav />
-        <main class="flex flex-col gap-y-4 pb-12">
-          <slot />
-        </main>
-      </div>
-    </div>
+  <body class="de-body">
+    <a class="de-skip-link" href="#main">{t.nav.skipToContent}</a>
+    <ClassifiedBar />
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  main {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  #container {
-    font-family:
-      Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial,
-      sans-serif;
-    height: 100%;
-  }
-</style>

@@ -1,155 +1,50 @@
 ---
-import { Image } from 'astro:assets';
-import { FileText, Fingerprint, Search } from '@lucide/astro';
 import Layout from '../layouts/Layout.astro';
-import Link from '../components/Nav/Link.astro';
-import DangerBadge from '../components/DangerBadge.astro';
+import Hero from '../components/Hero.astro';
 import CryptidCard from '../components/CryptidCard.astro';
+import Link from '../components/Nav/Link.astro';
 import { getCryptids } from '../lib/cryptids';
-import { getTranslations, toLocale } from '../i18n/utils';
+import { format, getTranslations, toLocale } from '../i18n/utils';
 
 const locale = toLocale(Astro.currentLocale);
 const t = getTranslations(locale);
 const cryptids = await getCryptids(locale);
 // Newest file first — that one is the Cryptid of the Month.
-const [featured] = cryptids;
+const [featured, ...others] = cryptids;
+const latest = others.slice(0, 8);
 ---
 
 <Layout>
-	<div class="min-h-screen bg-[#0f0f0f]">
-		{/* Hero Section */}
-		<section class="relative py-20 border-b border-purple-900/50 overflow-hidden">
-		  <div class="absolute inset-0 bg-gradient-to-b from-purple-950/20 to-transparent"></div>
-		  <div class="container mx-auto px-4 relative z-10">
-			<div class="max-w-4xl mx-auto text-center">
-			  <div class="inline-flex items-center gap-2 px-4 py-2 bg-lime-400/10 border border-lime-400 rounded-sm mb-6">
-				<Fingerprint class="w-5 h-5 text-lime-400" />
-				<span class="text-lime-400 font-['Courier_New']">{t.home.topSecret}</span>
-			  </div>
+  <Hero featured={featured} total={cryptids.length} />
 
-			  <h1 class="mb-6">
-				{t.home.title}
-			  </h1>
+  <section class="de-section" aria-labelledby="latest-title">
+    <div class="de-wrap">
+      <div class="de-section-head">
+        <div>
+          <p class="de-eyebrow">{t.home.latestEyebrow}</p>
+          <h2 id="latest-title" class="de-section-title">{t.home.latestTitle}</h2>
+        </div>
+        <Link to="/files/" class="de-btn">{format(t.home.browseAll, { count: cryptids.length })}</Link>
+      </div>
+      <ul class="de-files-grid">
+        {latest.map((cryptid, index) => (
+          <li>
+            <CryptidCard cryptid={cryptid} index={index} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
 
-			  <p class="text-purple-200 mb-8 max-w-2xl mx-auto">
-				{t.home.welcome}
-			  </p>
-
-			  <div class="flex flex-wrap items-center justify-center gap-4">
-				<Link
-				  to="/files/"
-				  class="px-8 py-4 bg-lime-400 text-black hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-all font-['Courier_New'] font-medium"
-				>
-				  <span class="flex items-center gap-2">
-					<Search class="w-5 h-5" />
-					{t.home.exploreFiles}
-				  </span>
-				</Link>
-				<a
-				  href="#featured"
-				  class="px-8 py-4 border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black hover:shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-all font-['Courier_New'] font-medium"
-				>
-				  <span class="flex items-center gap-2">
-					<FileText class="w-5 h-5" />
-					{t.home.cryptidOfTheMonth}
-				  </span>
-				</a>
-			  </div>
-			</div>
-		  </div>
-		</section>
-
-		{/* Featured Cryptid of the Month */}
-		<section id="featured" class="py-16 border-b border-purple-900/50">
-		  <div class="container mx-auto px-4">
-			<div class="flex items-center gap-3 mb-8">
-			  <div class="h-px flex-1 bg-lime-400"></div>
-			  <h2 class="text-lime-400 font-['Courier_New'] tracking-wider">
-				{t.home.featuredFile}
-			  </h2>
-			  <div class="h-px flex-1 bg-lime-400"></div>
-			</div>
-
-			<div class="max-w-5xl mx-auto bg-purple-950/50 border-4 border-yellow-400 shadow-2xl shadow-yellow-400/20">
-			  <div class="grid md:grid-cols-2 gap-0">
-				{/* Image Side */}
-				<div class="relative aspect-square bg-black overflow-hidden">
-				  <Image
-					src={featured.image}
-					alt={featured.name}
-					class="w-full h-full object-cover"
-				  />
-				  <div class="absolute top-4 left-4 right-4">
-					<div class="bg-black/80 border-2 border-yellow-400 p-3 font-['Courier_New']">
-					  <div class="text-yellow-400 mb-1">{t.home.caseFile}</div>
-					  <div class="text-lime-400">{featured.codename}</div>
-					</div>
-				  </div>
-				</div>
-
-				{/* Info Side */}
-				<div class="p-8 border-l-4 border-yellow-400">
-				  <h3 class="mb-4">{featured.name}</h3>
-
-				  <div class="space-y-3 mb-6">
-					<div class="flex flex-wrap gap-2">
-					  <span class="px-3 py-1 bg-lime-500/20 text-lime-400 border border-lime-400 rounded-sm font-['Courier_New']">
-						{featured.region}
-					  </span>
-					  <span class="px-3 py-1 bg-purple-500/20 text-purple-300 border border-purple-400 rounded-sm font-['Courier_New']">
-						{featured.type}
-					  </span>
-					</div>
-
-					<DangerBadge level={featured.dangerLevel} />
-				  </div>
-
-				  <p class="text-purple-200 mb-6">
-					{featured.description}
-				  </p>
-
-				  <div class="space-y-2 text-purple-300 mb-6">
-					<div class="flex gap-2">
-					  <span class="text-lime-400 font-['Courier_New'] min-w-[120px]">{t.home.firstSeen}</span>
-					  <span>{featured.firstSighting}</span>
-					</div>
-					<div class="flex gap-2">
-					  <span class="text-lime-400 font-['Courier_New'] min-w-[120px]">{t.home.location}</span>
-					  <span>{featured.location ?? featured.region}</span>
-					</div>
-				  </div>
-
-				  <Link
-					to={`/files/${featured.id}/`}
-					class="inline-block w-full px-6 py-3 bg-yellow-400 text-black hover:bg-lime-400 hover:shadow-[0_0_20px_rgba(163,230,53,0.4)] transition-all font-['Courier_New'] font-medium text-center"
-				  >
-					{t.home.viewFullFile}
-				  </Link>
-				</div>
-			  </div>
-			</div>
-		  </div>
-		</section>
-
-		{/* Latest Files Section */}
-		<section class="py-16">
-		  <div class="container mx-auto px-4">
-			<div class="flex items-center justify-between mb-8">
-			  <h2 class="text-lime-400">{t.home.latestFiles}</h2>
-			  <Link
-				to="/files/"
-				class="px-4 py-2 border border-lime-400 text-lime-400 hover:bg-lime-400 hover:text-black hover:shadow-[0_0_20px_rgba(163,230,53,0.4)] transition-all font-['Courier_New']"
-			  >
-				{t.home.viewAllFiles}
-			  </Link>
-			</div>
-
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-			  {cryptids.map((cryptid) => (
-				<CryptidCard cryptid={cryptid} />
-			  ))}
-			</div>
-		  </div>
-		</section>
-	  </div>
+  <section id="about" class="de-section" aria-labelledby="about-title">
+    <div class="de-wrap de-about-grid">
+      <div>
+        <p class="de-eyebrow">{t.about.eyebrow}</p>
+        <h2 id="about-title" class="de-section-title">{t.about.title}</h2>
+      </div>
+      <div class="de-about-card">
+        {t.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </div>
+  </section>
 </Layout>

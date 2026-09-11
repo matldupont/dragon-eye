@@ -12,6 +12,13 @@ export function getTranslations(locale: Locale): Translations {
   return translations[locale];
 }
 
+export { format } from './format';
+
+/** Dossier-style date stamp: 2026-02-17. */
+export function isoDate(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}
+
 /** Drop the locale prefix: "/fr/files/bigfoot/" → "/files/bigfoot/". */
 export function stripLocale(pathname: string): string {
   return pathname.replace(/^\/fr(?=\/|$)/, '') || '/';

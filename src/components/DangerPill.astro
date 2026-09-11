@@ -1,0 +1,16 @@
+---
+import { getTranslations, toLocale } from '../i18n/utils';
+
+interface Props {
+  level: 'Low' | 'Medium' | 'High' | 'Unknown';
+}
+
+const { level } = Astro.props;
+const t = getTranslations(toLocale(Astro.currentLocale));
+const key = level.toLowerCase() as Lowercase<typeof level>;
+---
+
+<span class={`de-danger-pill de-danger-${key}`}>
+  <span class="de-danger-dot" aria-hidden="true"></span>
+  <span class="de-sr-only">{t.dangerLevels.label}: </span>{t.dangerLevels[key]}
+</span>

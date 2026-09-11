@@ -6,24 +6,16 @@ const currentLocale = toLocale(Astro.currentLocale);
 const names: Record<Locale, string> = { en: 'English', fr: 'Français' };
 ---
 
-<div class="flex items-center gap-2">
-  {locales.map((code) => {
-    const isActive = currentLocale === code;
-
-    return (
-      <a
-        href={localizePath(Astro.url.pathname, code)}
-        hreflang={code}
-        aria-current={isActive ? 'page' : undefined}
-        class={`px-3 py-1 text-sm font-['Courier_New'] transition-colors ${
-          isActive
-            ? 'bg-lime-400 text-black'
-            : 'text-purple-300 hover:text-lime-400 border border-purple-700 hover:border-lime-400 hover:shadow-[0_0_20px_rgba(163,230,53,0.4)]'
-        }`}
-        aria-label={`Switch to ${names[code]}`}
-      >
-        {code.toUpperCase()}
-      </a>
-    );
-  })}
+<div class="de-lang">
+  {locales.map((code) => (
+    <a
+      href={localizePath(Astro.url.pathname, code)}
+      hreflang={code}
+      lang={code}
+      aria-label={names[code]}
+      aria-current={code === currentLocale ? 'page' : undefined}
+    >
+      {code.toUpperCase()}
+    </a>
+  ))}
 </div>

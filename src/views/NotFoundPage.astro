@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Link from '../components/Nav/Link.astro';
+import { getTranslations, toLocale } from '../i18n/utils';
+
+const t = getTranslations(toLocale(Astro.currentLocale));
+---
+
+<Layout title={t.notFound.title}>
+  <section class="de-wrap de-not-found">
+    <span class="de-stamp">404</span>
+    <h1 class="de-title-xl">{t.notFound.title}</h1>
+    <p class="de-hero-sub">{t.notFound.message}</p>
+    <Link to="/files/" class="de-btn de-btn-primary">{t.notFound.back}</Link>
+  </section>
+</Layout>

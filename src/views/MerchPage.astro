@@ -1,5 +1,4 @@
 ---
-import { Package } from '@lucide/astro';
 import Layout from '../layouts/Layout.astro';
 import Product from '../components/Product.astro';
 import { getTranslations, toLocale } from '../i18n/utils';
@@ -9,9 +8,9 @@ import shirt2 from '../assets/dragon-eye.shirt2.png';
 import cap from '../assets/dragon-eye.cap.png';
 import kit from '../assets/dragon-eye.kit.png';
 import badge from '../assets/dragon-eye.badge.png';
-import sticker1 from '../assets/dragon-eye.big-foot-stickers.png';
-import sticker3 from '../assets/dragon-eye.loch-ness-stickers.png';
-import sticker2 from '../assets/dragon-eye.ghost-stickers.png';
+import bigfootStickers from '../assets/dragon-eye.big-foot-stickers.png';
+import ghostStickers from '../assets/dragon-eye.ghost-stickers.png';
+import lochNessStickers from '../assets/dragon-eye.loch-ness-stickers.png';
 import sweatpants from '../assets/dragon-eye.pants.png';
 import plushieBigFoot from '../assets/big-foot.plushie.png';
 import plushieDragon from '../assets/dragon.plushie.png';
@@ -19,197 +18,86 @@ import plushieLochNess from '../assets/loch-ness.plushie.png';
 
 const t = getTranslations(toLocale(Astro.currentLocale));
 
-// Product data with categories - using translations
 const products = [
-  {
-    id: 'tshirt',
-    title: t.product.tshirt.title,
-    description: t.product.tshirt.description,
-    price: '20.00',
-    category: 'Dragon Eye Agency',
-    imageOptions: [
-      { src: shirt1, alt: 'Dragon Eye T-Shirt Option 1' },
-      { src: shirt2, alt: 'Dragon Eye T-Shirt Option 2' }
-    ]
-  },
-  {
-    id: 'cap',
-    title: t.product.cap.title,
-    description: t.product.cap.description,
-    price: '15.00',
-    category: 'Dragon Eye Agency',
-    imageOptions: [
-      { src: cap, alt: 'Dragon Eye Cap' }
-    ]
-  },
-  {
-    id: 'detective-kit',
-    title: t.product.detectiveKit.title,
-    description: t.product.detectiveKit.description,
-    price: '25.00',
-    category: 'Cryptid Collection',
-    imageOptions: [
-      { src: kit, alt: 'Junior Detective Kit' }
-    ]
-  },
-  {
-    id: 'badge',
-    title: t.product.badge.title,
-    description: t.product.badge.description,
-    price: '8.00',
-    category: 'Dragon Eye Agency',
-    imageOptions: [
-      { src: badge, alt: 'Dragon Eye Badge' }
-    ]
-  },
-  {
-    id: 'sticker-pack',
-    title: t.product.stickerPack.title,
-    description: t.product.stickerPack.description,
-    price: '5.00',
-    category: 'Cryptid Collection',
-    imageOptions: [
-      { src: sticker1, alt: 'Big Foot Sticker' },
-      { src: sticker2, alt: 'Ghost Sticker' },
-      { src: sticker3, alt: 'Loch Ness Sticker' }
-    ]
-  },
-  {
-    id: 'sweatpants',
-    title: t.product.sweatpants.title,
-    description: t.product.sweatpants.description,
-    price: '30.00',
-    category: 'Dragon Eye Agency',
-    imageOptions: [
-      { src: sweatpants, alt: 'Dragon Eye Sweatpants' }
-    ]
-  },
-  {
-    id: 'plushies',
-    title: t.product.plushies.title,
-    description: t.product.plushies.description,
-    price: '25.00',
-    category: 'Cryptid Collection',
-    imageOptions: [
-      { src: plushieBigFoot, alt: 'Big Foot Plushie' },
-      { src: plushieDragon, alt: 'Dragon Plushie' },
-      { src: plushieLochNess, alt: 'Loch Ness Monster Plushie' }
-    ]
-  }
+  { category: 'agency', price: '20.00', copy: t.product.tshirt, images: [shirt1, shirt2] },
+  { category: 'agency', price: '15.00', copy: t.product.cap, images: [cap] },
+  { category: 'cryptid', price: '25.00', copy: t.product.detectiveKit, images: [kit] },
+  { category: 'agency', price: '8.00', copy: t.product.badge, images: [badge] },
+  { category: 'cryptid', price: '5.00', copy: t.product.stickerPack, images: [bigfootStickers, ghostStickers, lochNessStickers] },
+  { category: 'agency', price: '30.00', copy: t.product.sweatpants, images: [sweatpants] },
+  { category: 'cryptid', price: '25.00', copy: t.product.plushies, images: [plushieBigFoot, plushieDragon, plushieLochNess] },
 ];
 ---
 
-<Layout>
-  <div class="min-h-screen bg-[#0f0f0f] py-12">
-    <div class="container mx-auto px-4">
-      {/* Header */}
-      <div class="mb-12 text-center">
-        <div class="inline-flex items-center gap-2 px-4 py-2 bg-yellow-400/10 border border-yellow-400 rounded-sm mb-4">
-          <Package class="w-5 h-5 text-yellow-400" />
-          <span class="text-yellow-400 font-['Courier_New']">{t.merch.evidenceLocker}</span>
+<Layout title={t.merch.pageTitle}>
+  <section class="de-section" aria-labelledby="merch-title">
+    <div class="de-wrap">
+      <div class="de-section-head">
+        <div>
+          <p class="de-eyebrow">{t.merch.eyebrow}</p>
+          <h1 id="merch-title" class="de-section-title">{t.merch.title}</h1>
         </div>
-        <h1 class="mb-4">{t.merch.title}</h1>
-        <p class="text-purple-200 max-w-2xl mx-auto">
-          {t.merch.description}
-        </p>
+        <p class="de-section-lede">{t.merch.description}</p>
       </div>
 
-      {/* Category Tabs */}
-      <div class="max-w-3xl mx-auto mb-12">
-        <div class="flex flex-wrap gap-3 justify-center">
-          <button
-            id="tab-all"
-            data-tab="all"
-            class="px-6 py-3 font-['Courier_New'] transition-all bg-yellow-400 text-black"
-          >
-            {t.merch.allItems}
-          </button>
-          <button
-            id="tab-agency"
-            data-tab="agency"
-            class="px-6 py-3 font-['Courier_New'] transition-all border border-yellow-400 text-yellow-400 hover:bg-yellow-400/10 hover:shadow-[0_0_20px_rgba(250,204,21,0.4)]"
-          >
-            {t.merch.dragonEyeAgency}
-          </button>
-          <button
-            id="tab-cryptid"
-            data-tab="cryptid"
-            class="px-6 py-3 font-['Courier_New'] transition-all border border-yellow-400 text-yellow-400 hover:bg-yellow-400/10 hover:shadow-[0_0_20px_rgba(250,204,21,0.4)]"
-          >
-            {t.merch.cryptidCollection}
-          </button>
-        </div>
+      <div class="de-tabs" role="group" aria-label={t.merch.filterLabel}>
+        <button type="button" class="de-tab" data-tab="all" aria-pressed="true">{t.merch.allItems}</button>
+        <button type="button" class="de-tab" data-tab="agency" aria-pressed="false">{t.merch.dragonEyeAgency}</button>
+        <button type="button" class="de-tab" data-tab="cryptid" aria-pressed="false">{t.merch.cryptidCollection}</button>
       </div>
 
-      {/* Products Grid */}
-      <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        {products.map(product => (
-          <div
-            class="product-wrapper"
-            data-category={product.category === 'Dragon Eye Agency' ? 'agency' : 'cryptid'}
-            data-product-id={product.id}
-          >
+      <ul class="de-evidence-grid">
+        {products.map((product, index) => (
+          <li data-category={product.category}>
             <Product
-              title={product.title}
-              description={product.description}
+              number={index + 1}
+              title={product.copy.title}
+              description={product.copy.description}
               price={product.price}
-              imageOptions={product.imageOptions}
+              images={product.images}
             />
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
 
-      {/* Info Box */}
-      <div class="max-w-3xl mx-auto bg-purple-950/30 border border-purple-800 p-6 text-center">
-        <div class="text-lime-400 font-['Courier_New'] mb-2">
-          {t.merch.comingSoon}
-        </div>
-        <p class="text-purple-200">
-          {t.merch.comingSoonDescription}
-        </p>
-      </div>
+      <aside class="de-note">
+        <p class="de-note-title">{t.merch.comingSoon}</p>
+        <p>{t.merch.comingSoonDescription}</p>
+      </aside>
     </div>
-  </div>
+  </section>
 
   <script>
-    const tabs = document.querySelectorAll('[data-tab]');
-    const productWrappers = document.querySelectorAll('.product-wrapper');
+    const tabs = [...document.querySelectorAll<HTMLButtonElement>('[data-tab]')];
+    const items = [...document.querySelectorAll<HTMLElement>('[data-category]')];
 
-    function filterProducts(activeTab: string) {
-      productWrappers.forEach(wrapper => {
-        const category = wrapper.getAttribute('data-category');
-
-        if (activeTab === 'all') {
-          (wrapper as HTMLElement).style.display = '';
-        } else if (activeTab === 'agency' && category === 'agency') {
-          (wrapper as HTMLElement).style.display = '';
-        } else if (activeTab === 'cryptid' && category === 'cryptid') {
-          (wrapper as HTMLElement).style.display = '';
-        } else {
-          (wrapper as HTMLElement).style.display = 'none';
-        }
-      });
-
-      // Update tab styles
-      tabs.forEach(tab => {
-        const tabValue = tab.getAttribute('data-tab');
-        if (tabValue === activeTab) {
-          tab.classList.remove('border', 'text-yellow-400', 'hover:bg-yellow-400/10', 'hover:shadow-[0_0_20px_rgba(250,204,21,0.4)]');
-          tab.classList.add('bg-yellow-400', 'text-black');
-        } else {
-          tab.classList.remove('bg-yellow-400', 'text-black');
-          tab.classList.add('border', 'border-yellow-400', 'text-yellow-400', 'hover:bg-yellow-400/10', 'hover:shadow-[0_0_20px_rgba(250,204,21,0.4)]');
+    for (const tab of tabs) {
+      tab.addEventListener('click', () => {
+        for (const other of tabs) other.setAttribute('aria-pressed', String(other === tab));
+        for (const item of items) {
+          item.hidden = tab.dataset.tab !== 'all' && item.dataset.category !== tab.dataset.tab;
         }
       });
     }
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const tabValue = tab.getAttribute('data-tab');
-        if (tabValue) {
-          filterProducts(tabValue);
-        }
+    for (const card of document.querySelectorAll<HTMLElement>('.de-evidence')) {
+      const dialog = card.querySelector('dialog');
+      const thumbs = [...card.querySelectorAll<HTMLButtonElement>('[data-show-photo]')];
+
+      for (const thumb of thumbs) {
+        thumb.addEventListener('click', () => {
+          for (const photo of card.querySelectorAll<HTMLElement>('[data-photo]')) {
+            photo.hidden = photo.dataset.photo !== thumb.dataset.showPhoto;
+          }
+          for (const other of thumbs) other.setAttribute('aria-pressed', String(other === thumb));
+        });
+      }
+
+      card.querySelector('[data-open-photo]')?.addEventListener('click', () => dialog?.showModal());
+      // Clicking the backdrop closes the photo
+      dialog?.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
       });
-    });
+    }
   </script>
 </Layout>

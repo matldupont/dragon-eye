@@ -1,10 +1,10 @@
 @import './fonts.css';
 @import "tailwindcss";
-@import './shadcn-tokens.css';
 @import './dragon-eye.css';
 
 @theme {
-  --font-display: "Gloock", "Playfair Display", serif;
-  --font-body: "Caveat", "Shadows Into Light", cursive;
-  --font-mono: "Courier Prime", monospace;
+  --font-display: "Special Elite", "Courier Prime", monospace;
+  --font-body: "Special Elite", "Courier Prime", monospace;
+  --font-mono: "Courier Prime", ui-monospace, monospace;
+  --font-label: "Oswald", Impact, sans-serif;
 }

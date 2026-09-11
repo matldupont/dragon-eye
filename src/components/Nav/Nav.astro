@@ -2,34 +2,25 @@
 import { Eye } from "@lucide/astro";
 import Link from "./Link.astro";
 import LanguageSwitcher from "../LanguageSwitcher.astro";
-import { getTranslations, toLocale } from "../../i18n/utils";
+import { getTranslations, stripLocale, toLocale } from "../../i18n/utils";
 
 const t = getTranslations(toLocale(Astro.currentLocale));
+const path = stripLocale(Astro.url.pathname);
+const currentFor = (section: string) => (path.startsWith(section) ? "page" : undefined);
 ---
 
-<nav class="border-b border-purple-900/50 bg-[#0a0a0a] sticky top-0 z-50">
-  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-    <Link to="/" class="flex items-center gap-2 group">
-      <Eye class="w-8 h-8 text-lime-400 group-hover:text-yellow-400 group-hover:drop-shadow-[0_0_15px_rgba(250,204,21,0.5)] transition-all" />
-      <span class="hidden md:inline font-['Courier_New'] tracking-wider">
-        DRAGON EYE
-      </span>
+<header class="de-nav">
+  <nav class="de-wrap de-nav-inner" aria-label={t.nav.label}>
+    <Link to="/" class="de-logo" aria-label={t.nav.home}>
+      <Eye class="de-logo-mark" aria-hidden="true" />
+      <span class="de-logo-text">Dragon Eye</span>
     </Link>
 
-    <div class="flex items-center gap-6">
-      <Link
-        to="/files/"
-        class="hover:text-lime-400 hover:drop-shadow-[0_0_15px_rgba(163,230,53,0.5)] transition-all"
-      >
-        {t.nav.files}
-      </Link>
-      <Link
-        to="/merch/"
-        class="hover:text-lime-400 hover:drop-shadow-[0_0_15px_rgba(163,230,53,0.5)] transition-all"
-      >
-        {t.nav.merch}
-      </Link>
+    <div class="de-nav-links">
+      <Link to="/files/" aria-current={currentFor("/files")}>{t.nav.files}</Link>
+      <Link to="/#about">{t.nav.about}</Link>
+      <Link to="/merch/" aria-current={currentFor("/merch")}>{t.nav.merch}</Link>
       <LanguageSwitcher />
     </div>
-  </div>
-</nav>
+  </nav>
+</header>

@@ -1,155 +1,95 @@
 ---
 import { Image } from "astro:assets";
-import { Calendar, MapPin } from "@lucide/astro";
-import DangerBadge from "./DangerBadge.astro";
-import StatusBadge from "./StatusBadge.astro";
-import CryptidCard from "./CryptidCard.astro";
 import Link from "./Nav/Link.astro";
-import { getCryptids, localizeCryptid, type CryptidEntry } from "../lib/cryptids";
-import { getTranslations, toLocale } from "../i18n/utils";
+import CryptidCard from "./CryptidCard.astro";
+import DangerPill from "./DangerPill.astro";
+import StatusStamp from "./StatusStamp.astro";
+import { getCryptids, type LocalizedCryptid } from "../lib/cryptids";
+import { format, getTranslations, toLocale } from "../i18n/utils";
 
 interface Props {
-  entry: CryptidEntry;
+  cryptid: LocalizedCryptid;
 }
 
+const { cryptid } = Astro.props;
 const locale = toLocale(Astro.currentLocale);
 const t = getTranslations(locale);
-const cryptid = localizeCryptid(Astro.props.entry, locale);
-const aliases = cryptid.alias ? cryptid.alias.split(",").map((a) => a.trim()) : [];
 
 // Related files: same region or type, excluding the current one
-const relatedFiles = (await getCryptids(locale))
+const related = (await getCryptids(locale))
   .filter((c) => c.id !== cryptid.id && (c.region === cryptid.region || c.type === cryptid.type))
-  .slice(0, 3);
+  .slice(0, 4);
 ---
 
-<div class="min-h-screen bg-[#0f0f0f] py-8">
-  <div class="container mx-auto px-4">
-    {/* Back Button */}
-    <Link
-      to="/files/"
-      class="flex items-center gap-2 px-4 py-2 border border-lime-400 text-lime-400 hover:bg-lime-400 hover:text-black hover:shadow-[0_0_20px_rgba(163,230,53,0.4)] transition-all font-['Courier_New'] mb-8 inline-block w-fit"
-    >
-      {t.fileDetails.backToFiles}
-    </Link>
+<div class="de-wrap de-dossier">
+  <Link to="/files/" class="de-back">{t.file.back}</Link>
 
-    {/* Main File Content */}
-    <div class="max-w-6xl mx-auto">
-      {/* Header with Codename and Status */}
-      <div class="bg-purple-950/50 border-2 border-yellow-400 p-6 mb-6">
-        <div class="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <div class="text-yellow-400 font-['Courier_New'] mb-2">
-              {t.fileDetails.caseNumber} {cryptid.codename}
-            </div>
-            <h1 class="mb-2">{cryptid.name}</h1>
-            {aliases.length > 0 && (
-              <div class="text-purple-300">
-                <span class="text-lime-400 font-['Courier_New']">{t.fileDetails.alias}</span>{" "}
-                {aliases.join(", ")}
-              </div>
-            )}
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <StatusBadge status={cryptid.status} />
-            <DangerBadge level={cryptid.dangerLevel} />
-          </div>
-        </div>
+  <article class="de-dossier-sheet" aria-labelledby="dossier-name">
+    <header class="de-dossier-header">
+      <div>
+        <p class="de-mono-label">{t.file.dossierNo}</p>
+        <p class="de-dossier-no">{cryptid.caseNumber}</p>
       </div>
-
-      {/* Main Content Grid */}
-      <div class="grid lg:grid-cols-2 gap-6 mb-8">
-        {/* Mugshot/Image */}
-        <div class="bg-purple-950/30 border-2 border-purple-800 p-4">
-          <div class="bg-black/50 border border-purple-700 mb-4">
-            <div class="aspect-square relative overflow-hidden">
-              <Image
-                src={cryptid.image}
-                alt={cryptid.name}
-                class="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-          <div class="text-center font-['Courier_New'] text-lime-400">
-            {t.fileDetails.photographicEvidence}
-          </div>
-        </div>
-
-        {/* Dossier Facts */}
-        <div class="space-y-4">
-          <div class="bg-purple-950/30 border-2 border-purple-800 p-6">
-            <h3 class="text-lime-400 font-['Courier_New'] mb-4 border-b border-purple-700 pb-2">
-              {t.fileDetails.dossierInformation}
-            </h3>
-
-            <div class="space-y-4">
-              <div>
-                <div class="flex items-center gap-2 text-lime-400 font-['Courier_New'] mb-1">
-                  <Calendar class="w-4 h-4" />
-                  {t.fileDetails.firstSighting}
-                </div>
-                <div class="text-purple-100 pl-6">{cryptid.firstSighting}</div>
-              </div>
-
-              <div>
-                <div class="flex items-center gap-2 text-lime-400 font-['Courier_New'] mb-1">
-                  <MapPin class="w-4 h-4" />
-                  {t.fileDetails.location}
-                </div>
-                <div class="text-purple-100 pl-6">{cryptid.location ?? cryptid.region}</div>
-              </div>
-
-              <div>
-                <div class="text-lime-400 font-['Courier_New'] mb-1">{t.fileDetails.type}</div>
-                <div class="text-purple-100 pl-6">{cryptid.type}</div>
-              </div>
-
-              <div>
-                <div class="text-lime-400 font-['Courier_New'] mb-1">{t.fileDetails.region}</div>
-                <div class="text-purple-100 pl-6">{cryptid.region}</div>
-              </div>
-
-              <div>
-                <div class="text-lime-400 font-['Courier_New'] mb-1">{t.fileDetails.status}</div>
-                <div class="pl-6">
-                  <StatusBadge status={cryptid.status} />
-                </div>
-              </div>
-
-              {cryptid.knownAssociates && (
-                <div>
-                  <div class="text-lime-400 font-['Courier_New'] mb-1">{t.fileDetails.knownAssociates}</div>
-                  <div class="text-purple-100 pl-6">{cryptid.knownAssociates}</div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Description */}
-          <div class="bg-purple-950/30 border-2 border-purple-800 p-6">
-            <h3 class="text-lime-400 font-['Courier_New'] mb-3 border-b border-purple-700 pb-2">
-              {t.fileDetails.description}
-            </h3>
-            <p class="text-purple-100 leading-relaxed">
-              {cryptid.description}
-            </p>
-          </div>
-        </div>
+      <StatusStamp status={cryptid.status} />
+      <div class="de-dossier-clearance">
+        <p class="de-mono-label">{t.file.clearance}</p>
+        <p class="de-dossier-no">{t.file.clearanceLevel}</p>
       </div>
+    </header>
 
-      {/* Related Files */}
-      {relatedFiles.length > 0 && (
-        <div>
-          <h2 class="text-lime-400 mb-6 pb-2 border-b border-purple-700">
-            {t.fileDetails.relatedFiles}
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {relatedFiles.map((related) => (
-              <CryptidCard cryptid={related} variant="compact" />
-            ))}
-          </div>
-        </div>
-      )}
+    <div class="de-dossier-body">
+      <figure class="de-dossier-figure">
+        <Image
+          src={cryptid.image}
+          alt={format(t.file.photoAlt, { name: cryptid.name })}
+          width={800}
+          class="de-dossier-photo"
+          loading="eager"
+        />
+        <figcaption class="de-mono-label">{t.file.exhibit}</figcaption>
+      </figure>
+
+      <div>
+        <h1 id="dossier-name" class="de-dossier-name">{cryptid.name}</h1>
+        <DangerPill level={cryptid.dangerLevel} />
+
+        <dl class="de-dossier-dl">
+          <dt>{t.file.codename}</dt>
+          <dd>{cryptid.codename}</dd>
+          <dt>{t.file.type}</dt>
+          <dd>{cryptid.type}</dd>
+          <dt>{t.file.region}</dt>
+          <dd>{cryptid.region}</dd>
+          {cryptid.location && cryptid.location !== cryptid.region && (
+            <>
+              <dt>{t.file.location}</dt>
+              <dd>{cryptid.location}</dd>
+            </>
+          )}
+          <dt>{t.file.firstSighting}</dt>
+          <dd>{cryptid.firstSighting}</dd>
+          <dt>{t.file.alias}</dt>
+          <dd>{cryptid.alias ?? "—"}</dd>
+          <dt>{t.file.associates}</dt>
+          <dd>{cryptid.knownAssociates ?? "—"}</dd>
+        </dl>
+
+        <h2 class="de-mono-label de-dossier-notes-title">{t.file.caseNotes}</h2>
+        <p class="de-dossier-notes">{cryptid.description}</p>
+      </div>
     </div>
-  </div>
+  </article>
+
+  {related.length > 0 && (
+    <section class="de-section" aria-labelledby="related-title">
+      <h2 id="related-title" class="de-section-title">{t.file.relatedTitle}</h2>
+      <ul class="de-files-grid de-related-grid">
+        {related.map((item, index) => (
+          <li>
+            <CryptidCard cryptid={item} index={index} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
 </div>

@@ -1,0 +1,14 @@
+---
+import { getTranslations, toLocale } from '../i18n/utils';
+
+const t = getTranslations(toLocale(Astro.currentLocale));
+// Repeat the messages so the track is wider than the screen, then render it twice for a seamless loop.
+const run = `${t.classifiedBar.join(' — ')} — `.repeat(3);
+---
+
+<div class="de-classbar" aria-hidden="true">
+  <div class="de-classbar-track">
+    <span>{run}</span>
+    <span>{run}</span>
+  </div>
+</div>
