@@ -19,7 +19,7 @@ window.DragonEyeMark = function DragonEyeMark({ size = 34, style = {} }) {
 // CLASSIFIED MARQUEE BAR
 // ============================================================
 window.ClassifiedBar = function ClassifiedBar() {
-  const msg = "★ FIELD NOTES — ENTRY 47 — WEATHER: OVERCAST — MOON: WAXING — COFFEE: RESTOCKED — INVESTIGATIONS: 13 ACTIVE — ";
+  const msg = "// CLASSIFIED — DRAGON EYE AGENCY — LEVEL 5 CLEARANCE REQUIRED — INTERNAL USE ONLY — DO NOT DISTRIBUTE — ";
   const content = msg.repeat(6);
   return (
     <div className="de-classbar">
@@ -43,7 +43,6 @@ window.Nav = function Nav() {
           <a href="#files">Files</a>
           <a href="#about">About</a>
           <a href="#merch">Evidence Locker</a>
-          <a href="#contact">Contact</a>
         </div>
       </div>
     </nav>

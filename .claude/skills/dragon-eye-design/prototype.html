@@ -7,7 +7,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Caveat:wght@400;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="colors_and_type.css">
 <link rel="stylesheet" href="styles/base.css">
@@ -17,9 +17,9 @@
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><ellipse cx='32' cy='32' rx='30' ry='14' fill='none' stroke='%23000' stroke-width='3'/><circle cx='32' cy='32' r='11' fill='%23000'/><ellipse cx='32' cy='32' rx='4' ry='10' fill='white'/></svg>">
 
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -28,10 +28,13 @@
 
 <script src="src/data.js"></script>
 <script type="text/babel">
+// The components below are the same as src/shared.jsx, src/hero.jsx and src/files.jsx.
+// They are inlined because Babel can't fetch external .jsx files when this page is
+// opened straight from disk (file://). Change both copies together.
 const { useState, useEffect, useMemo } = React;
 
 // ============================================================
-// DRAGON EYE EMBLEM
+// DRAGON EYE EMBLEM — dragon eye SVG mark
 // ============================================================
 window.DragonEyeMark = function DragonEyeMark({ size = 34, style = {} }) {
   return (
@@ -48,7 +51,7 @@ window.DragonEyeMark = function DragonEyeMark({ size = 34, style = {} }) {
 // CLASSIFIED MARQUEE BAR
 // ============================================================
 window.ClassifiedBar = function ClassifiedBar() {
-  const msg = "★ FIELD NOTES — ENTRY 47 — WEATHER: OVERCAST — MOON: WAXING — COFFEE: RESTOCKED — INVESTIGATIONS: 13 ACTIVE — ";
+  const msg = "// CLASSIFIED — DRAGON EYE AGENCY — LEVEL 5 CLEARANCE REQUIRED — INTERNAL USE ONLY — DO NOT DISTRIBUTE — ";
   const content = msg.repeat(6);
   return (
     <div className="de-classbar">
@@ -72,7 +75,6 @@ window.Nav = function Nav() {
           <a href="#files">Files</a>
           <a href="#about">About</a>
           <a href="#merch">Evidence Locker</a>
-          <a href="#contact">Contact</a>
         </div>
       </div>
     </nav>
@@ -93,47 +95,53 @@ window.DangerPill = function DangerPill({ level }) {
 };
 
 // ============================================================
-// HERO — Cryptid of the Month
+// HERO — Cryptid of the Month (Dossier: case file tossed on a desk)
 // ============================================================
 window.Hero = function Hero({ featured, onOpen }) {
+  const today = new Date().toISOString().slice(0,10);
   return (
-    <section className="de-hero hero-journal">
+    <section className="de-hero hero-secret">
       <div className="de-wrap">
-        <div className="hero-journal-grid">
+        <div className="hero-secret-grid">
           <div>
-            <div className="hero-journal-meta">Field Entry · {featured.firstSighting}</div>
-            <h1 className="de-title-xl hero-journal-title">
-              Cryptid<br/>of the<br/><em>Month.</em>
+            <div className="hero-secret-meta">
+              <span>DOSSIER № {featured.caseNumber}</span>
+              <span>FILED {today}</span>
+              <span>CLEARANCE // LVL 5</span>
+            </div>
+            <h1 className="de-title-xl" style={{marginTop: '0.2em'}}>
+              CRYPTID<br/>OF THE<br/>MONTH.
             </h1>
             <p className="de-hero-sub">
-              Thirteen active investigations this season. I've been chasing this one{' '}
-              <span className="hero-journal-highlight">across the river country</span>{' '}
-              since the first report came in. Big wings. Red eyes. Bad feeling.
+              Thirteen active investigations. One creature selected for deep file review.
+              This month the Dragon Eye Agency turns its glass on <b>{featured.name}</b> —
+              {featured.alias ? ` also known as ${featured.alias.split(",")[0]}.` : "."}
             </p>
-            <div className="hero-journal-sign">
-              — M.<span style={{color:'var(--de-accent)'}}>D.</span>, lead investigator
-            </div>
-            <div style={{display:'flex', gap:'1rem', marginTop:'1.6rem', flexWrap:'wrap'}}>
-              <button className="de-btn" onClick={onOpen}>Read the file</button>
-              <a className="de-btn" href="#files" style={{background:'transparent', color:'var(--de-ink)', boxShadow:'none'}}>Browse all 13</a>
+            <div style={{display:'flex', gap:'1rem', marginTop:'2rem', flexWrap:'wrap'}}>
+              <button className="de-btn de-btn-primary" onClick={onOpen}>
+                ▸ Open Dossier
+              </button>
+              <a className="de-btn" href="#files">Browse All Files</a>
             </div>
           </div>
-          <div className="hero-journal-polaroid-stack">
-            <div className="hero-journal-polaroid hero-journal-polaroid-back">
-              <div className="hero-journal-polaroid-img" style={{background:'#2c3540'}}/>
-            </div>
-            <div className="hero-journal-polaroid">
-              <div className="hero-journal-tape hero-journal-tape-l"/>
-              <div className="hero-journal-tape hero-journal-tape-r"/>
-              <img src={featured.image} alt={featured.name} className="hero-journal-polaroid-img"/>
-              <div className="hero-journal-polaroid-caption">
-                <span className="hero-journal-polaroid-name">{featured.name}?</span>
-                <br/>
-                <span style={{fontSize:'1rem'}}>{featured.region} · {featured.firstSighting}</span>
+          <div className="hero-secret-dossier">
+            <div className="hero-secret-folder">
+              <div className="hero-secret-tab">CASE {featured.caseNumber}</div>
+              <img src={featured.image} alt={featured.name} className="hero-secret-photo" />
+              <div className="hero-secret-stamps">
+                <div className="de-stamp" style={{transform:'rotate(-6deg)'}}>TOP SECRET</div>
+                <div className="de-stamp" style={{transform:'rotate(4deg)', marginTop:'-8px', color:'var(--de-accent-2)', borderColor:'var(--de-accent-2)'}}>EYES ONLY</div>
+              </div>
+              <div className="hero-secret-caption">
+                <div className="de-mono-label">SUBJECT</div>
+                <div style={{fontFamily:'var(--de-display)', fontSize:'2rem', lineHeight:1}}>{featured.name}</div>
+                <div className="de-mono-label" style={{marginTop:'6px'}}>
+                  LOCATION · {featured.region} · FIRST SEEN · {featured.firstSighting}
+                </div>
               </div>
               <window.DangerPill level={featured.dangerLevel} />
             </div>
-            <div className="hero-journal-scribble">"eyes glowed — camera<br/>wouldn't focus."</div>
+            <div className="hero-secret-paperclip"/>
           </div>
         </div>
       </div>
@@ -142,7 +150,7 @@ window.Hero = function Hero({ featured, onOpen }) {
 };
 
 // ============================================================
-// FILES SECTION
+// FILES SECTION — search, filter, grid, modal open (Dossier)
 // ============================================================
 window.FilesSection = function FilesSection({ cryptids, onOpen }) {
   const [q, setQ] = useState("");
@@ -173,33 +181,39 @@ window.FilesSection = function FilesSection({ cryptids, onOpen }) {
         <div className="de-section-head">
           <div>
             <div className="de-eyebrow">Case Archive</div>
-            <h2 className="de-section-title">All my files</h2>
+            <h2 className="de-section-title">Classified Database</h2>
           </div>
-          <p style={{maxWidth:'36ch', fontFamily:'var(--de-body)', fontSize:'1.2rem', lineHeight:1.4, margin:0, color:'var(--de-ink-soft)'}}>
-            I've got {cryptids.length} of them so far. Some are just rumors. Some I've seen.
+          <p style={{maxWidth:'36ch', fontFamily:'var(--de-body)', fontSize:'1rem', lineHeight:1.4, margin:0, color:'var(--de-ink-soft)'}}>
+            {cryptids.length} subjects. Browse by region or threat level. Clearance checks apply.
           </p>
         </div>
 
         <div className="de-search-row">
           <div className="files-search">
             <span className="files-search-icon">⌕</span>
-            <input className="de-input" type="text" placeholder="Scribble a name..." value={q} onChange={e => setQ(e.target.value)} />
+            <input
+              className="de-input"
+              type="text"
+              placeholder="SEARCH SUBJECT, CODENAME, REGION"
+              value={q}
+              onChange={e => setQ(e.target.value)}
+            />
           </div>
           <select className="de-input" value={region} onChange={e => setRegion(e.target.value)}>
-            {regions.map(r => <option key={r} value={r}>{r === 'all' ? 'Every region' : r}</option>)}
+            {regions.map(r => <option key={r} value={r}>{r === 'all' ? 'ALL REGIONS' : r}</option>)}
           </select>
           <select className="de-input" value={danger} onChange={e => setDanger(e.target.value)}>
-            {dangers.map(d => <option key={d} value={d}>{d === 'all' ? 'Any danger' : d}</option>)}
+            {dangers.map(d => <option key={d} value={d}>{d === 'all' ? 'ALL THREAT LEVELS' : d.toUpperCase()}</option>)}
           </select>
         </div>
 
         <div className="de-mono-label" style={{marginBottom:'1rem'}}>
-          {filtered.length} / {cryptids.length} entries
+          {filtered.length} / {cryptids.length} files found
         </div>
 
         {filtered.length === 0 ? (
-          <div style={{padding:'3rem', textAlign:'center', border:'1px dashed var(--de-ink-soft)', fontFamily:'var(--de-body)', fontSize:'1.4rem'}}>
-            Nothing in the notebook matches that.
+          <div style={{padding:'3rem', textAlign:'center', border:'1px dashed var(--de-ink-soft)', fontFamily:'var(--de-mono)'}}>
+            NO RECORDS MATCH QUERY
           </div>
         ) : (
           <div className="de-files-grid">
@@ -214,11 +228,17 @@ window.FilesSection = function FilesSection({ cryptids, onOpen }) {
 };
 
 function FileCard({ cryptid, i, onOpen }) {
-  const rot = ((i * 37) % 5) - 2;
   return (
-    <article className="de-card" style={{animationDelay: `${i * 40}ms`, '--rot': `${rot}deg`}} onClick={onOpen}>
+    <article
+      className="de-card"
+      style={{animationDelay: `${i * 40}ms`}}
+      onClick={onOpen}
+    >
       <div className="de-card-img-wrap">
         <img src={cryptid.image} alt={cryptid.name} className="de-card-img" loading="lazy" />
+        <div className="card-secret-stamp">
+          <div className="de-mono-label" style={{color:'var(--de-paper)'}}>№ {cryptid.caseNumber}</div>
+        </div>
       </div>
       <div className="de-card-info">
         <h3 className="de-card-name">{cryptid.name}</h3>
@@ -226,14 +246,14 @@ function FileCard({ cryptid, i, onOpen }) {
           <span>{cryptid.type}</span>
           <window.DangerPill level={cryptid.dangerLevel}/>
         </div>
-        <div className="de-card-region">{cryptid.region}</div>
+        <div className="de-card-region">LOC · {cryptid.region}</div>
       </div>
     </article>
   );
 }
 
 // ============================================================
-// MODAL
+// MODAL — full case file (Dossier)
 // ============================================================
 window.FileModal = function FileModal({ cryptid, onClose }) {
   useEffect(() => {
@@ -247,48 +267,49 @@ window.FileModal = function FileModal({ cryptid, onClose }) {
 
   return (
     <div className="de-modal-backdrop" onClick={onClose}>
-      <div className="de-modal de-modal-journal" onClick={e => e.stopPropagation()}>
+      <div className="de-modal de-modal-secret" onClick={e => e.stopPropagation()}>
         <button className="de-modal-close" onClick={onClose} aria-label="Close">✕</button>
-        <ModalJournal c={cryptid}/>
+        <ModalSecret c={cryptid}/>
       </div>
     </div>
   );
 };
 
-function ModalJournal({ c }) {
+function ModalSecret({ c }) {
   return (
-    <div className="modal-journal">
-      <div className="modal-journal-tape modal-journal-tape-l"/>
-      <div className="modal-journal-tape modal-journal-tape-r"/>
-      <div className="modal-journal-body">
-        <div style={{position:'relative'}}>
-          <div className="hero-journal-polaroid">
-            <div className="hero-journal-tape hero-journal-tape-l" style={{top:'-10px'}}/>
-            <img src={c.image} alt={c.name} className="hero-journal-polaroid-img"/>
-            <div className="hero-journal-polaroid-caption">
-              <span className="hero-journal-polaroid-name">{c.name}</span>
-              <br/>
-              <span style={{fontSize:'1rem'}}>{c.firstSighting}</span>
-            </div>
-          </div>
+    <div className="modal-secret">
+      <div className="modal-secret-header">
+        <div>
+          <div className="de-mono-label">DOSSIER №</div>
+          <div style={{fontFamily:'var(--de-label)', fontSize:'1.4rem'}}>{c.caseNumber}</div>
+        </div>
+        <div className="de-stamp">{c.status.toUpperCase()}</div>
+        <div style={{textAlign:'right'}}>
+          <div className="de-mono-label">CLEARANCE</div>
+          <div style={{fontFamily:'var(--de-label)', fontSize:'1.4rem'}}>LVL 5</div>
+        </div>
+      </div>
+
+      <div className="modal-secret-body">
+        <div>
+          <img src={c.image} alt={c.name} className="modal-secret-photo"/>
+          <div className="de-mono-label" style={{marginTop:'8px'}}>PHOTOGRAPHIC EVIDENCE · EXHIBIT A</div>
         </div>
         <div>
-          <div className="hero-journal-meta">Entry · Case № {c.caseNumber}</div>
-          <h2 className="hero-journal-title" style={{fontSize:'3.5rem', margin:'0.2em 0'}}>
-            The <em>{c.name}</em> File
-          </h2>
-          <window.DangerPill level={c.dangerLevel}/>
-          <dl className="modal-journal-dl">
+          <h2 style={{fontFamily:'var(--de-display)', fontSize:'3rem', margin:'0 0 8px', lineHeight:1}}>{c.name}</h2>
+          <div style={{display:'flex', gap:'8px', marginBottom:'1rem'}}>
+            <window.DangerPill level={c.dangerLevel}/>
+          </div>
+          <dl className="modal-secret-dl">
             <dt>Codename</dt><dd>{c.codename}</dd>
             <dt>Type</dt><dd>{c.type}</dd>
-            <dt>Where</dt><dd>{c.region}</dd>
-            <dt>Aliases</dt><dd>{c.alias || '—'}</dd>
-            <dt>Known associates</dt><dd>{c.knownAssociates || '—'}</dd>
+            <dt>Region</dt><dd>{c.region}</dd>
+            <dt>First Sighting</dt><dd>{c.firstSighting}</dd>
+            <dt>Alias</dt><dd>{c.alias || '—'}</dd>
+            <dt>Associates</dt><dd>{c.knownAssociates || '—'}</dd>
           </dl>
-          <p style={{fontFamily:'var(--de-body)', fontSize:'1.4rem', lineHeight:1.4, marginTop:'1rem'}}>
-            {c.description}
-          </p>
-          <div className="hero-journal-sign">— M.<span style={{color:'var(--de-accent)'}}>D.</span></div>
+          <div className="de-mono-label" style={{marginTop:'1.2rem'}}>INVESTIGATOR CASE NOTES</div>
+          <p style={{fontFamily:'var(--de-body)', lineHeight:1.6, marginTop:'6px'}}>{c.description}</p>
         </div>
       </div>
     </div>
@@ -296,7 +317,7 @@ function ModalJournal({ c }) {
 }
 
 // ============================================================
-// APP
+// APP — root component
 // ============================================================
 function App() {
   const [open, setOpen] = useState(null);
@@ -313,16 +334,16 @@ function App() {
         <div className="de-wrap de-about-grid">
           <div>
             <div className="de-eyebrow">Who we are</div>
-            <h2 className="de-section-title">About the Agency</h2>
+            <h2 className="de-section-title">About Dragon Eye</h2>
           </div>
           <div className="de-about-card">
-            <p style={{fontFamily:'var(--de-body)', fontSize:'1.4rem', lineHeight:1.6, margin:'0 0 1rem'}}>
+            <p style={{fontFamily:'var(--de-body)', fontSize:'1.05rem', lineHeight:1.6, margin:'0 0 1rem'}}>
               Dragon Eye is a kid-friendly agency, ages 8 to 13. We snoop around town and look for clues during school hours on Mondays and Wednesdays.
             </p>
-            <p style={{fontFamily:'var(--de-body)', fontSize:'1.4rem', lineHeight:1.6, margin:'0 0 1rem'}}>
+            <p style={{fontFamily:'var(--de-body)', fontSize:'1.05rem', lineHeight:1.6, margin:'0 0 1rem'}}>
               Strategy meetings every Monday and Wednesday morning — exclusive to Dragon Eye members.
             </p>
-            <p style={{fontFamily:'var(--de-body)', fontSize:'1.4rem', lineHeight:1.6, margin:0}}>
+            <p style={{fontFamily:'var(--de-body)', fontSize:'1.05rem', lineHeight:1.6, margin:0}}>
               We meet at Dragon Eye HQ, in the heart of the city. Address classified.
             </p>
           </div>
