@@ -1,0 +1,27 @@
+{
+  "caseNumber": "640218",
+  "codename": "DAHU-640218",
+  "dangerLevel": "Low",
+  "status": "Myth",
+  "addedOn": "2026-10-01",
+  "image": "./photo.jpg",
+  "photoPrompt": "A Dahu, a small shy mountain goat-like creature with brown fur, curved horns and legs shorter on one side of its body, standing on a steep rocky alpine slope with peaks behind it.",
+  "en": {
+    "name": "Dahu",
+    "description": "The Dahu is a shy, goat-like creature said to roam the steep slopes of the Alps. Agents describe it as a chamois-sized animal with thick brown fur, curved horns and a very odd secret: the legs on one side of its body are shorter than the legs on the other. That lets it stand steady on a mountain, but only if it always walks around the peak in the same direction. Mountain guides have long told newcomers that the Dahu can be caught by waiting at night with a sack while friends chase it your way. Agency note: nobody has ever caught one, and the sack-holder usually ends up alone in the dark.",
+    "alias": "Dahut, Darou, Daru",
+    "location": "Alpine slopes of France, Switzerland and Italy",
+    "region": "The Alps, France and Switzerland",
+    "type": "Mountain Beast",
+    "firstSighting": "Late 19th century"
+  },
+  "fr": {
+    "name": "Dahu",
+    "description": "Le dahu est une créature timide, semblable à une chèvre, qui parcourrait les pentes abruptes des Alpes. Nos agents le décrivent comme un animal de la taille d'un chamois, au pelage brun épais et aux cornes recourbées, avec un étrange secret : les pattes d'un côté de son corps sont plus courtes que celles de l'autre. Cela lui permet de tenir en équilibre sur la montagne, à condition de toujours tourner autour du sommet dans le même sens. Depuis longtemps, les guides de montagne racontent aux nouveaux venus qu'on peut l'attraper en attendant la nuit avec un sac pendant que des amis le rabattent vers soi. Note de l'agence : personne n'en a jamais capturé un, et celui qui tient le sac se retrouve le plus souvent seul dans le noir.",
+    "alias": "Dahut, Darou, Daru",
+    "location": "Pentes alpines de la France, de la Suisse et de l'Italie",
+    "region": "Les Alpes, France et Suisse",
+    "type": "Bête de montagne",
+    "firstSighting": "Fin du XIXe siècle"
+  }
+}
