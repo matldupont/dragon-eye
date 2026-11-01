@@ -1,0 +1,27 @@
+{
+  "caseNumber": "254027",
+  "codename": "KAPPA-254027",
+  "dangerLevel": "Medium",
+  "status": "Sighted",
+  "addedOn": "2026-11-01",
+  "image": "./photo.jpg",
+  "photoPrompt": "A Kappa, a small child-sized green Japanese river creature with a turtle shell on its back, webbed hands and feet, a short beak and a shallow water-filled dish on top of its head ringed by shaggy hair, crouching on mossy rocks at the edge of a quiet river with reeds and a wooden footbridge behind it.",
+  "en": {
+    "name": "Kappa",
+    "description": "The Kappa is a mischievous water creature from Japanese folklore, said to lurk in rivers, ponds and village canals. Agents describe it as about the size of a child, with green scaly skin, webbed hands, a beak-like mouth and a turtle shell on its back. Its strangest feature is a small dish on top of its head that holds water: if the water spills, the Kappa loses its strength. Old stories say it loves cucumbers, challenges people to sumo wrestling and plays tricks on anyone who swims too far from shore. Agency tip: Kappa are famously polite, so if you meet one, bow deeply and it will bow back, spill its water and have to let you go.",
+    "alias": "Kawataro, Gataro, Kawako, Suiko",
+    "location": "Rivers, ponds and canals across Japan",
+    "region": "Japan",
+    "type": "Water Spirit",
+    "firstSighting": "Edo period (river-spirit tales date back to the 8th century)"
+  },
+  "fr": {
+    "name": "Kappa",
+    "description": "Le kappa est une créature aquatique farceuse du folklore japonais, qui rôderait dans les rivières, les étangs et les canaux des villages. Nos agents le décrivent comme un être de la taille d'un enfant, à la peau verte et écailleuse, aux mains palmées, avec une bouche en forme de bec et une carapace de tortue sur le dos. Son détail le plus étrange est une petite coupelle sur le sommet du crâne, remplie d'eau : si l'eau se renverse, le kappa perd toutes ses forces. Les vieux récits racontent qu'il adore les concombres, qu'il défie les gens au sumo et qu'il joue des tours à ceux qui nagent trop loin de la rive. Conseil de l'agence : le kappa est très poli, alors si vous en croisez un, inclinez-vous bien bas : il vous rendra votre salut, renversera son eau et devra vous laisser partir.",
+    "alias": "Kawataro, Gataro, Kawako, Suiko",
+    "location": "Rivières, étangs et canaux de tout le Japon",
+    "region": "Japon",
+    "type": "Esprit des eaux",
+    "firstSighting": "Époque d'Edo (les récits d'esprits des rivières remontent au VIIIe siècle)"
+  }
+}
